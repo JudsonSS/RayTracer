@@ -13,6 +13,8 @@ namespace RayTracer
 
 		Tuple(float px, float py, float pz, float pw);
 		bool operator==(const Tuple t);
+		Tuple operator+(const Tuple t);
+		Tuple operator-(const Tuple t);
 	};
 
 	// Ponto

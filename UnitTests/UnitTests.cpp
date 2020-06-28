@@ -86,5 +86,47 @@ namespace UnitTest
 			Assert::IsTrue(t == v);
 		}
 
+		TEST_METHOD(TupleAdd)
+		{
+			Tuple t1{ 3.0f, -2.0f, 5.0f, 1.0f };
+			Tuple t2{ -2.0f, 3.0f, 1.0f, 0.0f };
+			Tuple t{ 1.0f, 1.0f, 6.0f, 1.0f };
+
+			Assert::IsTrue(t == t1 + t2);
+
+			Tuple add = t1 + t2;
+
+			Assert::AreEqual(add.x, t.x);
+			Assert::AreEqual(add.y, t.y);
+			Assert::AreEqual(add.z, t.z);
+			Assert::AreEqual(add.w, t.w);
+		}
+
+		TEST_METHOD(PointSubtract)
+		{
+			Point p1{ 3.0f, 2.0f, 1.0f };
+			Point p2{ 5.0f, 6.0f, 7.0f };
+			Vector v{ -2.0f, -4.0f, -6.0f };
+
+			Assert::IsTrue(v == p1 - p2);
+		}
+
+		TEST_METHOD(PointVectorSubtract)
+		{
+			Point p{ 3.0f, 2.0f, 1.0f };
+			Vector v{ 5.0f, 6.0f, 7.0f };
+			Point q{ -2.0f, -4.0f, -6.0f };
+
+			Assert::IsTrue(q == p - v);
+		}
+
+		TEST_METHOD(VectorVectorSubtract)
+		{
+			Vector v1{ 3.0f, 2.0f, 1.0f };
+			Vector v2{ 5.0f, 6.0f, 7.0f };
+			Vector r{ -2.0f, -4.0f, -6.0f };
+
+			Assert::IsTrue(r == v1 - v2);
+		}
 	};
 }

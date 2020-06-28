@@ -1,6 +1,8 @@
 #include "Types.h"
 #include <cmath>
 
+using namespace RayTracer;
+
 // ------------------------------------------------
 // Comparação Ponto-Flutuante
 // ------------------------------------------------
@@ -15,7 +17,6 @@ bool Equal(float a, float b)
 		return false;
 }
 
-
 // ------------------------------------------------
 // Tupla
 // ------------------------------------------------
@@ -29,6 +30,15 @@ bool RayTracer::Tuple::operator==(const Tuple t)
 	return Equal(x, t.x) && Equal(y, t.y) && Equal(z, t.z) && Equal(w, t.w);
 }
 
+Tuple RayTracer::Tuple::operator+(const Tuple t)
+{
+	return Tuple(x + t.x, y + t.y, z + t.z, w + t.w);
+}
+
+Tuple RayTracer::Tuple::operator-(const Tuple t)
+{
+	return Tuple(x - t.x, y - t.y, z - t.z, w - t.w);
+}
 
 // ------------------------------------------------
 // Ponto
