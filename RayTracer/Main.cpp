@@ -7,11 +7,11 @@ using namespace RayTracer;
 int main()
 {
 
-	Tuple t{ 4.3f, -4.2f, 3.1f, 1.0f };
-	Point p{ 4.3f, -4.2f, 3.1f };
-	Vector v{ 4.3f, -4.2f, 3.1f };
+	Point p{ 3.0f, 2.0f, 1.0f };
+	Vector v{ 5.0f, 6.0f, 7.0f };
+	Point q{ -2.0f, -4.0f, -6.0f };
 
-	cout << boolalpha << (p == t) << endl;
-	cout << boolalpha << (v == t) << endl;
+	cout << boolalpha << (q == p - v) << endl;
+	
 	return 0;
 }

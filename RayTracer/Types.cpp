@@ -21,7 +21,8 @@ bool Equal(float a, float b)
 // Tupla
 // ------------------------------------------------
 
-RayTracer::Tuple::Tuple(float px, float py, float pz, float pw) : x(px), y(py), z(pz), w(pw)
+RayTracer::Tuple::Tuple(float px, float py, float pz, float pw) 
+	: x(px), y(py), z(pz), w(pw)
 {
 }
 
@@ -39,6 +40,27 @@ Tuple RayTracer::Tuple::operator-(const Tuple t)
 {
 	return Tuple(x - t.x, y - t.y, z - t.z, w - t.w);
 }
+
+Tuple RayTracer::Tuple::operator-()
+{
+	return Tuple(-x, -y, -z, -w);
+}
+
+Tuple RayTracer::Tuple::operator*(float v)
+{
+	return Tuple(x * v, y * v, z * v, w * v);
+}
+
+Tuple RayTracer::Tuple::operator/(float v)
+{
+	return Tuple(x / v, y / v, z / v, w / v);
+}
+
+Tuple RayTracer::operator*(float v, Tuple t)
+{
+	return Tuple(t.x * v, t.y * v, t.z * v, t.w * v);
+}
+
 
 // ------------------------------------------------
 // Ponto

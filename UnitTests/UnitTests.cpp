@@ -7,7 +7,7 @@ using namespace RayTracer;
 
 namespace UnitTest
 {
-	TEST_CLASS(UnitTest)
+	TEST_CLASS(Construction)
 	{
 	public:
 
@@ -85,7 +85,11 @@ namespace UnitTest
 			Assert::IsFalse(t == p);
 			Assert::IsTrue(t == v);
 		}
+	};
 
+	TEST_CLASS(Arithmetic)
+	{
+	public:
 		TEST_METHOD(TupleAdd)
 		{
 			Tuple t1{ 3.0f, -2.0f, 5.0f, 1.0f };
@@ -128,5 +132,35 @@ namespace UnitTest
 
 			Assert::IsTrue(r == v1 - v2);
 		}
+
+		TEST_METHOD(TupleNegation)
+		{
+			Tuple t{ 1.0f, -2.0f, 3.0f, -4.0f };
+			Tuple n{ -1.0f, 2.0f, -3.0f, 4.0f };
+
+			Vector v{ 5.0f, 6.0f, 7.0f };
+			Vector i{ -5.0f, -6.0f, -7.0f };
+
+			Assert::IsTrue(-t == n);
+			Assert::IsTrue(-v == i);
+		}
+
+		TEST_METHOD(ScalarMultiplication)
+		{
+			Tuple t{ 1.0f, -2.0f, 3.0f, -4.0f };
+			Tuple m{ 3.5f, -7.0f, 10.5f, -14.0f };
+
+			Assert::IsTrue(t * 3.5 == m);
+			Assert::IsTrue(3.5 * t == m);
+		}
+
+		TEST_METHOD(ScalarDivision)
+		{
+			Tuple t{ 1.0f, -2.0f, 3.0f, -4.0f };
+			Tuple d{ 0.5f, -1.0f, 1.5f, -2.0f };
+
+			Assert::IsTrue(t / 2.0f == d);
+		}
+
 	};
 }
