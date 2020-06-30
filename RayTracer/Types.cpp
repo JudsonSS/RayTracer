@@ -9,7 +9,7 @@ using namespace RayTracer;
 
 const float Epsilon = 0.00001f;
 
-bool Equal(float a, float b)
+bool RayTracer::Equal(float a, float b)
 {
 	if (abs(a - b) < Epsilon)
 		return true;
@@ -76,4 +76,15 @@ RayTracer::Point::Point(float px, float py, float pz) : Tuple(px, py, pz, 1.0f)
 
 RayTracer::Vector::Vector(float px, float py, float pz) : Tuple(px, py, pz, 0.0f)
 {
+}
+
+float RayTracer::Vector::Magnitude()
+{
+	return sqrt(x*x + y*y + z*z + w*w);
+}
+
+Vector RayTracer::Vector::Normalized()
+{
+	float mag = Magnitude();
+	return Vector(x / mag, y / mag, z / mag);
 }

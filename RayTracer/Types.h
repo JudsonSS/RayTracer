@@ -3,7 +3,10 @@
 
 namespace RayTracer
 {
+	// -----------------------------------
 	// Tupla
+	// -----------------------------------
+
 	struct Tuple
 	{
 		float x;
@@ -20,20 +23,32 @@ namespace RayTracer
 		Tuple operator/(float v);						// divisão por escalar
 	};
 
+	bool Equal(float a, float b);						// comparação de pontos-flutuantes
 	Tuple operator*(float v, Tuple t);					// multiplicação por escalar
 
+	
+	// -----------------------------------
 	// Ponto
+	// -----------------------------------
+
 	class Point : public Tuple
 	{
 	public:
 		Point(float px, float py, float pz);
 	};
 
+
+	// -----------------------------------
 	// Vetor
+	// -----------------------------------
+
 	class Vector : public Tuple
 	{
 	public:
 		Vector(float px, float py, float pz);
+
+		float Magnitude();								// comprimento do vetor
+		Vector Normalized();							// vetor normalizado
 	};
 
 }

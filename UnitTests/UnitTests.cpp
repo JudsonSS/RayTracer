@@ -163,4 +163,36 @@ namespace UnitTest
 		}
 
 	};
+
+	TEST_CLASS(VectorOperations)
+	{
+	public:
+		TEST_METHOD(Magnitude)
+		{
+			Vector v1{ 1.0f, 0.0f, 0.0f };
+			Vector v2{ 0.0f, 1.0f, 0.0f };
+			Vector v3{ 0.0f, 0.0f, 1.0f };
+			
+			Vector v4{ 1.0f, 2.0f, 3.0f };
+			Vector v5{ -1.0f, -2.0f, -3.0f };
+			
+			Assert::IsTrue(Equal(v1.Magnitude(), 1.0f));
+			Assert::IsTrue(Equal(v2.Magnitude(), 1.0f));
+			Assert::IsTrue(Equal(v3.Magnitude(), 1.0f));
+			Assert::IsTrue(Equal(v4.Magnitude(), sqrt(14.0f)));
+			Assert::IsTrue(Equal(v5.Magnitude(), sqrt(14.0f)));
+		}
+
+		TEST_METHOD(Normalization)
+		{
+			Vector v1{ 4.0f, 0.0f, 0.0f };
+			Vector v2{ 1.0f, 2.0f, 3.0f };
+			
+			Assert::IsTrue(v1.Normalized() == Vector(1.0f, 0.0f, 0.0f));
+			Assert::IsTrue(v2.Normalized() == Vector(1.0f / sqrt(14.0f), 2.0f / sqrt(14.0f), 3.0f / sqrt(14.0f)));
+			
+			Assert::IsTrue(Equal(v1.Normalized().Magnitude(), 1.0f));
+			Assert::IsTrue(Equal(v2.Normalized().Magnitude(), 1.0f));
+		}
+	};
 }
