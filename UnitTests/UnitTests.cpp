@@ -187,12 +187,29 @@ namespace UnitTest
 		{
 			Vector v1{ 4.0f, 0.0f, 0.0f };
 			Vector v2{ 1.0f, 2.0f, 3.0f };
-			
+
 			Assert::IsTrue(v1.Normalized() == Vector(1.0f, 0.0f, 0.0f));
 			Assert::IsTrue(v2.Normalized() == Vector(1.0f / sqrt(14.0f), 2.0f / sqrt(14.0f), 3.0f / sqrt(14.0f)));
-			
+
 			Assert::IsTrue(Equal(v1.Normalized().Magnitude(), 1.0f));
 			Assert::IsTrue(Equal(v2.Normalized().Magnitude(), 1.0f));
+		}
+
+		TEST_METHOD(DotProduct)
+		{
+			Vector v1{ 1.0f, 2.0f, 3.0f };
+			Vector v2{ 2.0f, 3.0f, 4.0f };
+			
+			Assert::IsTrue(Equal(v1.Dot(v2), 20.0f));
+		}
+
+		TEST_METHOD(CrossProduct)
+		{
+			Vector v1{ 1.0f, 2.0f, 3.0f };
+			Vector v2{ 2.0f, 3.0f, 4.0f };
+
+			Assert::IsTrue(v1.Cross(v2) == Vector(-1.0f, 2.0f, -1.0f));
+			Assert::IsTrue(v2.Cross(v1) == Vector(1.0f, -2.0f, 1.0f));
 		}
 	};
 }

@@ -88,3 +88,13 @@ Vector RayTracer::Vector::Normalized()
 	float mag = Magnitude();
 	return Vector(x / mag, y / mag, z / mag);
 }
+
+float RayTracer::Vector::Dot(Vector v)
+{
+	return x * v.x + y * v.y + z * v.z;
+}
+
+Vector RayTracer::Vector::Cross(Vector v)
+{
+	return Vector(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x);
+}

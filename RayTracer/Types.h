@@ -49,6 +49,8 @@ namespace RayTracer
 
 		float Magnitude();								// comprimento do vetor
 		Vector Normalized();							// vetor normalizado
+		float Dot(Vector v);							// produto escalar entre vetores
+		Vector Cross(Vector v);							// produto vetorial entre vetores
 	};
 
 }
