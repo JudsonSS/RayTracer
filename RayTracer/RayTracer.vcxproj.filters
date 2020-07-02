@@ -23,7 +23,7 @@
     <ClCompile Include="Types.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="Projectile.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>

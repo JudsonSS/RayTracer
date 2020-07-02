@@ -34,7 +34,8 @@ namespace RayTracer
 	class Point : public Tuple
 	{
 	public:
-		Point(float px, float py, float pz);
+		Point(float px, float py, float pz);			// construtor
+		Point(Tuple&& t);								// conversão de tupla para ponto
 	};
 
 
@@ -45,7 +46,8 @@ namespace RayTracer
 	class Vector : public Tuple
 	{
 	public:
-		Vector(float px, float py, float pz);
+		Vector(float px, float py, float pz);			// construtor
+		Vector(Tuple&& t);								// conversão de tupla para vetor
 
 		float Magnitude();								// comprimento do vetor
 		Vector Normalized();							// vetor normalizado

@@ -70,11 +70,19 @@ RayTracer::Point::Point(float px, float py, float pz) : Tuple(px, py, pz, 1.0f)
 {
 }
 
+RayTracer::Point::Point(Tuple&& t) : Tuple(t.x, t.y, t.z, 1.0f)
+{
+}
+
 // ------------------------------------------------
 // Vetor
 // ------------------------------------------------
 
 RayTracer::Vector::Vector(float px, float py, float pz) : Tuple(px, py, pz, 0.0f)
+{
+}
+
+RayTracer::Vector::Vector(Tuple&& t) : Tuple(t.x, t.y, t.z, 0.0f)
 {
 }
 
