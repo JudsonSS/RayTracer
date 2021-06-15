@@ -95,15 +95,9 @@ namespace UnitTest
 			Tuple t1{ 3.0f, -2.0f, 5.0f, 1.0f };
 			Tuple t2{ -2.0f, 3.0f, 1.0f, 0.0f };
 			Tuple t{ 1.0f, 1.0f, 6.0f, 1.0f };
-
-			Assert::IsTrue(t == t1 + t2);
-
 			Tuple add = t1 + t2;
 
-			Assert::AreEqual(add.x, t.x);
-			Assert::AreEqual(add.y, t.y);
-			Assert::AreEqual(add.z, t.z);
-			Assert::AreEqual(add.w, t.w);
+			Assert::IsTrue(t == add);
 		}
 
 		TEST_METHOD(PointSubtract)
