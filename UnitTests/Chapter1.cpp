@@ -5,7 +5,7 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace RayTracer;
 
-namespace UnitTest
+namespace Chapter1
 {
 	TEST_CLASS(Construction)
 	{
@@ -158,7 +158,7 @@ namespace UnitTest
 
 	};
 
-	TEST_CLASS(VectorOperations)
+	TEST_CLASS(Operations)
 	{
 	public:
 		TEST_METHOD(Magnitude)
@@ -206,4 +206,5 @@ namespace UnitTest
 			Assert::IsTrue(v2.Cross(v1) == Vector(1.0f, -2.0f, 1.0f));
 		}
 	};
+
 }

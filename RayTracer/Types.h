@@ -55,6 +55,19 @@ namespace RayTracer
 		Vector Cross(Vector v);							// produto vetorial entre vetores
 	};
 
+
+	// -----------------------------------
+	// Color
+	// -----------------------------------
+
+	class Color : public Tuple
+	{
+	public:
+		Color(float red, float green, float blue);		// construtor
+		Color(Tuple&& t);								// conversão de tupla para cor
+	};
+
+	Color operator*(const Color c1, const Color c2);	// multiplicação de cores
 }
 
 #endif
