@@ -191,3 +191,9 @@ namespace Test1
 		EXPECT_TRUE(v2.Cross(v1) == Vector(1.0f, -2.0f, 1.0f));
 	}
 }
+
+int main(int argc, char **argv) 
+{
+	::testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
+}
