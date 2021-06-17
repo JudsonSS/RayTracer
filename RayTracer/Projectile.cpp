@@ -1,3 +1,18 @@
+/**********************************************************************************
+// Projectile (Arquivo de Código Fonte)
+//
+// Criação:		01 Jul 2020
+// Atualização:	17 Jun 2021
+// Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
+//
+// Descrição:	Aplicação simula o disparo de um projétil estabelecendo uma 
+//              posição e velocidade iniciais e calculando o efeito da gravidade  
+//              e do vento sobre o projétil. O objetivo do programa é testar os 
+//              tipos Tuple, Point e Vector.
+//
+**********************************************************************************/
+
+
 #include <iostream>
 #include "Types.h"
 

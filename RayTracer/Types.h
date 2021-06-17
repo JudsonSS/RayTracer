@@ -1,3 +1,15 @@
+/**********************************************************************************
+// Types (Arquivo de Cabeçalho)
+//
+// Criação:		27 Jun 2020
+// Atualização:	17 Jun 2021
+// Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
+//
+// Descrição:	Define os tipos básicos necessários para a construção de um 
+//              traçador de raios: tuplas, pontos, vetores, cores, etc.
+//
+**********************************************************************************/
+
 #ifndef RAY_TRACER_TYPES
 #define RAY_TRACER_TYPES
 

@@ -1,6 +1,18 @@
+/**********************************************************************************
+// Test1 (Arquivo de Código Fonte)
+//
+// Criação:		27 Jun 2020
+// Atualização:	17 Jun 2021
+// Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
+//
+// Descrição:	Define os testes de unidade criados no capítulo 1
+//              do livro "The Ray Tracer Challenge". Os testes utilizam
+//              o framework GoogleTest.
+//
+**********************************************************************************/
+
 #include "../RayTracer/Types.h"
 #include <gtest/gtest.h>
-#include <cmath>
 
 using namespace RayTracer;
 

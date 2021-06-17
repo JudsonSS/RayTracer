@@ -1,3 +1,15 @@
+/**********************************************************************************
+// Types (Arquivo de Código Fonte)
+//
+// Criação:		27 Jun 2020
+// Atualização:	17 Jun 2021
+// Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
+//
+// Descrição:	Define os tipos básicos necessários para a construção de um 
+//              traçador de raios: tuplas, pontos, vetores, cores, etc.
+//
+**********************************************************************************/
+
 #include "Types.h"
 #include <cmath>
 
@@ -90,3 +102,5 @@ RayTracer::Color::Color(Tuple&& t)
 
 Color RayTracer::operator*(const Color c1, const Color c2)
 { return Color(c1.x * c2.x, c1.y * c2.y, c1.z * c2.z); }
+
+// ------------------------------------------------
