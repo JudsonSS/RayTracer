@@ -15,16 +15,16 @@ namespace RayTracer
 		float w;
 
 		Tuple(float px, float py, float pz, float pw);	// construtor
-		bool operator==(const Tuple t);					// comparaÁ„o de igualdade
+		bool operator==(const Tuple t);					// compara√ß√£o de igualdade
 		Tuple operator+(const Tuple t);					// soma
-		Tuple operator-(const Tuple t);					// subtraÁ„o
-		Tuple operator-();								// menos un·rio
-		Tuple operator*(float v);						// multiplicaÁ„o por escalar
-		Tuple operator/(float v);						// divis„o por escalar
+		Tuple operator-(const Tuple t);					// subtra√ß√£o
+		Tuple operator-();								// menos un√°rio
+		Tuple operator*(float v);						// multiplica√ß√£o por escalar
+		Tuple operator/(float v);						// divis√£o por escalar
 	};
 
-	bool Equal(float a, float b);						// comparaÁ„o de pontos-flutuantes
-	Tuple operator*(float v, Tuple t);					// multiplicaÁ„o por escalar
+	bool Equal(float a, float b);						// compara√ß√£o de pontos-flutuantes
+	Tuple operator*(float v, Tuple t);					// multiplica√ß√£o por escalar
 
 	
 	// -----------------------------------
@@ -35,7 +35,7 @@ namespace RayTracer
 	{
 	public:
 		Point(float px, float py, float pz);			// construtor
-		Point(Tuple&& t);								// convers„o de tupla para ponto
+		Point(Tuple&& t);								// convers√£o de tupla para ponto
 	};
 
 
@@ -47,7 +47,7 @@ namespace RayTracer
 	{
 	public:
 		Vector(float px, float py, float pz);			// construtor
-		Vector(Tuple&& t);								// convers„o de tupla para vetor
+		Vector(Tuple&& t);								// convers√£o de tupla para vetor
 
 		float Magnitude();								// comprimento do vetor
 		Vector Normalized();							// vetor normalizado
@@ -64,10 +64,10 @@ namespace RayTracer
 	{
 	public:
 		Color(float red, float green, float blue);		// construtor
-		Color(Tuple&& t);								// convers„o de tupla para cor
+		Color(Tuple&& t);								// convers√£o de tupla para cor
 	};
 
-	Color operator*(const Color c1, const Color c2);	// multiplicaÁ„o de cores
+	Color operator*(const Color c1, const Color c2);	// multiplica√ß√£o de cores (blend)
 }
 
 #endif

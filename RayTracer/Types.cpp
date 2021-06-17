@@ -4,7 +4,7 @@
 using namespace RayTracer;
 
 // ------------------------------------------------
-// Comparação Ponto-Flutuante
+// ComparaÃ§Ã£o Ponto-Flutuante
 // ------------------------------------------------
 
 const float Epsilon = 0.00001f;

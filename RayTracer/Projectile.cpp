@@ -27,11 +27,11 @@ Projectile Tick(Environment e, Projectile p)
 int main()
 {
 
-	// projÈtil inicia um unidade acima do ch„o
-	// velocidade È normalizada para 1 unidade/tick
+	// proj√©til inicia um unidade acima do ch√£o
+	// velocidade √© normalizada para 1 unidade/tick
 	Projectile proj { Point(0, 1, 0), Vector(1, 1, 0).Normalized() };
 
-	// gravidade È -0.1 unidades/tick, e vento È -0.01 unidades/tick
+	// gravidade √© -0.1 unidades/tick, e vento √© -0.01 unidades/tick
 	Environment env{ Vector(0, -0.1f, 0), Vector(-0.01f, 0, 0) };
 
 	unsigned tickCount = 0;
