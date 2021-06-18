@@ -52,7 +52,7 @@ Color RayTracer::Canvas::At(int x, int y)
 
 // pinta pixel com uma cor
 void RayTracer::Canvas::Paint(int x, int y, Color c)
-{ grid[y][x] = c; }
+{ if (x >= 0 && x < cols && y >=0 && y < lines) grid[y][x] = c; }
 
 // ----------------------------------------------
 
