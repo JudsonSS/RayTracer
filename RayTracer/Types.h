@@ -13,6 +13,9 @@
 #ifndef RAY_TRACER_TYPES
 #define RAY_TRACER_TYPES
 
+#include <string>
+using std::string;
+
 namespace RayTracer
 {
 	// -----------------------------------
@@ -26,19 +29,18 @@ namespace RayTracer
 		float z;
 		float w;
 
-		Tuple(float px, float py, float pz, float pw);	// construtor
-		bool operator==(const Tuple t);					// comparação de igualdade
-		Tuple operator+(const Tuple t);					// soma
-		Tuple operator-(const Tuple t);					// subtração
-		Tuple operator-();								// menos unário
-		Tuple operator*(float v);						// multiplicação por escalar
-		Tuple operator/(float v);						// divisão por escalar
+		Tuple(float px, float py, float pz, float pw); 	// construtor
+		bool operator==(const Tuple t);				   	// comparação de igualdade
+		Tuple operator+(const Tuple t);				   	// soma
+		Tuple operator-(const Tuple t);				   	// subtração
+		Tuple operator-();							   	// menos unário
+		Tuple operator*(float v);					   	// multiplicação por escalar
+		Tuple operator/(float v);					   	// divisão por escalar
 	};
 
-	bool Equal(float a, float b);						// comparação de pontos-flutuantes
-	Tuple operator*(float v, Tuple t);					// multiplicação por escalar
+	bool Equal(float a, float b);	   					// comparação de pontos-flutuantes
+	Tuple operator*(float v, Tuple t); 					// multiplicação por escalar
 
-	
 	// -----------------------------------
 	// Ponto
 	// -----------------------------------
@@ -46,10 +48,9 @@ namespace RayTracer
 	class Point : public Tuple
 	{
 	public:
-		Point(float px, float py, float pz);			// construtor
-		Point(Tuple&& t);								// conversão de tupla para ponto
+		Point(float px, float py, float pz); 			// construtor
+		Point(Tuple &&t);					 			// conversão de tupla para ponto
 	};
-
 
 	// -----------------------------------
 	// Vetor
@@ -58,15 +59,14 @@ namespace RayTracer
 	class Vector : public Tuple
 	{
 	public:
-		Vector(float px, float py, float pz);			// construtor
-		Vector(Tuple&& t);								// conversão de tupla para vetor
+		Vector(float px, float py, float pz); 			// construtor
+		Vector(Tuple &&t);					  			// conversão de tupla para vetor
 
 		float Magnitude();								// comprimento do vetor
 		Vector Normalized();							// vetor normalizado
 		float Dot(Vector v);							// produto escalar entre vetores
-		Vector Cross(Vector v);							// produto vetorial entre vetores
+		Vector Cross(Vector v); 						// produto vetorial entre vetores
 	};
-
 
 	// -----------------------------------
 	// Color
@@ -75,11 +75,14 @@ namespace RayTracer
 	class Color : public Tuple
 	{
 	public:
-		Color(float red, float green, float blue);		// construtor
-		Color(Tuple&& t);								// conversão de tupla para cor
+		Color();										// construtor padrão
+		Color(float red, float green, float blue); 		// construtor
+		Color(Tuple &&t);						   		// conversão de tupla para cor
 	};
 
-	Color operator*(const Color c1, const Color c2);	// multiplicação de cores (blend)
+	Color operator*(const Color c1, const Color c2); 	// multiplicação de cores (blend)
+
+	// -----------------------------------
 }
 
 #endif

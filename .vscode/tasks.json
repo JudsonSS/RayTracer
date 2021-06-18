@@ -1,18 +1,18 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
             "label": "CMake",
             "type": "shell",
             "command": "cmake",
-            "args": [ "../"],
+            "args": [
+                "../"
+            ],
             "group": "build",
             "options": {
-                "cwd": "${workspaceFolder}/Build",    
+                "cwd": "${workspaceFolder}/Build"
             },
-            "problemMatcher": [ ],
+            "problemMatcher": []
         },
         {
             "label": "Make",
@@ -24,12 +24,14 @@
                 "isDefault": true
             },
             "options": {
-                "cwd": "${workspaceFolder}/Build",    
+                "cwd": "${workspaceFolder}/Build"
             },
-            "problemMatcher": ["$gcc"],
+            "problemMatcher": [
+                "$gcc"
+            ]
         }
     ],
-    "presentation":{
+    "presentation": {
         "echo": true,
         "reveal": "always",
         "focus": true,

@@ -94,6 +94,9 @@ Vector RayTracer::Vector::Cross(Vector v)
 // Cor
 // ------------------------------------------------
 
+RayTracer::Color::Color() 
+	: Tuple(0.0f, 0.0f, 0.0f, 0.0f) {}
+
 RayTracer::Color::Color(float r, float g, float b) 
 	: Tuple(r,g, b, 0.0f) {}
 
@@ -103,4 +106,4 @@ RayTracer::Color::Color(Tuple&& t)
 Color RayTracer::operator*(const Color c1, const Color c2)
 { return Color(c1.x * c2.x, c1.y * c2.y, c1.z * c2.z); }
 
-// ------------------------------------------------
+// -----------------------------------

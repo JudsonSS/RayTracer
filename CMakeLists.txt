@@ -6,18 +6,20 @@ project(RayTracer)
  set(CMAKE_BUILD_TYPE Debug)
  set(CMAKE_CXX_STANDARD 17)
 
-# Aplicação 
-add_executable(Projectile RayTracer/Projectile.cpp RayTracer/Types.cpp)
+# Aplicação de Exemplo
+set (SOURCE_FILES "RayTracer/Types.cpp" "RayTracer/Canvas.cpp")
+add_executable(Projectile RayTracer/Projectile.cpp ${SOURCE_FILES} )
 
  # Configuração do GoogleTest
  find_package(GTest REQUIRED)
  include_directories(${GTEST_INCLUDE_DIRS}) 
 
 # Testes de Unidade
-add_executable(UnitTest UnitTests/Test1.cpp UnitTests/Test2.cpp RayTracer/Types.cpp)
-target_link_libraries(UnitTest ${GTEST_LIBRARIES} pthread)
+set (TEST_FILES "UnitTests/Test1.cpp" "UnitTests/Test2.cpp")
+add_executable(UnitTests ${TEST_FILES} ${SOURCE_FILES})
+target_link_libraries(UnitTests ${GTEST_LIBRARIES} pthread)
 
-# Configura Testes via CMake (chamando ctest)
+# Configura exibição de testes com ctest
 enable_testing()
 include(GoogleTest)
-gtest_discover_tests(UnitTest)
+gtest_discover_tests(UnitTests)
