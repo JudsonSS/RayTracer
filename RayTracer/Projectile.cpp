@@ -63,7 +63,7 @@ int main()
 		proj = Tick(env, proj);
 		++tickCount;
 		canvas.Paint(proj.position.x, canvas.Height() - proj.position.y, red);
-		cout << "Position after " << tickCount << ": (" << proj.position.x << ", " << proj.position.y << ", " << proj.position.z << ")\n";
+		cout << "Position after " << tickCount << ": (" << proj.position.x << ", " << proj.position.y << ")\n";
 	} 
 	while (proj.position.y > 0);
 
