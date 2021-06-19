@@ -13,6 +13,7 @@ _deps
 
 #VS Code
 c_cpp_properties.json
+settings.json
 
 # Build results
 [Dd]ebug/
