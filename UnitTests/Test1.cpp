@@ -19,6 +19,16 @@ using namespace RayTracer;
 
 namespace Test1
 {
+	TEST(Tuples, TupleEmpty)
+	{
+		Tuple t;
+
+		EXPECT_EQ(t.x, 0.0f);
+		EXPECT_EQ(t.y, 0.0f);
+		EXPECT_EQ(t.z, 0.0f);
+		EXPECT_EQ(t.w, 0.0f);
+	}
+
 	TEST(Tuples, TupleOne)
 	{
 		Tuple t{4.3f, -4.2f, 3.1f, 1.0f};

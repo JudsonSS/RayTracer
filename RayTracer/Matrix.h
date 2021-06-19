@@ -31,6 +31,8 @@ namespace RayTracer
     public:
         Matrix();                                               // construtor padrão
         Matrix(unsigned rows, unsigned cols);                   // construtor com linhas e colunas
+        Matrix(unsigned rows, unsigned cols, 
+               initializer_list<float> init);                   // construtor com lista de valores
         Matrix(Matrix& mat);                                    // construtor de cópia
         Matrix(Matrix&& mat);                                   // construtor de transferência (move)
         ~Matrix();                                              // destrutor
@@ -46,6 +48,10 @@ namespace RayTracer
         friend bool operator==(Matrix &m1, Matrix &m2);         // igualdade de matrizes
         friend bool operator!=(Matrix &m1, Matrix &m2);         // desigualdade de matrizes
         friend Matrix operator*(Matrix &m1, Matrix &m2);        // multiplicação de matrizes
+        friend Tuple operator*(Matrix &m, Tuple t);             // multiplicação de matriz com tupla
+
+        // membros estáticos da classe
+        static Matrix Identity;                                 // matriz identidade
     };
 }
 

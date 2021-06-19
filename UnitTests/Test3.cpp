@@ -194,4 +194,32 @@ namespace Test3
         Matrix M = A*B;
         EXPECT_TRUE(M == R);
     }
+
+    TEST(Matrix, TupleMultiply)
+    {
+        Matrix A {4,4};
+
+        A = { 1,2,3,4,
+              2,4,4,2,
+              8,6,4,1,
+              0,0,0,1 };
+
+        Tuple t {1, 2, 3, 1};
+        Tuple r {18,24,33,1};
+        EXPECT_TRUE(A * t == r);
+    }
+
+    TEST(Matrix, Identity)
+    {
+        Matrix A {4,4};
+        Matrix R {4,4};
+
+        A = { 0,1,2,4,
+              1,2,4,8,
+              2,4,8,16,
+              4,8,16,32 };
+        
+        R = A * Matrix::Identity;
+        EXPECT_TRUE(R == A);
+    }
 }

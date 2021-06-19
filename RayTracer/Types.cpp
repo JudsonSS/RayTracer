@@ -32,6 +32,9 @@ bool RayTracer::Equal(float a, float b)
 // Tupla
 // ------------------------------------------------
 
+RayTracer::Tuple::Tuple() 
+	: x(0.0f), y(0.0f), z(0.0f), w(0.0f) {}
+
 RayTracer::Tuple::Tuple(float px, float py, float pz, float pw) 
 	: x(px), y(py), z(pz), w(pw) {}
 

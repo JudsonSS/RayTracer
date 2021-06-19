@@ -29,7 +29,8 @@ namespace RayTracer
 		float z;
 		float w;
 
-		Tuple(float px, float py, float pz, float pw); 	// construtor
+		Tuple();										// construtor padrão
+		Tuple(float px, float py, float pz, float pw); 	// construtor com valores
 		bool operator==(const Tuple t);				   	// comparação de igualdade
 		Tuple operator+(const Tuple t);				   	// soma
 		Tuple operator-(const Tuple t);				   	// subtração
