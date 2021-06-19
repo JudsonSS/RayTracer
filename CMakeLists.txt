@@ -7,7 +7,7 @@ project(RayTracer)
  set(CMAKE_CXX_STANDARD 17)
 
 # Aplicação de Exemplo
-set (SOURCE_FILES "RayTracer/Types.cpp" "RayTracer/Canvas.cpp")
+set (SOURCE_FILES "RayTracer/Types.cpp" "RayTracer/Canvas.cpp" "RayTracer/Matrix.cpp")
 add_executable(Projectile RayTracer/Projectile.cpp ${SOURCE_FILES} )
 
  # Configuração do GoogleTest

@@ -14,9 +14,7 @@
 #define RAY_TRACER_TYPES
 
 #include <string>
-#include <initializer_list>
 using std::string;
-using std::initializer_list;
 
 namespace RayTracer
 {
@@ -83,32 +81,6 @@ namespace RayTracer
 	};
 
 	Color operator*(const Color c1, const Color c2); 	// multiplicação de cores (blend)
-
-	// -----------------------------------
-	// Matriz
-	// -----------------------------------
-
-	class Matrix
-	{
-	private:
-		unsigned mRows; 								// número de linhas
-		unsigned mCols; 								// número de colunas
-		unsigned mSize;  								// número de elementos
-		float *mData;									// dados da matriz
-
-	public:
-		Matrix(unsigned rows, unsigned cols);			// construtor
-		~Matrix();										// destrutor
-
-		unsigned Size() const;							// retorna quantidade de elementos da matriz
-		void operator=(initializer_list<float> init);	// atribuição de lista de valores
-		float &operator()(unsigned i, unsigned j);		// retorna referência a elemento
-		float operator()(unsigned i, unsigned j) const;	// retorna cópia do elemento
-		bool operator==(Matrix &m) const;				// igualdade de matrizes
-		bool operator!=(Matrix &m) const;				// desigualdade de matrizes
-	};
-
-	// -----------------------------------
 }
 
 #endif

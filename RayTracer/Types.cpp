@@ -12,7 +12,6 @@
 
 #include "Types.h"
 #include <cmath>
-
 using namespace RayTracer;
 
 // ------------------------------------------------
@@ -105,62 +104,5 @@ RayTracer::Color::Color(Tuple&& t)
 
 Color RayTracer::operator*(const Color c1, const Color c2)
 { return Color(c1.x * c2.x, c1.y * c2.y, c1.z * c2.z); }
-
-// ------------------------------------------------
-// Matriz
-// ------------------------------------------------
-
-RayTracer::Matrix::Matrix(unsigned rows, unsigned cols)
-	: mRows(rows),
-	  mCols(cols),
-	  mSize(rows*cols),
-	  mData(new float[mSize]{0})
-{
-}
-
-RayTracer::Matrix::~Matrix()
-{
-	delete [] mData;
-}
-
-unsigned RayTracer::Matrix::Size() const
-{ return mSize; }
-
-void RayTracer::Matrix::operator=(std::initializer_list<float> init) 
-{
-	initializer_list<float>::iterator it;
-	unsigned i;
-	for (i=0, it = init.begin(); it != init.end() && i < mSize; ++it)
-		mData[i++] = *it;
-}
-
-float & RayTracer::Matrix::operator()(unsigned i, unsigned j)
-{
-	return mData[i * mCols + j];
-}
-
-float RayTracer::Matrix::operator()(unsigned i, unsigned j) const
-{
-	return mData[i * mCols + j];
-}
-
-bool RayTracer::Matrix::operator==(Matrix &m) const
-{
-	// se tem tamanhos diferentes
-	if (mSize != m.Size())
-		return false;
-
-	// compara os elementos usando a função 
-	// de comparação de pontos-flutuantes
-	for (int i = 0; i < mRows; ++i)
-		for (int j = 0; j < mCols; ++j)
-			if (!Equal((*this)(i,j), m(i,j)))
-				return false;
-
-	return true;
-}
-
-bool RayTracer::Matrix::operator!=(Matrix &m) const
-{ return !operator==(m); }
 
 // -----------------------------------
