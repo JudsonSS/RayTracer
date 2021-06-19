@@ -22,16 +22,17 @@ namespace RayTracer
 	class Canvas
 	{
 	private:
-		Color ** grid;									// grade (matriz) de cores
-		int lines;										// número de linhas da grade
-		int cols;										// número de colunas da grade
+		Color * mGrid;									// grade de pixels
+		unsigned mWidth;								// largura do canvas
+		unsigned mHeight;								// altura do canvas
+		unsigned mSize;									// total de pixels
 
 	public:
-		Canvas(int width, int height);					// construtor 
+		Canvas(unsigned width, unsigned height);		// construtor 
 		~Canvas();										// destrutor
 
-		int Width() const;								// retorna largura da grade
-		int Height() const;								// retorna altura da grade
+		int Width() const;								// retorna largura 
+		int Height() const;								// retorna altura
 		Color At(int x, int y);							// retorna cor da posição (x,y)
 		void Paint(int x, int y, Color c);				// pinta pixel (x,y) com uma cor
 		bool Save(string filename);						// grava canvas no formato PPM

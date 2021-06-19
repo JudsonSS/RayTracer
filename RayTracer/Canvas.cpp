@@ -19,40 +19,36 @@ using std::cerr;
 
 // ----------------------------------------------
 
-RayTracer::Canvas::Canvas(int width, int height)
-	: cols(width), lines(height)
+RayTracer::Canvas::Canvas(unsigned width, unsigned height)
+	: mWidth(width), mHeight(height), mSize(width*height)
 {
-	// aloca uma matriz dinâmica
-	grid = new Color*[lines];
-	for (int i=0; i<lines; i++)
-		grid[i] = new Color[cols];
+	// aloca vetor dinâmico 
+	mGrid = new Color[mSize];
 }
 
 RayTracer::Canvas::~Canvas()
 {
-	// libera matriz dinâmica
-	for (int i=0; i<lines; i++)
-		delete [] grid[i];
-	delete [] grid;
+	// libera vetor dinâmico
+	delete [] mGrid;
 }
 
 // ----------------------------------------------
 
 // Retorna largura da grade
 int RayTracer::Canvas::Width() const
-{ return cols; }								
+{ return mWidth; }								
 
 // Retorna altura da grade
 int RayTracer::Canvas::Height() const
-{ return lines; }								
+{ return mHeight; }								
 
 // Retorna cor da posição (x,y)
 Color RayTracer::Canvas::At(int x, int y)
-{ return grid[y][x]; }
+{ return mGrid[y * mWidth + x]; }
 
 // pinta pixel com uma cor
 void RayTracer::Canvas::Paint(int x, int y, Color c)
-{ if (x >= 0 && x < cols && y >=0 && y < lines) grid[y][x] = c; }
+{ if (x >= 0 && x < mWidth && y >=0 && y < mHeight) mGrid[y * mWidth + x] = c; }
 
 // ----------------------------------------------
 
@@ -78,21 +74,21 @@ bool RayTracer::Canvas::Save(string filename)
 
     // cabeçalho do arquivo PPM 
     fout << "P3\n";                             // arquivo PPM
-    fout << cols << ' ' << lines << '\n';       // largura e altura
+    fout << mWidth << ' ' << mHeight << '\n';   // largura e altura
     fout << "255\n";                            // valor máximo de cor
 
     // pode haver no máximo 70 caracteres em uma linha
     int char_count = 0;
 
     // dados do arquivo PPM
-    for (int i=0; i<lines; i++)
+    for (int y=0; y<mHeight; y++)
     {
-        for (int j=0; j<cols; j++)
+        for (int x=0; x<mWidth; x++)
         {
             // adiciona 0.5 para arredondar valor
-            int r = grid[i][j].x * 255 + 0.5;
-            int g = grid[i][j].y * 255 + 0.5;
-            int b = grid[i][j].z * 255 + 0.5;
+            int r = mGrid[y * mWidth + x].x * 255 + 0.5;
+            int g = mGrid[y * mWidth + x].y * 255 + 0.5;
+            int b = mGrid[y * mWidth + x].z * 255 + 0.5;
 
             // mantém na faixa [0-255]
             if (r < 0) r = 0; else if (r > 255) r = 255;

@@ -15,7 +15,7 @@ add_executable(Projectile RayTracer/Projectile.cpp ${SOURCE_FILES} )
  include_directories(${GTEST_INCLUDE_DIRS}) 
 
 # Testes de Unidade
-set (TEST_FILES "UnitTests/Test1.cpp" "UnitTests/Test2.cpp")
+set (TEST_FILES "UnitTests/Test1.cpp" "UnitTests/Test2.cpp" "UnitTests/Test3.cpp")
 add_executable(UnitTests ${TEST_FILES} ${SOURCE_FILES})
 target_link_libraries(UnitTests ${GTEST_LIBRARIES} pthread)
 
