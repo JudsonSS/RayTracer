@@ -122,7 +122,7 @@ float RayTracer::Matrix::operator()(unsigned i, unsigned j) const
 
 // ----------------------------------------------
 
-bool RayTracer::operator==(Matrix &m1, Matrix &m2)
+bool RayTracer::operator==(const Matrix &m1, const Matrix &m2)
 {
 	// se tem tamanhos diferentes
 	if (m1.mSize != m2.mSize)
@@ -137,14 +137,14 @@ bool RayTracer::operator==(Matrix &m1, Matrix &m2)
 	return true;
 }
 
-bool RayTracer::operator!=(Matrix &m1, Matrix &m2)
+bool RayTracer::operator!=(const Matrix &m1, const Matrix &m2)
 { 
 	return !(m1 == m2); 
 }
 
 // ----------------------------------------------
 
-Matrix RayTracer::operator*(Matrix &m1, Matrix &m2)
+Matrix RayTracer::operator*(const Matrix &m1, const Matrix &m2)
 {
 	assert(m1.mCols == m2.mRows);
     Matrix M{m1.mRows,m2.mCols};
@@ -157,7 +157,7 @@ Matrix RayTracer::operator*(Matrix &m1, Matrix &m2)
     return M;
 }
 
-Tuple RayTracer::operator*(Matrix &m, Tuple t)
+Tuple RayTracer::operator*(const Matrix &m, const Tuple t)
 {
 	assert(m.mRows == 4);
 	assert(m.mCols == 4);
@@ -172,3 +172,12 @@ Tuple RayTracer::operator*(Matrix &m, Tuple t)
 }
 
 // ----------------------------------------------
+
+Matrix RayTracer::Matrix::Transpose() const
+{
+	Matrix T {mRows, mCols};
+	for (int i = 0; i < mRows; ++i)
+		for (int j = 0; j < mCols; ++j)
+			T(j,i) = mData[i * mCols + j];
+	return T;
+}

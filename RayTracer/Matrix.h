@@ -23,35 +23,38 @@ namespace RayTracer
     class Matrix
     {
     private:
-        unsigned mRows;                                         // número de linhas
-        unsigned mCols;                                         // número de colunas
-        unsigned mSize;                                         // número de elementos
-        float *mData;                                           // dados da matriz
+        unsigned mRows;                                                 // número de linhas
+        unsigned mCols;                                                 // número de colunas
+        unsigned mSize;                                                 // número de elementos
+        float *mData;                                                   // dados da matriz
 
     public:
-        Matrix();                                               // construtor padrão
-        Matrix(unsigned rows, unsigned cols);                   // construtor com linhas e colunas
+        Matrix();                                                       // construtor padrão
+        Matrix(unsigned rows, unsigned cols);                           // construtor com linhas e colunas
         Matrix(unsigned rows, unsigned cols, 
-               initializer_list<float> init);                   // construtor com lista de valores
-        Matrix(Matrix& mat);                                    // construtor de cópia
-        Matrix(Matrix&& mat);                                   // construtor de transferência (move)
-        ~Matrix();                                              // destrutor
+               initializer_list<float> init);                           // construtor com lista de valores
+        Matrix(Matrix& mat);                                            // construtor de cópia
+        Matrix(Matrix&& mat);                                           // construtor de transferência (move)
+        ~Matrix();                                                      // destrutor
 
         // funções membro da classe 
-        Matrix& operator=(Matrix& mat);                         // atribuição por cópia
-        Matrix& operator=(Matrix&& mat);                        // atribuição por transferência (cópia)
-        Matrix& operator=(initializer_list<float> init);        // atribuição de lista de valores
-        float &operator()(unsigned i, unsigned j);              // retorna referência a elemento
-        float operator()(unsigned i, unsigned j) const;         // retorna cópia do elemento
+        Matrix& operator=(Matrix& mat);                                 // atribuição por cópia
+        Matrix& operator=(Matrix&& mat);                                // atribuição por transferência (cópia)
+        Matrix& operator=(initializer_list<float> init);                // atribuição de lista de valores
+        float &operator()(unsigned i, unsigned j);                      // retorna referência a elemento
+        float operator()(unsigned i, unsigned j) const;                 // retorna cópia do elemento
 
         // funções amiga não são membros da classe
-        friend bool operator==(Matrix &m1, Matrix &m2);         // igualdade de matrizes
-        friend bool operator!=(Matrix &m1, Matrix &m2);         // desigualdade de matrizes
-        friend Matrix operator*(Matrix &m1, Matrix &m2);        // multiplicação de matrizes
-        friend Tuple operator*(Matrix &m, Tuple t);             // multiplicação de matriz com tupla
+        friend bool operator==(const Matrix &m1, const Matrix &m2);     // igualdade de matrizes
+        friend bool operator!=(const Matrix &m1, const Matrix &m2);     // desigualdade de matrizes
+        friend Matrix operator*(const Matrix &m1, const Matrix &m2);    // multiplicação de matrizes
+        friend Tuple operator*(const Matrix &m, const Tuple t);         // multiplicação de matriz com tupla
+
+        // operações sobre as matrizes
+        Matrix Transpose() const;                                       // retorna a matriz transposta
 
         // membros estáticos da classe
-        static Matrix Identity;                                 // matriz identidade
+        static Matrix Identity;                                         // matriz identidade
     };
 }
 
