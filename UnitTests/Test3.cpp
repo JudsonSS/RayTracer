@@ -247,7 +247,7 @@ namespace Test3
         EXPECT_TRUE(A == Matrix::Identity);
     }
 
-    TEST(Matrix, Determinant)
+    TEST(Matrix, Determinant2x2)
     {
         Matrix A {2,2};
         A = {1, 5, 
@@ -288,5 +288,62 @@ namespace Test3
         
         Matrix S = A.Submatrix(2,1);
         EXPECT_TRUE(S == R);
+    }
+
+    TEST(Matrix, Minor)
+    {
+        Matrix A {3,3};
+    
+        A = { 3, 5, 0, 
+              2,-1,-7,
+              6,-1, 5 };
+
+        Matrix B = A.Submatrix(1,0);
+        EXPECT_EQ(B.Determinant(), 25);
+        EXPECT_EQ(A.Minor(1,0), 25);
+    }
+
+    TEST(Matrix, Cofactor)
+    {
+        Matrix A {3,3};
+    
+        A = { 3, 5, 0, 
+              2,-1,-7,
+              6,-1, 5 };
+
+        EXPECT_EQ(A.Minor(0,0), -12);
+        EXPECT_EQ(A.Cofactor(0,0), -12);
+        EXPECT_EQ(A.Minor(1,0), 25);
+        EXPECT_EQ(A.Cofactor(1,0), -25);
+    }
+
+    TEST(Matrix, Determinant3x3)
+    {
+        Matrix A {3,3};
+    
+        A = { 1, 2, 6, 
+             -5, 8,-4,
+              2, 6, 4 };
+
+        EXPECT_EQ(A.Cofactor(0,0), 56);
+        EXPECT_EQ(A.Cofactor(0,1), 12);
+        EXPECT_EQ(A.Cofactor(0,2), -46);
+        EXPECT_EQ(A.Determinant(), -196);
+    }
+
+    TEST(Matrix, Determinant4x4)
+    {
+        Matrix A {4,4};
+    
+        A = {-2,-8, 3, 5, 
+             -3, 1, 7, 3,
+              1, 2,-9, 6,
+             -6, 7, 7, -9 };
+
+        EXPECT_EQ(A.Cofactor(0,0), 690);
+        EXPECT_EQ(A.Cofactor(0,1), 447);
+        EXPECT_EQ(A.Cofactor(0,2), 210);
+        EXPECT_EQ(A.Cofactor(0,3), 51);
+        EXPECT_EQ(A.Determinant(), -4071);
     }
 }

@@ -184,15 +184,33 @@ Matrix RayTracer::Matrix::Transpose() const
 
 float RayTracer::Matrix::Determinant() const
 {
-	// só funciona para matrizes 2x2
-	assert(mRows == 2);
-	assert(mCols == 2);
+	// só existe determinante para matrizes quadradas
+	assert(mRows == mCols);
 
-	// M[0,0] * M[1,1] - M[0,1] * M[1,0]
-	return mData[0] * mData[3] - mData[1] * mData[2];
+	float det = 0;
+
+	if (mRows == 2)
+	{
+		// determinante de matrizes 2x2 é dado por
+		// (M[0,0] * M[1,1]) - (M[0,1] * M[1,0])
+		det = mData[0] * mData[3] - mData[1] * mData[2];
+	}
+	else
+	{
+		// determinante de matrizes maiores depende
+		// de cofatores, que dependem de minor, que 
+		// dependem do determinte de submatrizes
+		for (unsigned col = 0; col < mCols; ++col)
+		{
+			// det = det + M[0,col] * cofactor(M, 0, col)
+			det += mData[col] * this->Cofactor(0, col);
+		}
+	}
+
+	return det;
 }
 
-Matrix RayTracer::Matrix::Submatrix(unsigned row, unsigned col)
+Matrix RayTracer::Matrix::Submatrix(unsigned row, unsigned col) const
 {
 	// linha e coluna precisa existir na matrix
 	assert(row < mRows);
@@ -229,4 +247,16 @@ Matrix RayTracer::Matrix::Submatrix(unsigned row, unsigned col)
 				S(i-1,j-1) = mData[i * mCols + j];
 
 	return S;
+}
+
+float RayTracer::Matrix::Minor(unsigned row, unsigned col) const
+{
+	return this->Submatrix(row,col).Determinant();
+}
+
+float RayTracer::Matrix::Cofactor(unsigned row, unsigned col) const
+{
+	float minor = this->Minor(row, col);
+	// se linha + coluna é um número ímpar retorna -minor
+	return ((row+col) % 2 == 0) ? minor : -minor; 
 }
