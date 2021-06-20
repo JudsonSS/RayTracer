@@ -255,4 +255,38 @@ namespace Test3
 
         EXPECT_EQ(A.Determinant(), 17);
     }
+
+    TEST(Matrix, Submatrix2x2)
+    {
+        Matrix A {3,3};
+        Matrix R {2,2};
+
+        A = { 1, 5, 0, 
+             -3, 2, 7,
+              0, 6,-3 };
+
+        R = {-3, 2,
+              0, 6 };
+        
+        Matrix S = A.Submatrix(0,2);
+        EXPECT_TRUE(S == R);
+    }
+
+    TEST(Matrix, Submatrix3x3)
+    {
+        Matrix A {4,4};
+        Matrix R {3,3};
+
+        A = {-6, 1, 1, 6, 
+             -8, 5, 8, 6,
+             -1, 0, 8, 2,
+             -7, 1,-1, 1 };
+
+        R = {-6, 1, 6,
+             -8, 8, 6,
+             -7, -1, 1 };
+        
+        Matrix S = A.Submatrix(2,1);
+        EXPECT_TRUE(S == R);
+    }
 }

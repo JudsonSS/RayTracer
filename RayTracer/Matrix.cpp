@@ -184,9 +184,49 @@ Matrix RayTracer::Matrix::Transpose() const
 
 float RayTracer::Matrix::Determinant() const
 {
+	// só funciona para matrizes 2x2
 	assert(mRows == 2);
 	assert(mCols == 2);
 
 	// M[0,0] * M[1,1] - M[0,1] * M[1,0]
 	return mData[0] * mData[3] - mData[1] * mData[2];
+}
+
+Matrix RayTracer::Matrix::Submatrix(unsigned row, unsigned col)
+{
+	// linha e coluna precisa existir na matrix
+	assert(row < mRows);
+	assert(col < mCols);
+
+	// ao remover linha e coluna, a matrix fica 
+	// dividida em 4 quadrantes que precisam ser 
+	// copiados para a submatrix resultante
+	// 
+	// Q1 | Q2
+	// -------
+	// Q3 | Q4
+
+	Matrix S {mRows-1, mCols-1};
+	
+	// cópia do quadrante 1 
+	for (unsigned i = 0; i < row; ++i)
+		for (unsigned j = 0; j < col; ++j)
+				S(i,j) = mData[i * mCols + j];
+
+	// cópia do quadrante 2
+	for (unsigned i = 0; i < row; ++i)
+		for (unsigned j = col+1; j < mCols; ++j)
+				S(i,j-1) = mData[i * mCols + j];
+
+	// cópia do quadrante 3
+	for (unsigned i = row+1; i < mRows; ++i)
+		for (unsigned j = 0; j < col; ++j)
+				S(i-1,j) = mData[i * mCols + j];
+
+	// cópia do quadrante 4
+	for (unsigned i = row+1; i < mRows; ++i)
+		for (unsigned j = col+1; j < mCols; ++j)
+				S(i-1,j-1) = mData[i * mCols + j];
+
+	return S;
 }

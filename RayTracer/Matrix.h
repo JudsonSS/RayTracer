@@ -53,6 +53,7 @@ namespace RayTracer
         // operações sobre as matrizes
         Matrix Transpose() const;                                       // retorna a matriz transposta
         float Determinant() const;                                      // retorna o determinante
+        Matrix Submatrix(unsigned row, unsigned col);                   // retorna matrix sem a linha e coluna indicadas
 
         // membros estáticos da classe
         static Matrix Identity;                                         // matriz identidade
