@@ -181,3 +181,12 @@ Matrix RayTracer::Matrix::Transpose() const
 			T(j,i) = mData[i * mCols + j];
 	return T;
 }
+
+float RayTracer::Matrix::Determinant() const
+{
+	assert(mRows == 2);
+	assert(mCols == 2);
+
+	// M[0,0] * M[1,1] - M[0,1] * M[1,0]
+	return mData[0] * mData[3] - mData[1] * mData[2];
+}

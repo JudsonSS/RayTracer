@@ -240,4 +240,19 @@ namespace Test3
         
         EXPECT_TRUE(T == A.Transpose());
     }
+
+    TEST(Matrix, TransIdentity)
+    {
+        Matrix A = Matrix::Identity.Transpose();
+        EXPECT_TRUE(A == Matrix::Identity);
+    }
+
+    TEST(Matrix, Determinant)
+    {
+        Matrix A {2,2};
+        A = {1, 5, 
+            -3, 2};
+
+        EXPECT_EQ(A.Determinant(), 17);
+    }
 }
