@@ -458,4 +458,34 @@ namespace Test3
 
         EXPECT_TRUE(C * B.Inverse() == A);
     }
+
+    TEST(Matrix, IdentityInv)
+    {
+        Matrix Inv = Matrix::Identity.Inverse(); 
+        EXPECT_TRUE(Inv == Matrix::Identity);
+    }
+
+    TEST(Matrix, AxAinv)
+    {
+        Matrix A {4,4};
+    
+        A = { 3,-9, 7, 3, 
+              3,-8, 2,-9,
+             -4, 4, 4, 1,
+             -6, 5,-1, 1 };
+
+        EXPECT_TRUE(A * A.Inverse() == Matrix::Identity);
+    }
+
+    TEST(Matrix, TransposeInverse)
+    {
+        Matrix A {4,4};
+    
+        A = { 3,-9, 7, 3, 
+              3,-8, 2,-9,
+             -4, 4, 4, 1,
+             -6, 5,-1, 1 };
+
+        EXPECT_TRUE(A.Transpose().Inverse() == A.Inverse().Transpose());
+    }
 }
