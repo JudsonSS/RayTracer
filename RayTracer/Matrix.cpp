@@ -203,7 +203,7 @@ float RayTracer::Matrix::Determinant() const
 		for (unsigned col = 0; col < mCols; ++col)
 		{
 			// det = det + M[0,col] * cofactor(M, 0, col)
-			det += mData[col] * this->Cofactor(0, col);
+			det += mData[col] * Cofactor(0, col);
 		}
 	}
 
@@ -251,12 +251,32 @@ Matrix RayTracer::Matrix::Submatrix(unsigned row, unsigned col) const
 
 float RayTracer::Matrix::Minor(unsigned row, unsigned col) const
 {
-	return this->Submatrix(row,col).Determinant();
+	return Submatrix(row,col).Determinant();
 }
 
 float RayTracer::Matrix::Cofactor(unsigned row, unsigned col) const
 {
-	float minor = this->Minor(row, col);
+	float minor = Minor(row, col);
 	// se linha + coluna é um número ímpar retorna -minor
 	return ((row+col) % 2 == 0) ? minor : -minor; 
+}
+
+bool RayTracer::Matrix::Invertible() const
+{
+	return (Determinant() == 0) ? false : true;  
+}
+
+Matrix RayTracer::Matrix::Inverse() const
+{
+	assert(Invertible());
+	float det = Determinant();
+
+	Matrix M {mRows, mCols};
+
+	for (unsigned row = 0; row < mRows; ++row)
+		for (unsigned col = 0; col < mCols; ++col)
+			// usar [col,row] em vez de [row,col] faz a transposição da matriz  
+			M(col,row) = Cofactor(row,col) / det;
+
+	return M;
 }

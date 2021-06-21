@@ -56,6 +56,8 @@ namespace RayTracer
         Matrix Submatrix(unsigned row, unsigned col) const;             // retorna matrix sem a linha e coluna indicadas
         float Minor(unsigned row, unsigned col) const;                  // retorna minor da matrix na posição indicada
         float Cofactor(unsigned row, unsigned col) const;               // retorna cofator da matrix na posição indicada
+        bool Invertible() const;                                        // testa se a matriz tem inversa
+        Matrix Inverse() const;                                         // retorna a matrix inversa
 
         // membros estáticos da classe
         static Matrix Identity;                                         // matriz identidade
