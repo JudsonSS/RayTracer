@@ -1,8 +1,8 @@
 /**********************************************************************************
 // Matrix (Arquivo de Código Fonte)
 //
-// Criação:		19 Jun 2020
-// Atualização:	19 Jun 2021
+// Criação:		19 Jun 2021
+// Atualização:	21 Jun 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define uma classe para uma matriz dinâmica com as operações
@@ -13,7 +13,7 @@
 #include "Matrix.h"
 using namespace RayTracer;
 
-// ----------------------------------------------
+// -------------------------------------------------------------------------------
 
 // membros estáticos da classe
 Matrix Matrix::Identity { 4, 4, 
@@ -23,7 +23,7 @@ Matrix Matrix::Identity { 4, 4,
     0,0,0,1 } 
 };
 
-// ----------------------------------------------
+// -------------------------------------------------------------------------------
 
 RayTracer::Matrix::Matrix()
 	: mRows(0),
@@ -71,7 +71,7 @@ RayTracer::Matrix::Matrix(Matrix &&mat)
 RayTracer::Matrix::~Matrix()
 { delete [] mData; }
 
-// ----------------------------------------------
+// -------------------------------------------------------------------------------
 
 Matrix& RayTracer::Matrix::operator=(Matrix& mat)
 {
@@ -108,7 +108,7 @@ Matrix& RayTracer::Matrix::operator=(std::initializer_list<float> init)
 	return *this;
 }
 
-// ----------------------------------------------
+// -------------------------------------------------------------------------------
 
 float & RayTracer::Matrix::operator()(unsigned i, unsigned j)
 {
@@ -120,7 +120,7 @@ float RayTracer::Matrix::operator()(unsigned i, unsigned j) const
 	return mData[i * mCols + j];
 }
 
-// ----------------------------------------------
+// -------------------------------------------------------------------------------
 
 bool RayTracer::operator==(const Matrix &m1, const Matrix &m2)
 {
@@ -142,7 +142,7 @@ bool RayTracer::operator!=(const Matrix &m1, const Matrix &m2)
 	return !(m1 == m2); 
 }
 
-// ----------------------------------------------
+// -------------------------------------------------------------------------------
 
 Matrix RayTracer::operator*(const Matrix &m1, const Matrix &m2)
 {
@@ -171,7 +171,7 @@ Tuple RayTracer::operator*(const Matrix &m, const Tuple t)
 	return r;
 }
 
-// ----------------------------------------------
+// -------------------------------------------------------------------------------
 
 Matrix RayTracer::Matrix::Transpose() const
 {
@@ -280,3 +280,5 @@ Matrix RayTracer::Matrix::Inverse() const
 
 	return M;
 }
+
+// -------------------------------------------------------------------------------
