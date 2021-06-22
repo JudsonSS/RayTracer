@@ -17,7 +17,7 @@ using namespace RayTracer;
 using std::ofstream;
 using std::cerr;
 
-// ----------------------------------------------
+// -------------------------------------------------------------------------------
 
 RayTracer::Canvas::Canvas(unsigned width, unsigned height)
 	: mWidth(width), mHeight(height), mSize(width*height)
@@ -32,7 +32,7 @@ RayTracer::Canvas::~Canvas()
 	delete [] mGrid;
 }
 
-// ----------------------------------------------
+// -------------------------------------------------------------------------------
 
 // Retorna largura da grade
 int RayTracer::Canvas::Width() const
@@ -50,7 +50,7 @@ Color RayTracer::Canvas::At(int x, int y)
 void RayTracer::Canvas::Paint(int x, int y, Color c)
 { if (x >= 0 && x < mWidth && y >=0 && y < mHeight) mGrid[y * mWidth + x] = c; }
 
-// ----------------------------------------------
+// -------------------------------------------------------------------------------
 
 // calcula a quantidade de dígitos de um inteiro
 int tamanho(int num)
@@ -167,4 +167,4 @@ bool RayTracer::Canvas::Save(string filename)
     return true;
 }
 
-// ----------------------------------------------
+// -------------------------------------------------------------------------------
