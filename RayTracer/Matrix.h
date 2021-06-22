@@ -62,6 +62,10 @@ namespace RayTracer
         // membros estáticos da classe
         static Matrix Identity;                                         // matriz identidade
     };
+
+    // transformações de matrizes
+    Matrix Translation(float x, float y, float z);                      // retorna matriz de translação
+    Matrix Scaling(float x, float y, float z);                          // retorna matriz de escala
 }
 
 #endif

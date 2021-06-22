@@ -6,15 +6,11 @@
     "configurations": [
         {
             "name": "Depurar",
-            "type": "cppdbg",
+            "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/Build/UnitTests",
             "args": [],
-            "stopAtEntry": true,
-            "cwd": "${fileDirname}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "lldb",
+            "cwd":"${workspaceFolder}/Build/",
             "preLaunchTask": "Make"
         }
     ]

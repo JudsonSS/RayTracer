@@ -282,3 +282,23 @@ Matrix RayTracer::Matrix::Inverse() const
 }
 
 // -------------------------------------------------------------------------------
+
+Matrix RayTracer::Translation(float x, float y, float z)
+{
+	Matrix T {Matrix::Identity};
+	T(0,3) = x;
+	T(1,3) = y;
+	T(2,3) = z;
+	return T;
+}
+
+Matrix RayTracer::Scaling(float x, float y, float z)
+{
+	Matrix S {Matrix::Identity};
+	S(0,0) = x;
+	S(1,1) = y;
+	S(2,2) = z;
+	return S;
+}
+
+// -------------------------------------------------------------------------------

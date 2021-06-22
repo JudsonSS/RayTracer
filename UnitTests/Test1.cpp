@@ -5,8 +5,8 @@
 // Atualização:	18 Jun 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
-// Descrição:	Define os testes de unidade criados no Capítulo 1 (Tuplas,
-//              Pontos e Vetores) do livro "The Ray Tracer Challenge". 
+// Descrição:	Define os testes de unidade criados no Capítulo 1, Tuplas,
+//              Pontos e Vetores, do livro "The Ray Tracer Challenge". 
 //              Os testes utilizam o framework GoogleTest.
 //
 **********************************************************************************/
