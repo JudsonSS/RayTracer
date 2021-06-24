@@ -13,6 +13,7 @@
 
 #include "../RayTracer/Types.h"
 #include "../RayTracer/Matrix.h"
+#include <cmath>
 #include <gtest/gtest.h>
 using namespace RayTracer;
 
@@ -74,5 +75,51 @@ namespace Test4
         Point p {2, 3, 4};
         Point r {-2, 3, 4};
 		EXPECT_TRUE(S * p == r);
+	}
+
+    TEST(Transformations, RotationX)
+	{
+        Point p {0, 1, 0};
+        Matrix HalfQuarter = RotationX(PI/4);
+        Matrix FullQuarter = RotationX(PI/2); 
+        
+        Point hq {0, sqrt(2.0f)/2.0f, sqrt(2.0f)/2.0f};
+        Point fq {0, 0, 1};
+		EXPECT_TRUE(HalfQuarter * p == hq);
+        EXPECT_TRUE(FullQuarter * p == fq);
+	}
+
+    TEST(Transformations, RotationXInv)
+	{
+        Point p {0, 1, 0};
+        Point hq {0, sqrt(2.0f)/2.0f, sqrt(2.0f)/2.0f};
+        Matrix HalfQuarter = RotationX(PI/4);
+        Matrix HQInv = HalfQuarter.Inverse(); 
+        
+		EXPECT_TRUE(HQInv * hq == p);
+	}
+
+    TEST(Transformations, RotationY)
+	{
+        Point p {0, 0, 1};
+        Matrix HalfQuarter = RotationY(PI/4);
+        Matrix FullQuarter = RotationY(PI/2); 
+        
+        Point hq {sqrt(2.0f)/2.0f, 0, sqrt(2.0f)/2.0f};
+        Point fq {1, 0, 0};
+		EXPECT_TRUE(HalfQuarter * p == hq);
+        EXPECT_TRUE(FullQuarter * p == fq);
+	}
+
+    TEST(Transformations, RotationZ)
+	{
+        Point p {0, 1, 0};
+        Matrix HalfQuarter = RotationZ(PI/4);
+        Matrix FullQuarter = RotationZ(PI/2); 
+        
+        Point hq {-sqrt(2.0f)/2.0f, sqrt(2.0f)/2.0f, 0};
+        Point fq {-1, 0, 0};
+		EXPECT_TRUE(HalfQuarter * p == hq);
+        EXPECT_TRUE(FullQuarter * p == fq);
 	}
 }

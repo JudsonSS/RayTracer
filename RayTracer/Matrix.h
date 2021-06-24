@@ -66,6 +66,12 @@ namespace RayTracer
     // transformações de matrizes
     Matrix Translation(float x, float y, float z);                      // retorna matriz de translação
     Matrix Scaling(float x, float y, float z);                          // retorna matriz de escala
+    Matrix RotationX(float radians);                                    // retorna matriz de rotação para o eixo x
+    Matrix RotationY(float radians);                                    // retorna matriz de rotação para o eixo y
+    Matrix RotationZ(float radians);                                    // retorna matriz de rotação para o eixo z
+
+    // constantes
+    const float PI = 3.14159f;
 }
 
 #endif

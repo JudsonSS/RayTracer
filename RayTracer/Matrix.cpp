@@ -10,6 +10,7 @@
 //
 **********************************************************************************/
 
+#include <cmath>
 #include "Matrix.h"
 using namespace RayTracer;
 
@@ -299,6 +300,36 @@ Matrix RayTracer::Scaling(float x, float y, float z)
 	S(1,1) = y;
 	S(2,2) = z;
 	return S;
+}
+
+Matrix RayTracer::RotationX(float radians)
+{
+	Matrix R {Matrix::Identity};
+	R(1,1) = cos(radians);
+	R(1,2) = -sin(radians);
+	R(2,1) = sin(radians);
+	R(2,2) = cos(radians);
+	return R;
+}
+
+Matrix RayTracer::RotationY(float radians)
+{
+	Matrix R {Matrix::Identity};
+	R(0,0) = cos(radians);
+	R(0,2) = sin(radians);
+	R(2,0) = -sin(radians);
+	R(2,2) = cos(radians);
+	return R;
+}
+
+Matrix RayTracer::RotationZ(float radians)
+{
+	Matrix R {Matrix::Identity};
+	R(0,0) = cos(radians);
+	R(0,1) = -sin(radians);
+	R(1,0) = sin(radians);
+	R(1,1) = cos(radians);
+	return R;
 }
 
 // -------------------------------------------------------------------------------
