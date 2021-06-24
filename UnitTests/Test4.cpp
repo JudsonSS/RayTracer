@@ -122,4 +122,83 @@ namespace Test4
 		EXPECT_TRUE(HalfQuarter * p == hq);
         EXPECT_TRUE(FullQuarter * p == fq);
 	}
+
+    TEST(Transformations, ShearingXY)
+	{
+        Matrix S = Shearing(1,0,0,0,0,0); 
+        Point p {2, 3, 4};
+        Point r {5, 3, 4};
+		EXPECT_TRUE(S * p == r);
+	}
+
+    TEST(Transformations, ShearingXZ)
+	{
+        Matrix S = Shearing(0,1,0,0,0,0); 
+        Point p {2, 3, 4};
+        Point r {6, 3, 4};
+		EXPECT_TRUE(S * p == r);
+	}
+
+    TEST(Transformations, ShearingYX)
+	{
+        Matrix S = Shearing(0,0,1,0,0,0); 
+        Point p {2, 3, 4};
+        Point r {2, 5, 4};
+		EXPECT_TRUE(S * p == r);
+	}
+
+    TEST(Transformations, ShearingYZ)
+	{
+        Matrix S = Shearing(0,0,0,1,0,0); 
+        Point p {2, 3, 4};
+        Point r {2, 7, 4};
+		EXPECT_TRUE(S * p == r);
+	}
+
+    TEST(Transformations, ShearingZX)
+	{
+        Matrix S = Shearing(0,0,0,0,1,0); 
+        Point p {2, 3, 4};
+        Point r {2, 3, 6};
+		EXPECT_TRUE(S * p == r);
+	}
+
+    TEST(Transformations, ShearingZY)
+	{
+        Matrix S = Shearing(0,0,0,0,0,1); 
+        Point p {2, 3, 4};
+        Point r {2, 3, 7};
+		EXPECT_TRUE(S * p == r);
+	}
+
+    TEST(Transformations, Individual)
+	{
+        Point p {1, 0, 1};
+        Matrix R = RotationX(PI/2);
+        Matrix S = Scaling(5,5,5);
+        Matrix T = Translation(10,5,7);
+
+        // primeiro rotação
+        Point p2 = R * p;
+        EXPECT_TRUE(p2 == Point(1,-1,0));
+
+        // depois aplica escala
+        Point p3 = S * p2;
+        EXPECT_TRUE(p3 == Point(5,-5,0));
+        
+        // e por fim translação
+        Point p4 = T * p3;
+		EXPECT_TRUE(p4 == Point(15,0,7));
+	}
+
+    TEST(Transformations, Chained)
+	{
+        Point p {1, 0, 1};
+        Matrix R = RotationX(PI/2);
+        Matrix S = Scaling(5,5,5);
+        Matrix T = Translation(10,5,7);
+
+        Matrix C = T*S*R;
+		EXPECT_TRUE(C * p == Point(15,0,7));
+	}
 }

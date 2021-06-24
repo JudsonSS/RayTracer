@@ -332,4 +332,16 @@ Matrix RayTracer::RotationZ(float radians)
 	return R;
 }
 
+Matrix RayTracer::Shearing(float xy, float xz, float yx, float yz, float zx, float zy)
+{
+	Matrix S {Matrix::Identity};
+	S(0,1) = xy;
+	S(0,2) = xz;
+	S(1,0) = yx;
+	S(1,2) = yz;
+	S(2,0) = zx;
+	S(2,1) = zy;
+	return S;
+}
+
 // -------------------------------------------------------------------------------

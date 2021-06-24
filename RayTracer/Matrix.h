@@ -69,6 +69,9 @@ namespace RayTracer
     Matrix RotationX(float radians);                                    // retorna matriz de rotação para o eixo x
     Matrix RotationY(float radians);                                    // retorna matriz de rotação para o eixo y
     Matrix RotationZ(float radians);                                    // retorna matriz de rotação para o eixo z
+    Matrix Shearing(float xy, float xz, 
+                    float yx, float yz,
+                    float zx, float zy);                                // retorna matriz de distorção 
 
     // constantes
     const float PI = 3.14159f;
