@@ -8,7 +8,7 @@
             "name": "Depurar",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/Build/UnitTests",
+            "program": "${workspaceFolder}/Build/Clock",
             "args": [],
             "cwd":"${workspaceFolder}/Build/",
             "preLaunchTask": "Make"

@@ -14,8 +14,8 @@
 
 
 #include <iostream>
-#include "Types.h"
-#include "Canvas.h"
+#include "../RayTracer/Types.h"
+#include "../RayTracer/Canvas.h"
 
 using namespace std;
 using namespace RayTracer;
