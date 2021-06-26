@@ -34,18 +34,24 @@ float RayTracer::Intersection::operator[](unsigned i)
 
 Intersection RayTracer::Sphere::Intersect(Ray r)
 {
-    // vetor do centro da esfera (0,0,0) até a origem do raio
-    Vector sphere_to_ray = r.origin - Point{0,0,0};
+    // vetor do centro da esfera, posição (0,0,0), até a origem do raio
+    Vector center_origin = r.origin - Point{0,0,0};
 
+    // coeficientes da equação do segundo grau: at2 + bt + c = 0
     float a = r.direction.Dot(r.direction);
-    float b = 2 * r.direction.Dot(sphere_to_ray);
-    float c = sphere_to_ray.Dot(sphere_to_ray) - 1;
+    float b = 2 * r.direction.Dot(center_origin);
+    float c = center_origin.Dot(center_origin) - 1;
 
+    // discriminante da equação do segundo grau
     float discriminant = b * b - 4 * a * c;
 
+    // se o discriminante é negativo não há raízes reais 
     if (discriminant < 0)
         return Intersection();
     
+    // existem duas raízes iguais 
+    // quando o discriminante é igual a zero 
+    // ou duas raízes diferentes se ele é positivo
     Intersection i;
     i.count = 2;
     i.positions[0] = (-b - sqrt(discriminant)) / (2 * a);
