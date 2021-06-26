@@ -67,7 +67,7 @@ int main()
 	} 
 	while (proj.position.y > 0);
 
-	canvas.Save("canvas.ppm");
+	canvas.Save("projectile.ppm");
 	cout << "Hit the ground with: " << tickCount << " ticks\n";
 	
 	return 0;

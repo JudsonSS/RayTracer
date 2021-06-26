@@ -10,19 +10,33 @@ project(RayTracer)
  find_package(GTest REQUIRED)
  include_directories(${GTEST_INCLUDE_DIRS}) 
 
-# Testes de Unidade
-set (RAYTRACER_FILES 
+# Projectile
+set (PROJECTILE_FILES 
+    "RayTracer/Types.cpp" 
+    "RayTracer/Canvas.cpp")
+
+# Clock
+set (CLOCK_FILES 
     "RayTracer/Types.cpp" 
     "RayTracer/Canvas.cpp" 
     "RayTracer/Matrix.cpp")
 
+# RayTracer
+set (RAYTRACER_FILES 
+    "RayTracer/Types.cpp" 
+    "RayTracer/Canvas.cpp" 
+    "RayTracer/Matrix.cpp"
+    "RayTracer/Ray.cpp")
+
+# Testes de Unidade
 set (TEST_FILES 
     "UnitTests/Test1.cpp" 
     "UnitTests/Test2.cpp" 
     "UnitTests/Test3.cpp" 
-    "UnitTests/Test4.cpp")
+    "UnitTests/Test4.cpp"
+    "UnitTests/Test5.cpp")
 
-add_executable(Projectile "Projects/Projectile.cpp" ${RAYTRACER_FILES})
-add_executable(Clock "Projects/Clock.cpp" ${RAYTRACER_FILES})
+add_executable(Projectile "Projects/Projectile.cpp" ${PROJECTILE_FILES})
+add_executable(Clock "Projects/Clock.cpp" ${CLOCK_FILES})
 add_executable(UnitTests ${TEST_FILES} ${RAYTRACER_FILES})
 target_link_libraries(UnitTests ${GTEST_LIBRARIES} pthread)
