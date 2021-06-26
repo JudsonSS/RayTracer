@@ -35,7 +35,6 @@ namespace RayTracer
         float operator[](unsigned i);   // retorna valores das interseções
     };
 
-
     class Sphere
     {
     public:
