@@ -15,6 +15,7 @@
 
 #include <vector>
 #include "Ray.h"
+#include "Matrix.h"
 using std::vector;
 
 namespace RayTracer
@@ -25,12 +26,11 @@ namespace RayTracer
         SPHERE_T
     };
 
-    class Geometry
+    struct Geometry
     {
-    protected:
-        unsigned type;                                      // tipo da geometria
-
-    public:
+        unsigned type;                                      // tipo da geometria 
+        Matrix transform;                                   // matrix de transformação
+        
         Geometry();                                         // construtor padrão
         virtual vector<Intersection> Intersect(Ray r) = 0;  // retorna pontos de interseção com o raio
     };

@@ -17,7 +17,7 @@ using namespace RayTracer;
 // -------------------------------------------------------------------------------
 
 RayTracer::Geometry::Geometry()
-    : type(UNKNOWN_T) {}
+    : type(UNKNOWN_T), transform(Matrix::Identity) {}
 
 // -------------------------------------------------------------------------------
 
@@ -28,6 +28,10 @@ RayTracer::Sphere::Sphere()
 
 vector<Intersection> RayTracer::Sphere::Intersect(Ray r)
 {
+    // aplica inversa da transformação da esfera 
+    // ao raio antes de testar a interseção
+    r = r.Transform(transform.Inverse());
+
     // vetor do centro da esfera, posição (0,0,0), até a origem do raio
     Vector center_origin = r.origin - Point{0,0,0};
 
@@ -51,3 +55,5 @@ vector<Intersection> RayTracer::Sphere::Intersect(Ray r)
     v.push_back(Intersection((-b + sqrt(discriminant)) / (2 * a), *this));
     return v;
 }
+
+// -------------------------------------------------------------------------------

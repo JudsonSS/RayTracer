@@ -11,10 +11,11 @@
 //
 **********************************************************************************/
 
+#include <gtest/gtest.h>
 #include "../RayTracer/Types.h"
 #include "../RayTracer/Ray.h"
+#include "../RayTracer/Matrix.h"
 #include "../RayTracer/Geometry.h"
-#include <gtest/gtest.h>
 using namespace RayTracer;
 
 namespace Test5
@@ -81,17 +82,17 @@ namespace Test5
     TEST(Ray, ObjectIntersection)
 	{
         Sphere s;
-        Intersection i = Intersection(3.5,s);
+        Intersection i {3.5,s};
 		
         EXPECT_EQ(i.time, 3.5);
-        EXPECT_EQ(&i.object, &s);
+        EXPECT_EQ(i.object, &s);
     }	
 
     TEST(Ray, AgregatingIntersection)
 	{
         Sphere s;
-        Intersection i1 = Intersection(1,s);
-        Intersection i2 = Intersection(2,s);
+        Intersection i1 {1,s};
+        Intersection i2 {2,s};
         vector<Intersection> intersections;
         intersections.push_back(i1);
         intersections.push_back(i2);
@@ -108,7 +109,102 @@ namespace Test5
         vector<Intersection> xs = s.Intersect(r);
 
         EXPECT_EQ(xs.size(), 2);
-        EXPECT_EQ(&xs[0].object, &s);
-        EXPECT_EQ(&xs[1].object, &s);
+        EXPECT_EQ(xs[0].object, &s);
+        EXPECT_EQ(xs[1].object, &s);
+    }   
+
+    TEST(Ray, HitAllPositive)
+	{
+        Sphere s;
+        Intersection i1 {1,s};
+        Intersection i2 {2,s};
+        vector<Intersection> xs {i2,i1};
+        Intersection * i = Hit(xs); 
+        EXPECT_TRUE(*i == i1);
+    }
+
+    TEST(Ray, HitSomeNegative)
+	{
+        Sphere s;
+        Intersection i1 {-1,s};
+        Intersection i2 {1,s};
+        vector<Intersection> xs {i2,i1};
+        Intersection * i = Hit(xs); 
+        EXPECT_TRUE(*i == i2);
+    }
+
+    TEST(Ray, HitAllNegative)
+	{
+        Sphere s;
+        Intersection i1 {-2,s};
+        Intersection i2 {-1,s};
+        vector<Intersection> xs {i2,i1};
+        Intersection * i = Hit(xs); 
+        EXPECT_EQ(i, nullptr);
+    }
+
+    TEST(Ray, HitAlwaysLowest)
+	{
+        Sphere s;
+        Intersection i1 {5,s};
+        Intersection i2 {7,s};
+        Intersection i3 {-3,s};
+        Intersection i4 {2,s};
+        vector<Intersection> xs {i1,i2,i3,i4};
+        Intersection * i = Hit(xs); 
+        EXPECT_TRUE(*i == i4);
+    }
+
+    TEST(Ray, TranslatingRay)
+    {
+        Ray r {Point(1,2,3), Vector(0,1,0)};
+        Matrix T = Translation(3,4,5);
+        Ray r2 = r.Transform(T);
+        EXPECT_TRUE(r2.origin == Point(4,6,8));
+        EXPECT_TRUE(r2.direction == Vector(0,1,0));
+    }
+
+    TEST(Ray, ScalingRay)
+    {
+        Ray r {Point(1,2,3), Vector(0,1,0)};
+        Matrix T = Scaling(2,3,4);
+        Ray r2 = r.Transform(T);
+        EXPECT_TRUE(r2.origin == Point(2,6,12));
+        EXPECT_TRUE(r2.direction == Vector(0,3,0));
+    }
+
+    TEST(Ray, SphereDefaultTransform)
+	{
+        Sphere s;
+        EXPECT_TRUE(s.transform == Matrix::Identity);
+    }
+
+    TEST(Ray, ChangingSphereTransform)
+	{
+        Sphere s;
+        Matrix T = Translation(2,3,4);
+        s.transform = T;
+        EXPECT_TRUE(s.transform == T);
+    }
+
+    TEST(Ray, IntersectScaledSphere)
+	{
+        Ray r {Point(0,0,-5), Vector(0,0,1)};
+        Sphere s;
+        s.transform = Scaling(2,2,2);
+        vector<Intersection> xs = s.Intersect(r);
+
+        EXPECT_EQ(xs.size(), 2);
+        EXPECT_EQ(xs[0].time, 3);
+        EXPECT_EQ(xs[1].time, 7);
+    }
+
+    TEST(Ray, IntersectTranslatedSphere)
+	{
+        Ray r {Point(0,0,-5), Vector(0,0,1)};
+        Sphere s;
+        s.transform = Translation(5,0,0);
+        vector<Intersection> xs = s.Intersect(r);
+        EXPECT_EQ(xs.size(), 0);
     }
 }
