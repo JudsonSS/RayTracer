@@ -13,46 +13,50 @@
 #include <cmath>
 #include <algorithm>
 #include "Ray.h"
-using namespace RayTracer;
 using std::sort;
 
-// -------------------------------------------------------------------------------
-
-RayTracer::Ray::Ray(Point orig, Vector dir)
-    : origin(orig), direction(dir) {}
-
-Point RayTracer::Ray::Position(float t)
-{ return origin + direction * t; } 
-
-Ray RayTracer::Ray::Transform(Matrix m)
+namespace RayTracer
 {
-    Ray r {m * origin, m * direction};
-    return r;
-}
+    Ray::Ray(Point orig, Vector dir)
+        : origin(orig), direction(dir) {}
 
-// -------------------------------------------------------------------------------
-
-RayTracer::Intersection::Intersection(float t, Geometry & obj)
-    : time(t), object(&obj) {}
-
-bool RayTracer::operator==(Intersection &a, const Intersection &b)
-{ return (a.time == b.time) && (a.object == b.object); }
-
-bool RayTracer::operator<(const Intersection &a, const Intersection &b)
-{ return a.time < b.time; }
-
-// -------------------------------------------------------------------------------
-
-Intersection * RayTracer::Hit(vector<Intersection> intersections)
-{
-    sort(intersections.begin(), intersections.end());
-
-    for (auto &i : intersections)
+    Point Ray::Position(float t)
     {
-        if (i.time >= 0)
-            return &i;
+        return origin + direction * t;
     }
-    return nullptr;
-}
 
-// -------------------------------------------------------------------------------
+    Ray Ray::Transform(Matrix m)
+    {
+        Ray r{m * origin, m * direction};
+        return r;
+    }
+
+    // -------------------------------------------------------------------------------
+
+    Intersection::Intersection(float t, Geometry &obj)
+        : time(t), object(&obj) {}
+
+    bool operator==(Intersection &a, const Intersection &b)
+    {
+        return (a.time == b.time) && (a.object == b.object);
+    }
+
+    bool operator<(const Intersection &a, const Intersection &b)
+    {
+        return a.time < b.time;
+    }
+
+    // -------------------------------------------------------------------------------
+
+    Intersection * Hit(vector<Intersection> & intersections)
+    {
+        sort(intersections.begin(), intersections.end());
+
+        for (auto &i : intersections)
+        {
+            if (i.time >= 0)
+                return &i;
+        }
+        return nullptr;
+    }
+}

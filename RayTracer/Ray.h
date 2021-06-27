@@ -41,7 +41,7 @@ namespace RayTracer
     
     bool operator==(Intersection &a, const Intersection &b);        // comparação de igualdade entre interseções
     bool operator<(const Intersection &a, const Intersection &b);   // permite comparações para ordenação
-    Intersection * Hit(vector<Intersection> intersections);         // retorna interseção com menor valor não-negativo
+    Intersection * Hit(vector<Intersection> & intersections);       // retorna interseção com menor valor não-negativo
 }
 
 #endif
