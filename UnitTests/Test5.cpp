@@ -13,6 +13,7 @@
 
 #include "../RayTracer/Types.h"
 #include "../RayTracer/Ray.h"
+#include "../RayTracer/Geometry.h"
 #include <gtest/gtest.h>
 using namespace RayTracer;
 
@@ -40,40 +41,74 @@ namespace Test5
 	{
         Ray r {Point(0,1,-5), Vector(0,0,1)};
         Sphere s;
-        Intersection pos = s.Intersect(r);
+        vector<Intersection> xs = s.Intersect(r);
 
-		EXPECT_EQ(pos.count, 2);
-        EXPECT_EQ(pos[0], 5.0f);
-        EXPECT_EQ(pos[1], 5.0f);
+		EXPECT_EQ(xs.size(), 2);
+        EXPECT_EQ(xs[0].time, 5.0f);
+        EXPECT_EQ(xs[1].time, 5.0f);
     }
 
     TEST(Ray, NoIntersection)
 	{
         Ray r {Point(0,2,-5), Vector(0,0,1)};
         Sphere s;
-        Intersection pos = s.Intersect(r);
-		EXPECT_EQ(pos.count, 0);
+        vector<Intersection> xs = s.Intersect(r);
+		EXPECT_EQ(xs.size(), 0);
     }
 
     TEST(Ray, InsideSphere)
 	{
         Ray r {Point(0,0,0), Vector(0,0,1)};
         Sphere s;
-        Intersection pos = s.Intersect(r);
+        vector<Intersection> xs = s.Intersect(r);
 		
-        EXPECT_EQ(pos.count, 2);
-        EXPECT_EQ(pos[0], -1.0f);
-        EXPECT_EQ(pos[1], 1.0f);
+        EXPECT_EQ(xs.size(), 2);
+        EXPECT_EQ(xs[0].time, -1.0f);
+        EXPECT_EQ(xs[1].time, 1.0f);
     }
 
     TEST(Ray, AfterSphere)
 	{
         Ray r {Point(0,0,5), Vector(0,0,1)};
         Sphere s;
-        Intersection pos = s.Intersect(r);
+        vector<Intersection> xs = s.Intersect(r);
 		
-        EXPECT_EQ(pos.count, 2);
-        EXPECT_EQ(pos[0], -6.0f);
-        EXPECT_EQ(pos[1], -4.0f);
+        EXPECT_EQ(xs.size(), 2);
+        EXPECT_EQ(xs[0].time, -6.0f);
+        EXPECT_EQ(xs[1].time, -4.0f);
+    }
+
+    TEST(Ray, ObjectIntersection)
+	{
+        Sphere s;
+        Intersection i = Intersection(3.5,s);
+		
+        EXPECT_EQ(i.time, 3.5);
+        EXPECT_EQ(&i.object, &s);
     }	
+
+    TEST(Ray, AgregatingIntersection)
+	{
+        Sphere s;
+        Intersection i1 = Intersection(1,s);
+        Intersection i2 = Intersection(2,s);
+        vector<Intersection> intersections;
+        intersections.push_back(i1);
+        intersections.push_back(i2);
+		
+        EXPECT_EQ(intersections.size(), 2);
+        EXPECT_EQ(intersections[0].time, 1);
+        EXPECT_EQ(intersections[1].time, 2);
+    }
+
+    TEST(Ray, SetObjectOnIntersection)
+	{
+        Ray r {Point(0,0,-5), Vector(0,0,1)};
+        Sphere s;
+        vector<Intersection> xs = s.Intersect(r);
+
+        EXPECT_EQ(xs.size(), 2);
+        EXPECT_EQ(&xs[0].object, &s);
+        EXPECT_EQ(&xs[1].object, &s);
+    }
 }

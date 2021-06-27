@@ -26,7 +26,8 @@ set (RAYTRACER_FILES
     "RayTracer/Types.cpp" 
     "RayTracer/Canvas.cpp" 
     "RayTracer/Matrix.cpp"
-    "RayTracer/Ray.cpp")
+    "RayTracer/Ray.cpp"
+    "RayTracer/Geometry.cpp")
 
 # Testes de Unidade
 set (TEST_FILES 
