@@ -33,7 +33,7 @@ namespace RayTracer
     Intersection::Intersection(float t, Geometry &obj)
         : time(t), object(&obj) {}
 
-    bool operator==(Intersection &a, const Intersection &b)
+    bool operator==(const Intersection &a, const Intersection &b)
     {
         return (a.time == b.time) && (a.object == b.object);
     }

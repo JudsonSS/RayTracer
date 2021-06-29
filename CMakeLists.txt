@@ -39,5 +39,6 @@ set (TEST_FILES
 
 add_executable(Projectile "Projects/Projectile.cpp" ${PROJECTILE_FILES})
 add_executable(Clock "Projects/Clock.cpp" ${CLOCK_FILES})
+add_executable(Sphere "Projects/Sphere.cpp" ${RAYTRACER_FILES})
 add_executable(UnitTests ${TEST_FILES} ${RAYTRACER_FILES})
 target_link_libraries(UnitTests ${GTEST_LIBRARIES} pthread)
