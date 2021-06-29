@@ -1,7 +1,7 @@
 /**********************************************************************************
 // Sphere (Arquivo de Código Fonte)
 //
-// Criação:		29 Jun 2021
+// Criação:     29 Jun 2021
 // Atualização:	29 Jun 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
