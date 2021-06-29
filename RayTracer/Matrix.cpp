@@ -2,7 +2,7 @@
 // Matrix (Arquivo de Código Fonte)
 //
 // Criação:		19 Jun 2021
-// Atualização:	21 Jun 2021
+// Atualização:	28 Jun 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define uma classe para uma matriz dinâmica com as operações
@@ -16,6 +16,8 @@
 
 namespace RayTracer 
 {
+	// -------------------------------------------------------------------------------
+
 	// membros estáticos da classe
 	Matrix Matrix::Identity{4, 4, {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}};
 
@@ -340,4 +342,6 @@ namespace RayTracer
 		S(2, 1) = zy;
 		return S;
 	}
+
+	// -------------------------------------------------------------------------------
 }

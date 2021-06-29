@@ -2,7 +2,7 @@
 // Ray (Arquivo de Código Fonte)
 //
 // Criação:		25 Jun 2021
-// Atualização:	27 Jun 2021
+// Atualização:	28 Jun 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define a representação de um raio, 
@@ -17,19 +17,16 @@ using std::sort;
 
 namespace RayTracer
 {
+    // -------------------------------------------------------------------------------
+
     Ray::Ray(Point orig, Vector dir)
         : origin(orig), direction(dir) {}
 
     Point Ray::Position(float t)
-    {
-        return origin + direction * t;
-    }
+    { return origin + direction * t; }
 
     Ray Ray::Transform(Matrix m)
-    {
-        Ray r{m * origin, m * direction};
-        return r;
-    }
+    { return Ray {m * origin, m * direction}; }
 
     // -------------------------------------------------------------------------------
 
@@ -59,4 +56,6 @@ namespace RayTracer
         }
         return nullptr;
     }
+
+    // -------------------------------------------------------------------------------
 }

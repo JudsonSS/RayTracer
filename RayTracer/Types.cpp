@@ -40,39 +40,25 @@ namespace RayTracer
 		: x(px), y(py), z(pz), w(pw) {}
 
 	bool Tuple::operator==(const Tuple t)
-	{
-		return Equal(x, t.x) && Equal(y, t.y) && Equal(z, t.z) && Equal(w, t.w);
-	}
+	{ return Equal(x, t.x) && Equal(y, t.y) && Equal(z, t.z) && Equal(w, t.w); }
 
 	Tuple Tuple::operator+(const Tuple t)
-	{
-		return Tuple(x + t.x, y + t.y, z + t.z, w + t.w);
-	}
+	{ return Tuple(x + t.x, y + t.y, z + t.z, w + t.w); }
 
 	Tuple Tuple::operator-(const Tuple t)
-	{
-		return Tuple(x - t.x, y - t.y, z - t.z, w - t.w);
-	}
+	{ return Tuple(x - t.x, y - t.y, z - t.z, w - t.w); }
 
 	Tuple Tuple::operator-()
-	{
-		return Tuple(-x, -y, -z, -w);
-	}
+	{ return Tuple(-x, -y, -z, -w); }
 
 	Tuple Tuple::operator*(float v)
-	{
-		return Tuple(x * v, y * v, z * v, w * v);
-	}
+	{ return Tuple(x * v, y * v, z * v, w * v); }
 
 	Tuple Tuple::operator/(float v)
-	{
-		return Tuple(x / v, y / v, z / v, w / v);
-	}
+	{ return Tuple(x / v, y / v, z / v, w / v); }
 
 	Tuple operator*(float v, Tuple t)
-	{
-		return Tuple(t.x * v, t.y * v, t.z * v, t.w * v);
-	}
+	{ return Tuple(t.x * v, t.y * v, t.z * v, t.w * v); }
 
 	// -------------------------------------------------------------------------------
 	// Ponto
@@ -95,9 +81,7 @@ namespace RayTracer
 		: Tuple(t.x, t.y, t.z, 0.0f) {}
 
 	float Vector::Magnitude()
-	{
-		return sqrt(x * x + y * y + z * z + w * w);
-	}
+	{ return sqrt(x * x + y * y + z * z + w * w); }
 
 	Vector Vector::Normalized()
 	{
@@ -106,14 +90,10 @@ namespace RayTracer
 	}
 
 	float Vector::Dot(Vector v)
-	{
-		return x * v.x + y * v.y + z * v.z;
-	}
+	{ return x * v.x + y * v.y + z * v.z; }
 
 	Vector Vector::Cross(Vector v)
-	{
-		return Vector(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x);
-	}
+	{ return Vector(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x); }
 
 	// -------------------------------------------------------------------------------
 	// Cor
@@ -129,7 +109,7 @@ namespace RayTracer
 		: Tuple(t.x, t.y, t.z, 0.0f) {}
 
 	Color operator*(const Color c1, const Color c2)
-	{
-		return Color(c1.x * c2.x, c1.y * c2.y, c1.z * c2.z);
-	}
+	{ return Color(c1.x * c2.x, c1.y * c2.y, c1.z * c2.z); }
+
+	// -------------------------------------------------------------------------------
 }

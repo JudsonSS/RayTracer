@@ -2,7 +2,7 @@
 // Types (Arquivo de Cabeçalho)
 //
 // Criação:		27 Jun 2020
-// Atualização:	17 Jun 2021
+// Atualização:	28 Jun 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os tipos básicos necessários para a construção de um 

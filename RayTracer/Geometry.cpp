@@ -2,7 +2,7 @@
 // Geometry (Arquivo de Código Fonte)
 //
 // Criação:		26 Jun 2021
-// Atualização:	27 Jun 2021
+// Atualização:	28 Jun 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define uma classe base para geometrias e classes para as 
@@ -15,8 +15,11 @@
 
 namespace RayTracer
 {
+    // -------------------------------------------------------------------------------
+
     Geometry::Geometry()
-        : type(UNKNOWN_T), transform(Matrix::Identity) {}
+        : type(UNKNOWN_T), 
+          transform(Matrix::Identity) {}
 
     // -------------------------------------------------------------------------------
 
@@ -24,6 +27,8 @@ namespace RayTracer
     {
         type = SPHERE_T;
     }
+
+    // -------------------------------------------------------------------------------
 
     vector<Intersection> Sphere::Intersect(Ray r)
     {
@@ -54,4 +59,6 @@ namespace RayTracer
         v.push_back(Intersection((-b + sqrt(discriminant)) / (2 * a), *this));
         return v;
     }
+
+    // -------------------------------------------------------------------------------
 }
