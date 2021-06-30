@@ -35,7 +35,8 @@ set (TEST_FILES
     "UnitTests/Test2.cpp" 
     "UnitTests/Test3.cpp" 
     "UnitTests/Test4.cpp"
-    "UnitTests/Test5.cpp")
+    "UnitTests/Test5.cpp"
+    "UnitTests/Test6.cpp")
 
 add_executable(Projectile "Projects/Projectile.cpp" ${PROJECTILE_FILES})
 add_executable(Clock "Projects/Clock.cpp" ${CLOCK_FILES})

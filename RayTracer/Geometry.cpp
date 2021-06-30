@@ -24,6 +24,7 @@ namespace RayTracer
     // -------------------------------------------------------------------------------
 
     Sphere::Sphere()
+        : center(Point{0,0,0}), radius(1)
     {
         type = SPHERE_T;
     }
@@ -58,6 +59,19 @@ namespace RayTracer
         v.push_back(Intersection((-b - sqrt(discriminant)) / (2 * a), *this));
         v.push_back(Intersection((-b + sqrt(discriminant)) / (2 * a), *this));
         return v;
+    }
+
+    Vector Sphere::Normal(Point point_world)
+    {
+        // ATENÇÃO: o livro não explica porque a transposta
+        // da inversa fornece o vetor normal correto
+        // após a transformação da esfera
+        Matrix Tinv = transform.Inverse(); 
+        Point point_object = Tinv * point_world;
+        Vector normal_object = point_object - center;
+        Vector normal_world = Tinv.Transpose() * normal_object;
+        normal_world.w = 0;
+        return normal_world.Normalized();
     }
 
     // -------------------------------------------------------------------------------

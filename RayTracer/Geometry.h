@@ -37,9 +37,14 @@ namespace RayTracer
 
     class Sphere : public Geometry
     {
+    private:
+        Point center;                                       // posição do centro da esfera
+        float radius;                                       // raio da esfera
+
     public:
         Sphere();                                           // construtor padrão
         vector<Intersection> Intersect(Ray r);              // retorna pontos de interseção com o raio
+        Vector Normal(Point p);                             // retorna vetor normal no ponto P
     };
 }
 
