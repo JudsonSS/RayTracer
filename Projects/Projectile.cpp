@@ -2,7 +2,7 @@
 // Projectile (Arquivo de Código Fonte)
 //
 // Criação:		01 Jul 2020
-// Atualização:	18 Jun 2021
+// Atualização:	30 Jun 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Aplicação simula o disparo de um projétil estabelecendo uma 
@@ -14,8 +14,8 @@
 
 
 #include <iostream>
-#include "../RayTracer/Types.h"
-#include "../RayTracer/Canvas.h"
+#include "Types.h"
+#include "Canvas.h"
 
 using namespace std;
 using namespace RayTracer;

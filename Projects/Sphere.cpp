@@ -2,7 +2,7 @@
 // Sphere (Arquivo de Código Fonte)
 //
 // Criação:     29 Jun 2021
-// Atualização:	29 Jun 2021
+// Atualização:	30 Jun 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Aplicação desenha a sombra de uma esfera no plano. 
@@ -10,11 +10,11 @@
 //
 **********************************************************************************/
 
-#include "../RayTracer/Types.h"
-#include "../RayTracer/Canvas.h"
-#include "../RayTracer/Matrix.h"
-#include "../RayTracer/Geometry.h"
-#include "../RayTracer/Ray.h"
+#include "Types.h"
+#include "Canvas.h"
+#include "Matrix.h"
+#include "Geometry.h"
+#include "Ray.h"
 using namespace RayTracer;
 using std::vector;
 

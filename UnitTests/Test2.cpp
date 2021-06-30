@@ -2,7 +2,7 @@
 // Test1 (Arquivo de Código Fonte)
 //
 // Criação:		27 Jun 2020
-// Atualização:	18 Jun 2021
+// Atualização:	30 Jun 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados no Capítulo 2, Desenhando
@@ -11,11 +11,11 @@
 //
 **********************************************************************************/
 
-#include "../RayTracer/Types.h"
-#include "../RayTracer/Canvas.h"
 #include <gtest/gtest.h>
 #include <fstream>
 #include <string>
+#include "Types.h"
+#include "Canvas.h"
 
 using std::string;
 using std::ifstream;

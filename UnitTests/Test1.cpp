@@ -2,7 +2,7 @@
 // Test1 (Arquivo de Código Fonte)
 //
 // Criação:		27 Jun 2020
-// Atualização:	18 Jun 2021
+// Atualização:	30 Jun 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados no Capítulo 1, Tuplas,
@@ -11,9 +11,9 @@
 //
 **********************************************************************************/
 
-#include "../RayTracer/Types.h"
 #include <gtest/gtest.h>
 #include <cmath>
+#include "Types.h"
 
 using namespace RayTracer;
 

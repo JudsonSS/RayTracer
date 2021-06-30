@@ -12,7 +12,6 @@ CTestTestfile.cmake
 _deps
 
 #VS Code
-c_cpp_properties.json
 settings.json
 launch.json
 

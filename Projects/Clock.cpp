@@ -2,7 +2,7 @@
 // Clock (Arquivo de Código Fonte)
 //
 // Criação:		24 Jun 2021
-// Atualização:	24 Jun 2021
+// Atualização:	30 Jun 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Aplicação desenha o pano de fundo de um relógio. 
@@ -10,9 +10,9 @@
 //
 **********************************************************************************/
 
-#include "../RayTracer/Types.h"
-#include "../RayTracer/Canvas.h"
-#include "../RayTracer/Matrix.h"
+#include "Types.h"
+#include "Canvas.h"
+#include "Matrix.h"
 using namespace RayTracer;
 
 int main()

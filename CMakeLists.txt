@@ -5,6 +5,7 @@ project(RayTracer)
 # Configuração do C++
  set(CMAKE_BUILD_TYPE Debug)
  set(CMAKE_CXX_STANDARD 17)
+ set(CMAKE_EXPORT_COMPILE_COMMANDS ON )
 
  # Configuração do GoogleTest
  find_package(GTest REQUIRED)
@@ -38,6 +39,7 @@ set (TEST_FILES
     "UnitTests/Test5.cpp"
     "UnitTests/Test6.cpp")
 
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/RayTracer")
 add_executable(Projectile "Projects/Projectile.cpp" ${PROJECTILE_FILES})
 add_executable(Clock "Projects/Clock.cpp" ${CLOCK_FILES})
 add_executable(Sphere "Projects/Sphere.cpp" ${RAYTRACER_FILES})
