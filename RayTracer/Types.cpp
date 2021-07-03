@@ -95,6 +95,9 @@ namespace RayTracer
 	Vector Vector::Cross(Vector v)
 	{ return Vector(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x); }
 
+	Vector Vector::Reflect(Vector normal)
+	{ return (*this) - normal * 2 * this->Dot(normal); }
+
 	// -------------------------------------------------------------------------------
 	// Cor
 	// -------------------------------------------------------------------------------

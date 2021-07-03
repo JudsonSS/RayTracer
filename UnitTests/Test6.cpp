@@ -71,4 +71,20 @@ namespace Test6
         Vector n = s.Normal(Point(0, sqrt(2.0f)/2.0f, -sqrt(2.0f)/2.0f));
         EXPECT_TRUE(n == Vector(0, 0.97014, -0.24254));
 	}
+
+    TEST(Normal, Reflect45)
+	{
+        Vector v {1, -1, 0};
+        Vector n {0, 1, 0};
+        Vector r = v.Reflect(n);
+        EXPECT_TRUE(r == Vector(1, 1, 0));
+	}
+
+    TEST(Normal, ReflectSlanted)
+	{
+        Vector v {0, -1, 0};
+        Vector n {sqrt(2.0f)/2.0f, sqrt(2.0f)/2.0f, 0};
+        Vector r = v.Reflect(n);
+        EXPECT_TRUE(r == Vector(1, 0, 0));
+	}
 }

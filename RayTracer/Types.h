@@ -67,6 +67,7 @@ namespace RayTracer
 		Vector Normalized();							// vetor normalizado
 		float Dot(Vector v);							// produto escalar entre vetores
 		Vector Cross(Vector v); 						// produto vetorial entre vetores
+		Vector Reflect(Vector normal);					// obtém reflexão do vetor com a normal
 	};
 
 	// ---------------------------------------------------------------------------------------
