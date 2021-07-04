@@ -75,5 +75,18 @@ namespace RayTracer
         return normal_world.Normalized();
     }
 
+    bool operator==(const Sphere &a, const Sphere &b)
+    {
+        if (a.type == b.type 
+        && a.radius == b.radius 
+        && a.center == b.center
+        && a.material == b.material
+        && a.transform == b.transform)
+        {
+            return true;
+        }
+        return false;
+    }
+
     // -------------------------------------------------------------------------------
 }

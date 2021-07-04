@@ -18,7 +18,7 @@
 #include "Object.h"
 using namespace RayTracer;
 
-namespace Test5
+namespace Chapter5
 {
     TEST(Ray, Creation)
 	{

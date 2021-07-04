@@ -68,6 +68,9 @@ namespace RayTracer
         Color intensity;                        // intensidade da luz
 	};
 
+    // comparação de igualdade entre pontos de luz
+    bool operator==(const PointLight &a, const PointLight &b);
+
     // ---------------------------------------------------------------------------------------
 	// Material
 	// ---------------------------------------------------------------------------------------

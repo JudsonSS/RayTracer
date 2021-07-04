@@ -19,7 +19,7 @@
 #include "Object.h"
 using namespace RayTracer;
 
-namespace Test6
+namespace Chapter6
 {
     TEST(Normal, PointXAxis)
 	{

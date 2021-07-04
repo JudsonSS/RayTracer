@@ -59,6 +59,13 @@ namespace RayTracer
 
     // -------------------------------------------------------------------------------
 
+    bool operator==(const PointLight &a, const PointLight &b)
+    {
+        return (a.position == b.position && a.intensity == b.intensity);
+    }
+
+    // -------------------------------------------------------------------------------
+
     Material::Material()
         : color(Color(1,1,1)), 
           ambient(0.1f), 

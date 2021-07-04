@@ -58,6 +58,9 @@ namespace RayTracer
         Sphere();                                           // construtor padrão
         vector<Intersection> Intersect(Ray r);              // retorna pontos de interseção
         Vector Normal(Point p);                             // obtém a normal no ponto P
+        
+        // compara igualdade de esferas
+        friend bool operator==(const Sphere &a, const Sphere &b);
     };
 
     // ---------------------------------------------------------------------------------------

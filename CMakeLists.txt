@@ -28,16 +28,18 @@ set (RAYTRACER_FILES
     "RayTracer/Canvas.cpp" 
     "RayTracer/Matrix.cpp"
     "RayTracer/Ray.cpp"
-    "RayTracer/Object.cpp")
+    "RayTracer/Object.cpp"
+    "RayTracer/World.cpp")
 
 # Testes de Unidade
 set (TEST_FILES 
-    "UnitTests/Test1.cpp" 
-    "UnitTests/Test2.cpp" 
-    "UnitTests/Test3.cpp" 
-    "UnitTests/Test4.cpp"
-    "UnitTests/Test5.cpp"
-    "UnitTests/Test6.cpp")
+    "UnitTests/Chapter1.cpp" 
+    "UnitTests/Chapter2.cpp" 
+    "UnitTests/Chapter3.cpp" 
+    "UnitTests/Chapter4.cpp"
+    "UnitTests/Chapter5.cpp"
+    "UnitTests/Chapter6.cpp"
+    "UnitTests/Chapter7.cpp")
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/RayTracer")
 add_executable(Projectile "Projects/Projectile.cpp" ${PROJECTILE_FILES})
