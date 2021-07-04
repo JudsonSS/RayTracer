@@ -20,7 +20,9 @@ using std::vector;
 
 namespace RayTracer
 {
-    class Geometry;                             // protótipo da classe
+    // ---------------------------------------------------------------------------------------
+
+    class Object;                               // protótipo da classe
 
     // ---------------------------------------------------------------------------------------
 	// Raio
@@ -43,8 +45,8 @@ namespace RayTracer
     struct Intersection
     {           
         float time;                             // valor de distância ao longo do raio
-        Geometry * object;                      // objeto em que ocorreu a interseção
-        Intersection(float t, Geometry & obj);  // construtor
+        Object * object;                        // objeto em que ocorreu a interseção
+        Intersection(float t, Object & obj);    // construtor
     };
     
     // comparação de igualdade entre interseções

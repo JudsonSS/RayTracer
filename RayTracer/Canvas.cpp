@@ -2,7 +2,7 @@
 // Canvas (Arquivo de Código Fonte)
 //
 // Criação:		17 Jun 2021
-// Atualização:	27 Jun 2021
+// Atualização:	04 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define uma representação para um grade retangular de pixels.
@@ -18,14 +18,14 @@ using std::cerr;
 
 namespace RayTracer
 {
-    RayTracer::Canvas::Canvas(unsigned width, unsigned height)
+    Canvas::Canvas(unsigned width, unsigned height)
         : mWidth(width), mHeight(height), mSize(width * height)
     {
         // aloca vetor dinâmico
         mGrid = new Color[mSize];
     }
 
-    RayTracer::Canvas::~Canvas()
+    Canvas::~Canvas()
     {
         // libera vetor dinâmico
         delete[] mGrid;
@@ -34,25 +34,25 @@ namespace RayTracer
     // -------------------------------------------------------------------------------
 
     // Retorna largura da grade
-    int RayTracer::Canvas::Width() const
+    int Canvas::Width() const
     {
         return mWidth;
     }
 
     // Retorna altura da grade
-    int RayTracer::Canvas::Height() const
+    int Canvas::Height() const
     {
         return mHeight;
     }
 
     // Retorna cor da posição (x,y)
-    Color RayTracer::Canvas::At(int x, int y)
+    Color Canvas::At(int x, int y)
     {
         return mGrid[y * mWidth + x];
     }
 
     // pinta pixel com uma cor
-    void RayTracer::Canvas::Paint(int x, int y, Color c)
+    void Canvas::Paint(int x, int y, Color c)
     {
         if (x >= 0 && x < mWidth && y >= 0 && y < mHeight)
             mGrid[y * mWidth + x] = c;
@@ -61,7 +61,7 @@ namespace RayTracer
     // -------------------------------------------------------------------------------
 
     // calcula a quantidade de dígitos de um inteiro
-    int tamanho(int num)
+    int IntLength(int num)
     {
         unsigned digitos = 1;
         while (num /= 10)
@@ -70,7 +70,7 @@ namespace RayTracer
     }
 
     // grava canvas no formato PPM
-    bool RayTracer::Canvas::Save(string filename)
+    bool Canvas::Save(string filename)
     {
         ofstream fout;
         fout.open(filename);
@@ -113,9 +113,9 @@ namespace RayTracer
                     b = 255;
 
                 // o quanto char_count irá crescer com cada cor
-                int tamR = tamanho(r) + 1;
-                int tamG = tamanho(g) + 1;
-                int tamB = tamanho(b) + 1;
+                int tamR = IntLength(r) + 1;
+                int tamG = IntLength(g) + 1;
+                int tamB = IntLength(b) + 1;
 
                 // tentando inserir R na linha
                 if (char_count + tamR < 70)

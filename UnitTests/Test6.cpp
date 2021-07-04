@@ -2,7 +2,7 @@
 // Test6 (Arquivo de Código Fonte)
 //
 // Criação:		29 Jun 2021
-// Atualização:	03 Jul 2021
+// Atualização:	04 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados para o Capítulo 6,
@@ -16,7 +16,7 @@
 #include "Types.h"
 #include "Ray.h"
 #include "Matrix.h"
-#include "Geometry.h"
+#include "Object.h"
 using namespace RayTracer;
 
 namespace Test6
