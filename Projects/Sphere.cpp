@@ -2,10 +2,10 @@
 // Sphere (Arquivo de Código Fonte)
 //
 // Criação:     29 Jun 2021
-// Atualização:	30 Jun 2021
+// Atualização:	03 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
-// Descrição:	Aplicação desenha a sombra de uma esfera no plano. 
+// Descrição:	Aplicação desenha a silhueta de uma esfera no plano. 
 //              O traçamento de raios é feito a partir de um ponto fixo.
 //
 **********************************************************************************/
@@ -28,11 +28,11 @@ int main()
     float half_size = wall_size / 2;
 
     Canvas canvas { canvas_size, canvas_size }; 
-    Color red { 1,0,0 };
-    Sphere shape;
-    float world_x, world_y;
+    Sphere shape; shape.material.color = Color(1, 0.2, 1);
+    PointLight light { Point{-10, 10, -10}, Color{1,1,1} };
     vector<Intersection> intersections;
-
+    float world_x, world_y;
+    
     // para cada linha de pixels no canvas
     for (int y = 0; y < canvas_size; y++)
     {
@@ -45,12 +45,21 @@ int main()
 
             // posição alvo do raio na parede
             Point target { world_x, world_y, wall_z };
-            Ray ray { origin, target - origin };
+            Vector direction = Vector(target - origin).Normalized();
+
+            Ray ray { origin, direction };
             intersections = shape.Intersect(ray);
+            Intersection * hit = Hit(intersections);
 
             // se o raio atingiu a esfera
-            if (Hit(intersections))
-                canvas.Paint(x,y,red);
+            if (hit)
+            {
+                Point hit_point = ray.Position(hit->time);
+                Vector hit_normal = shape.Normal(hit_point);
+                Vector eye = -ray.direction;
+                Color color = Lighting(shape.material, light, hit_point, eye, hit_normal);
+                canvas.Paint(x,y,color);
+            }
         }
     }
 
