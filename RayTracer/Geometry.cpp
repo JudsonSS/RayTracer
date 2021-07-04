@@ -2,7 +2,7 @@
 // Geometry (Arquivo de Código Fonte)
 //
 // Criação:		26 Jun 2021
-// Atualização:	28 Jun 2021
+// Atualização:	03 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define uma classe base para geometrias e classes para as 

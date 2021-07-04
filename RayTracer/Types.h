@@ -2,7 +2,7 @@
 // Types (Arquivo de Cabeçalho)
 //
 // Criação:		27 Jun 2020
-// Atualização:	28 Jun 2021
+// Atualização:	03 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os tipos básicos necessários para a construção de um 
@@ -31,16 +31,16 @@ namespace RayTracer
 
 		Tuple();										// construtor padrão
 		Tuple(float px, float py, float pz, float pw); 	// construtor com valores
-		bool operator==(const Tuple t);				   	// comparação de igualdade
-		Tuple operator+(const Tuple t);				   	// soma
-		Tuple operator-(const Tuple t);				   	// subtração
-		Tuple operator-();							   	// menos unário
-		Tuple operator*(float v);					   	// multiplicação por escalar
-		Tuple operator/(float v);					   	// divisão por escalar
 	};
 
 	bool Equal(float a, float b);	   					// comparação de pontos-flutuantes
-	Tuple operator*(float v, Tuple t); 					// multiplicação por escalar
+	bool operator==(const Tuple &a, const Tuple &b);	// comparação de igualdade
+	Tuple operator+(const Tuple &a, const Tuple &b);	// soma 
+	Tuple operator-(const Tuple &a, const Tuple &b);	// subtração
+	Tuple operator-(const Tuple &t);					// menos unário
+	Tuple operator*(const Tuple &t, float v);			// multiplicação por escalar
+	Tuple operator*(float v, const Tuple &t); 			// multiplicação por escalar
+	Tuple operator/(const Tuple &t, float v);			// divisão por escalar
 
 	// ---------------------------------------------------------------------------------------
 	// Ponto
@@ -82,7 +82,7 @@ namespace RayTracer
 		Color(Tuple &&t);						   		// conversão de tupla para cor
 	};
 
-	Color operator*(const Color c1, const Color c2); 	// multiplicação de cores (blend)
+	Color operator*(const Color &c1, const Color &c2); 	// multiplicação de cores (blend)
 
 	// ---------------------------------------------------------------------------------------
 }

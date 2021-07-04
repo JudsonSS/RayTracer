@@ -2,7 +2,7 @@
 // Types (Arquivo de Código Fonte)
 //
 // Criação:		27 Jun 2020
-// Atualização:	27 Jun 2021
+// Atualização:	03 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os tipos básicos necessários para a construção de um 
@@ -19,7 +19,7 @@ namespace RayTracer
 	// Comparação Ponto-Flutuante
 	// -------------------------------------------------------------------------------
 
-	const float Epsilon = 0.00001f;
+	const float Epsilon = 0.0001f;
 
 	bool Equal(float a, float b)
 	{
@@ -39,25 +39,25 @@ namespace RayTracer
 	Tuple::Tuple(float px, float py, float pz, float pw)
 		: x(px), y(py), z(pz), w(pw) {}
 
-	bool Tuple::operator==(const Tuple t)
-	{ return Equal(x, t.x) && Equal(y, t.y) && Equal(z, t.z) && Equal(w, t.w); }
+	bool operator==(const Tuple &a, const Tuple &b)
+	{ return Equal(a.x, b.x) && Equal(a.y, b.y) && Equal(a.z, b.z) && Equal(a.w, b.w); }
 
-	Tuple Tuple::operator+(const Tuple t)
-	{ return Tuple(x + t.x, y + t.y, z + t.z, w + t.w); }
+	Tuple operator+(const Tuple &a, const Tuple &b)
+	{ return Tuple(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w); }
 
-	Tuple Tuple::operator-(const Tuple t)
-	{ return Tuple(x - t.x, y - t.y, z - t.z, w - t.w); }
+	Tuple operator-(const Tuple &a, const Tuple &b)
+	{ return Tuple(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w); }
 
-	Tuple Tuple::operator-()
-	{ return Tuple(-x, -y, -z, -w); }
+	Tuple operator-(const Tuple &t)
+	{ return Tuple(-t.x, -t.y, -t.z, -t.w); }
 
-	Tuple Tuple::operator*(float v)
-	{ return Tuple(x * v, y * v, z * v, w * v); }
+	Tuple operator*(const Tuple &t, float v)
+	{ return Tuple(t.x * v, t.y * v, t.z * v, t.w * v); }
 
-	Tuple Tuple::operator/(float v)
-	{ return Tuple(x / v, y / v, z / v, w / v); }
+	Tuple operator/(const Tuple &t, float v)
+	{ return Tuple(t.x / v, t.y / v, t.z / v, t.w / v); }
 
-	Tuple operator*(float v, Tuple t)
+	Tuple operator*(float v, const Tuple &t)
 	{ return Tuple(t.x * v, t.y * v, t.z * v, t.w * v); }
 
 	// -------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ namespace RayTracer
 	Color::Color(Tuple &&t)
 		: Tuple(t.x, t.y, t.z, 0.0f) {}
 
-	Color operator*(const Color c1, const Color c2)
+	Color operator*(const Color &c1, const Color &c2)
 	{ return Color(c1.x * c2.x, c1.y * c2.y, c1.z * c2.z); }
 
 	// -------------------------------------------------------------------------------
