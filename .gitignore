@@ -11,6 +11,9 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
+#MacOS
+.DS_Store
+
 #VS Code
 settings.json
 launch.json
