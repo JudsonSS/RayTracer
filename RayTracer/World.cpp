@@ -12,6 +12,7 @@
 #include "World.h"
 #include <algorithm>
 using std::find;
+using std::sort;
 
 namespace RayTracer
 {
@@ -53,6 +54,8 @@ namespace RayTracer
     unsigned World::Lights() const
     { return lights.size(); }
 
+    // -------------------------------------------------------------------------------
+
     bool World::Contains(Object &obj)
     {
         for (Object * item : objects)
@@ -77,4 +80,18 @@ namespace RayTracer
     }
 
     // -------------------------------------------------------------------------------
+
+    vector<Intersection> World::Intersect(Ray r)
+    {
+        vector<Intersection> world_intersections;
+
+        for (Object * obj : objects)
+        {
+            vector<Intersection> object_intersections = obj->Intersect(r);
+            for (Intersection & i : object_intersections)
+                world_intersections.push_back(i);
+        }
+        sort(world_intersections.begin(), world_intersections.end());
+        return world_intersections;
+    }
 }

@@ -40,4 +40,17 @@ namespace Chapter7
         EXPECT_TRUE(world.Contains(s1));
         EXPECT_TRUE(world.Contains(s2));
     }
+
+    TEST(World, RayIntersect)
+	{
+        World world(World::Default);
+        Ray ray { Point{0,0,-5}, Vector{0,0,1} };
+        vector<Intersection> xs = world.Intersect(ray);
+        
+        EXPECT_EQ(xs.size(), 4);
+        EXPECT_EQ(xs[0].time, 4.0);
+        EXPECT_EQ(xs[1].time, 4.5);
+        EXPECT_EQ(xs[2].time, 5.5);
+        EXPECT_EQ(xs[3].time, 6.0);
+    }
 }

@@ -22,19 +22,21 @@ namespace RayTracer
 	class World
 	{
     private:
-		vector<Object*> objects;			// coleção de objetos
-        vector<PointLight*> lights;         // coleção de pontos de luzes
+		vector<Object*> objects;			    // coleção de objetos
+        vector<PointLight*> lights;             // coleção de pontos de luzes
         
     public:
-        enum {Empty, Default};              // configurações do mundo
+        enum {Empty, Default};                  // opções do construtor
         
-        World(int config = Empty);		    // construtor padrão
-        ~World();                           // destrutor
+        World(int config = Empty);		        // construtor padrão
+        ~World();                               // destrutor
 
-        unsigned Objects() const;           // retorna quantidade de objetos
-        unsigned Lights() const;            // retorna quantidade de luzes
-        bool Contains(Object &obj);         // mundo contém objeto
-        bool Contains(PointLight &light);   // mundo contém ponto de luz
+        unsigned Objects() const;               // retorna quantidade de objetos
+        unsigned Lights() const;                // retorna quantidade de luzes
+        bool Contains(Object &obj);             // mundo contém objeto
+        bool Contains(PointLight &light);       // mundo contém ponto de luz
+        
+        vector<Intersection> Intersect(Ray r);  // retorna pontos de interseção
 	};
 }
 
