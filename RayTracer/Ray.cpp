@@ -51,8 +51,6 @@ namespace RayTracer
 
     Intersection Hit(vector<Intersection> & intersections)
     {
-        sort(intersections.begin(), intersections.end());
-
         for (auto &i : intersections)
         {
             if (i.time >= 0)

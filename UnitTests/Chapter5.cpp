@@ -118,7 +118,7 @@ namespace Chapter5
         Sphere s;
         Intersection i1 {1,s};
         Intersection i2 {2,s};
-        vector<Intersection> xs {i2,i1};
+        vector<Intersection> xs {i1,i2};
         Intersection i = Hit(xs); 
         EXPECT_TRUE(i == i1);
     }
@@ -151,6 +151,7 @@ namespace Chapter5
         Intersection i3 {-3,s};
         Intersection i4 {2,s};
         vector<Intersection> xs {i1,i2,i3,i4};
+        sort(xs.begin(), xs.end());
         Intersection i = Hit(xs); 
         EXPECT_TRUE(i == i4);
     }
