@@ -2,7 +2,7 @@
 // Types (Arquivo de Cabeçalho)
 //
 // Criação:		27 Jun 2020
-// Atualização:	03 Jul 2021
+// Atualização:	07 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os tipos básicos necessários para a construção de um 
@@ -49,7 +49,8 @@ namespace RayTracer
 	class Point : public Tuple
 	{
 	public:
-		Point(float px, float py, float pz); 			// construtor
+		Point();										// construtor padrão
+		Point(float px, float py, float pz); 			// construtor com coordenadas
 		Point(Tuple &&t);					 			// conversão de tupla para ponto
 	};
 
@@ -60,7 +61,8 @@ namespace RayTracer
 	class Vector : public Tuple
 	{
 	public:
-		Vector(float px, float py, float pz); 			// construtor
+		Vector();										// construtor padrão
+		Vector(float px, float py, float pz); 			// construtor com coordenadas
 		Vector(Tuple &&t);					  			// conversão de tupla para vetor
 
 		float Magnitude();								// comprimento do vetor

@@ -20,8 +20,8 @@ namespace Chapter7
     TEST(World, Empty)
 	{
         World world;
-        EXPECT_TRUE(world.Objects() == 0);
-        EXPECT_TRUE(world.Lights() == 0);
+        EXPECT_TRUE(world.objects.size() == 0);
+        EXPECT_TRUE(world.light == PointLight());
     }
 
     TEST(World, Default)
@@ -36,7 +36,7 @@ namespace Chapter7
         
         World world(World::Default);
         
-        EXPECT_TRUE(world.Contains(light));
+        EXPECT_TRUE(world.light == light);
         EXPECT_TRUE(world.Contains(s1));
         EXPECT_TRUE(world.Contains(s2));
     }
@@ -52,5 +52,92 @@ namespace Chapter7
         EXPECT_EQ(xs[1].time, 4.5);
         EXPECT_EQ(xs[2].time, 5.5);
         EXPECT_EQ(xs[3].time, 6.0);
+    }
+
+    TEST(World, StateOfIntersection)
+	{
+        Ray ray { Point{0,0,-5}, Vector{0,0,1} };
+        Sphere shape;
+        Intersection i {4, shape};
+        HitData comps = PrepareComputations(i, ray);
+        
+        EXPECT_EQ(comps.time, i.time);
+        EXPECT_EQ(comps.object, i.object);
+        EXPECT_EQ(comps.point, Point(0,0,-1));
+        EXPECT_EQ(comps.eye, Vector(0,0,-1));
+        EXPECT_EQ(comps.normal, Vector(0,0,-1));
+    }
+
+    TEST(World, HitOutsideObject)
+	{
+        Ray ray { Point{0,0,-5}, Vector{0,0,1} };
+        Sphere shape;
+        Intersection i {4, shape};
+        HitData comps = PrepareComputations(i, ray);
+        EXPECT_EQ(comps.inside, false);
+    }
+
+    TEST(World, HitInsideObject)
+	{
+        Ray ray { Point{0,0,0}, Vector{0,0,1} };
+        Sphere shape;
+        Intersection i {1, shape};
+        HitData comps = PrepareComputations(i, ray);
+        EXPECT_EQ(comps.inside, true);
+        EXPECT_EQ(comps.point, Point(0,0,1));
+        EXPECT_EQ(comps.eye, Vector(0,0,-1));
+        EXPECT_EQ(comps.normal, Vector(0,0,-1));
+    }
+
+    TEST(World, ShadingIntersection)
+	{
+        World world(World::Default);
+        Ray ray { Point{0,0,-5}, Vector{0,0,1} };
+        Sphere & shape = *((Sphere*) world.objects[0]); 
+        Intersection i {4, shape};
+        HitData comps = PrepareComputations(i, ray);
+        Color color = world.ShadeHit(comps);
+        EXPECT_EQ(color, Color(0.38066, 0.47583, 0.2855));
+    }
+
+    TEST(World, ShadingFromInside)
+	{
+        World world(World::Default);
+        world.light = PointLight{Point{0,0.25,0}, Color{1,1,1}};
+        Ray ray { Point{0,0,0}, Vector{0,0,1} };
+        Sphere & shape = *((Sphere*) world.objects[1]); 
+        Intersection i {0.5, shape};
+        HitData comps = PrepareComputations(i, ray);
+        Color color = world.ShadeHit(comps);
+        EXPECT_EQ(color, Color(0.90498, 0.90498, 0.90498));
+    }
+
+    TEST(World, ColorRayMisses)
+	{
+        World world(World::Default);
+        Ray ray { Point{0,0,-5}, Vector{0,1,0} };
+        Color color = world.ColorAt(ray);
+        EXPECT_EQ(color, Color(0, 0, 0));
+    }
+
+    TEST(World, ColorRayHits)
+	{
+        World world(World::Default);
+        Ray ray { Point{0,0,-5}, Vector{0,0,1} };
+        Color color = world.ColorAt(ray);
+        EXPECT_EQ(color, Color(0.38066, 0.47583, 0.2855));
+    }
+
+    TEST(World, ColorBehindRay)
+	{
+        World world(World::Default);
+        Sphere & outer = *((Sphere*) world.objects[0]); 
+        Sphere & inner = *((Sphere*) world.objects[1]);
+        outer.material.ambient = 1;
+        inner.material.ambient = 1; 
+
+        Ray ray { Point{0, 0, 0.75}, Vector{0, 0, -1} };
+        Color color = world.ColorAt(ray);
+        EXPECT_EQ(color, inner.material.color);
     }
 }

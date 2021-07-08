@@ -2,7 +2,7 @@
 // Ray (Arquivo de Código Fonte)
 //
 // Criação:		25 Jun 2021
-// Atualização:	03 Jul 2021
+// Atualização:	08 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define a representação de um raio, 
@@ -13,6 +13,7 @@
 #include <cmath>
 #include <algorithm>
 #include "Ray.h"
+#include "Object.h"
 using std::sort;
 
 namespace RayTracer

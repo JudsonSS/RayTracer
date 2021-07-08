@@ -2,7 +2,7 @@
 // Types (Arquivo de Código Fonte)
 //
 // Criação:		27 Jun 2020
-// Atualização:	03 Jul 2021
+// Atualização:	07 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os tipos básicos necessários para a construção de um 
@@ -64,6 +64,9 @@ namespace RayTracer
 	// Ponto
 	// -------------------------------------------------------------------------------
 
+	Point::Point()
+		: Tuple(0.0f, 0.0f, 0.0f, 1.0f) {}
+
 	Point::Point(float px, float py, float pz)
 		: Tuple(px, py, pz, 1.0f) {}
 
@@ -73,6 +76,9 @@ namespace RayTracer
 	// -------------------------------------------------------------------------------
 	// Vetor
 	// -------------------------------------------------------------------------------
+
+	Vector::Vector()
+		: Tuple(0.0f, 0.0f, 0.0f, 0.0f) {}
 
 	Vector::Vector(float px, float py, float pz)
 		: Tuple(px, py, pz, 0.0f) {}
