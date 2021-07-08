@@ -46,7 +46,8 @@ namespace RayTracer
     {           
         float time;                             // valor de distância ao longo do raio
         Object * object;                        // objeto em que ocorreu a interseção
-        Intersection(float t, Object & obj);    // construtor
+        Intersection();                         // construtor padrão
+        Intersection(float t, Object & obj);    // construtor com tempo e objeto
     };
     
     // comparação de igualdade entre interseções
@@ -56,7 +57,7 @@ namespace RayTracer
     bool operator<(const Intersection &a, const Intersection &b);
 
     // retorna interseção com menor valor não-negativo   
-    Intersection * Hit(vector<Intersection> & intersections);          
+    Intersection Hit(vector<Intersection> & intersections);          
 
     // ---------------------------------------------------------------------------------------
 	// Ponto de Luz

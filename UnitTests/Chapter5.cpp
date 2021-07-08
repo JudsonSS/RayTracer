@@ -119,8 +119,8 @@ namespace Chapter5
         Intersection i1 {1,s};
         Intersection i2 {2,s};
         vector<Intersection> xs {i2,i1};
-        Intersection * i = Hit(xs); 
-        EXPECT_TRUE(*i == i1);
+        Intersection i = Hit(xs); 
+        EXPECT_TRUE(i == i1);
     }
 
     TEST(Ray, HitSomeNegative)
@@ -129,8 +129,8 @@ namespace Chapter5
         Intersection i1 {-1,s};
         Intersection i2 {1,s};
         vector<Intersection> xs {i2,i1};
-        Intersection * i = Hit(xs); 
-        EXPECT_TRUE(*i == i2);
+        Intersection i = Hit(xs); 
+        EXPECT_TRUE(i == i2);
     }
 
     TEST(Ray, HitAllNegative)
@@ -139,8 +139,8 @@ namespace Chapter5
         Intersection i1 {-2,s};
         Intersection i2 {-1,s};
         vector<Intersection> xs {i2,i1};
-        Intersection * i = Hit(xs); 
-        EXPECT_EQ(i, nullptr);
+        Intersection i = Hit(xs); 
+        EXPECT_EQ(i.object, nullptr);
     }
 
     TEST(Ray, HitAlwaysLowest)
@@ -151,8 +151,8 @@ namespace Chapter5
         Intersection i3 {-3,s};
         Intersection i4 {2,s};
         vector<Intersection> xs {i1,i2,i3,i4};
-        Intersection * i = Hit(xs); 
-        EXPECT_TRUE(*i == i4);
+        Intersection i = Hit(xs); 
+        EXPECT_TRUE(i == i4);
     }
 
     TEST(Ray, TranslatingRay)

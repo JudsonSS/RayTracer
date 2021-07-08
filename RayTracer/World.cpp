@@ -111,9 +111,9 @@ namespace RayTracer
         if (intersections.size() == 0)
             return Color {0,0,0};
 
-        Intersection * hit = Hit(intersections);
-        HitData data = PrepareComputations(*hit, r);
-        return ShadeHit(data);
+        Intersection intersection = Hit(intersections);
+        HitData hit = PrepareComputations(intersection, r);
+        return ShadeHit(hit);
     }
 
     // -------------------------------------------------------------------------------

@@ -31,6 +31,9 @@ namespace RayTracer
 
     // -------------------------------------------------------------------------------
 
+    Intersection::Intersection()
+        : time(0), object(nullptr) {}
+
     Intersection::Intersection(float t, Object &obj)
         : time(t), object(&obj) {}
 
@@ -46,16 +49,16 @@ namespace RayTracer
 
     // -------------------------------------------------------------------------------
 
-    Intersection * Hit(vector<Intersection> & intersections)
+    Intersection Hit(vector<Intersection> & intersections)
     {
         sort(intersections.begin(), intersections.end());
 
         for (auto &i : intersections)
         {
             if (i.time >= 0)
-                return &i;
+                return i;
         }
-        return nullptr;
+        return Intersection();
     }
 
     // -------------------------------------------------------------------------------
