@@ -116,5 +116,22 @@ namespace RayTracer
         return ShadeHit(hit);
     }
 
+    Matrix ViewTransform(Point from, Point to, Vector up)
+    {
+        Vector forward = Vector(to - from).Normalized();
+        Vector left = forward.Cross(up.Normalized());
+        Vector true_up = left.Cross(forward);
+        Matrix orientation {4,4, 
+            {
+                left.x,     left.y,     left.z,    0,
+                true_up.x,  true_up.y,  true_up.z, 0,
+               -forward.x, -forward.y, -forward.z, 0,
+                0,          0,          0,         1
+            } 
+        };
+
+        return orientation * Translation(-from.x, -from.y, -from.z);
+    }
+
     // -------------------------------------------------------------------------------
 }

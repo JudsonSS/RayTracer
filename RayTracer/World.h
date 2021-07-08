@@ -46,6 +46,9 @@ namespace RayTracer
         Color ShadeHit(HitData hit);            // retorna cor no ponto de interseção
         Color ColorAt(Ray r);                   // retorna cor na interseção com o raio
 	};    
+
+    // retorna matrix de transformação da câmera
+    Matrix ViewTransform(Point from, Point to, Vector up);
 }
 
 #endif

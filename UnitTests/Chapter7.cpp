@@ -140,4 +140,48 @@ namespace Chapter7
         Color color = world.ColorAt(ray);
         EXPECT_EQ(color, inner.material.color);
     }
+
+    TEST(World, DefaultViewTransform)
+	{
+        Point from {0, 0, 0};
+        Point to {0, 0, -1};
+        Vector up { 0, 1, 0};
+        Matrix view = ViewTransform(from, to, up);
+        EXPECT_EQ(view, Matrix::Identity);
+    }
+
+    TEST(World, LookingPositiveZ)
+	{
+        Point from {0, 0, 0};
+        Point to {0, 0, 1};
+        Vector up { 0, 1, 0};
+        Matrix view = ViewTransform(from, to, up);
+        EXPECT_EQ(view, Scaling(-1,1,-1));
+    }
+
+    TEST(World, ViewTransformMovesWorld)
+	{
+        Point from {0, 0, 8};
+        Point to {0, 0, 0};
+        Vector up { 0, 1, 0};
+        Matrix view = ViewTransform(from, to, up);
+        EXPECT_EQ(view, Translation(0,0,-8));
+    }
+
+    TEST(World, ArbitraryViewTransform)
+	{
+        Point from {1, 3, 2};
+        Point to {4, -2, 8};
+        Vector up { 1, 1, 0};
+        Matrix view = ViewTransform(from, to, up);
+        Matrix T {4, 4,  
+            { 
+              -0.50709, 0.50709,  0.67612, -2.36643,
+               0.76772, 0.60609,  0.12122, -2.82843,
+              -0.35857, 0.59761, -0.71714,  0.00000,
+               0.00000, 0.00000,  0.00000,  1.00000 
+            } 
+        };
+        EXPECT_EQ(view, T);
+    }
 }
