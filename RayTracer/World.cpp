@@ -20,22 +20,22 @@ namespace RayTracer
 
     HitData PrepareComputations(Intersection &intersection, Ray &ray)
     {
-        HitData comps;
-        comps.time = intersection.time;
-        comps.object = intersection.object;
-        comps.point = ray.Position(intersection.time);
-        comps.eye = -ray.direction;
-        comps.normal = comps.object->Normal(comps.point);
-        comps.inside = false;
+        HitData hit;
+        hit.time = intersection.time;
+        hit.object = intersection.object;
+        hit.point = ray.Position(intersection.time);
+        hit.eye = -ray.direction;
+        hit.normal = hit.object->Normal(hit.point);
+        hit.inside = false;
 
         // se os vetores tem direções opostas
-        if (comps.normal.Dot(comps.eye) < 0)
+        if (hit.normal.Dot(hit.eye) < 0)
         {
-            comps.inside = true;
-            comps.normal = -comps.normal;
+            hit.inside = true;
+            hit.normal = -hit.normal;
         }
         
-        return comps;
+        return hit;
     }
 
     // -------------------------------------------------------------------------------
