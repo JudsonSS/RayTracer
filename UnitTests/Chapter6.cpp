@@ -163,7 +163,7 @@ namespace Chapter6
         Vector normal {0,0,-1};
         PointLight light {Point(0,10,-10), Color(1,1,1)};
         Color result = Lighting(m, light, position, eye, normal);
-        EXPECT_TRUE(result == Color(1.6364, 1.6364, 1.6364));
+        EXPECT_EQ(result, Color(1.63638, 1.63638, 1.63638));
 	}
 
     TEST(Lighting, LightBehindSurface)

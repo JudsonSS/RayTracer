@@ -2,7 +2,7 @@
 // Canvas (Arquivo de Código Fonte)
 //
 // Criação:		17 Jun 2021
-// Atualização:	04 Jul 2021
+// Atualização:	09 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define uma representação para um grade retangular de pixels.
@@ -25,10 +25,54 @@ namespace RayTracer
         mGrid = new Color[mSize];
     }
 
+    Canvas::Canvas(Canvas &c)
+        : mGrid(new Color[c.mSize]),
+          mWidth(c.mWidth),
+          mHeight(c.mHeight),
+          mSize(c.mSize)
+    {
+        for (int i = 0; i < mSize; ++i)
+			mGrid[i] = c.mGrid[i];
+    }
+
+    Canvas::Canvas(Canvas &&c)
+        : mGrid(c.mGrid),
+          mWidth(c.mWidth),
+          mHeight(c.mHeight),
+          mSize(c.mSize)
+    {
+        c.mGrid = nullptr;
+    }
+
     Canvas::~Canvas()
     {
         // libera vetor dinâmico
         delete[] mGrid;
+    }
+
+    Canvas & Canvas::operator=(Canvas &c)
+    {
+        mWidth = c.mWidth;
+        mHeight = c.mHeight;
+        mSize = c.mSize;
+
+        delete [] mGrid;
+        mGrid = new Color[mSize];
+        for (int i = 0; i < mSize; ++i)
+			mGrid[i] = c.mGrid[i];
+
+		return *this;
+    }
+
+    Canvas & Canvas::operator=(Canvas &&c)
+    {
+        mWidth = c.mWidth;
+        mHeight = c.mHeight;
+        mSize = c.mSize;
+        delete [] mGrid;
+        mGrid = c.mGrid;
+        c.mGrid = nullptr;
+		return *this;
     }
 
     // -------------------------------------------------------------------------------

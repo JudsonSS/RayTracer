@@ -2,7 +2,7 @@
 // World (Arquivo de Cabeçalho)
 //
 // Criação:		04 Jul 2021
-// Atualização:	08 Jul 2021
+// Atualização:	09 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Um mundo contém uma coleção de objetos e fontes de luz.
@@ -14,11 +14,16 @@
 
 #include <vector>
 #include "Object.h"
+#include "Canvas.h"
 #include "Ray.h"
 using std::vector;
 
 namespace RayTracer
 {
+    // ---------------------------------------------------------------------------------------
+	// HitData
+	// ---------------------------------------------------------------------------------------
+
     struct HitData
     {
         float time;                             // valor de distância ao longo do raio
@@ -31,6 +36,10 @@ namespace RayTracer
 
     // pré-calcula algumas informações para o sombreamento do ponto de interseção
     HitData PrepareComputations(Intersection &intersection, Ray &ray);
+
+    // ---------------------------------------------------------------------------------------
+	// Mundo
+	// ---------------------------------------------------------------------------------------
 
 	struct World
 	{
@@ -49,6 +58,35 @@ namespace RayTracer
 
     // retorna matrix de transformação da câmera
     Matrix ViewTransform(Point from, Point to, Vector up);
+
+    // ---------------------------------------------------------------------------------------
+	// Camera
+	// ---------------------------------------------------------------------------------------
+
+    struct Camera
+    {
+        unsigned hsize;                         // tamanho horizontal (em pixels)
+        unsigned vsize;                         // tamanho vertical (em pixels)
+        float fov;                              // field of view (ângulo em radianos)
+        float pixel_size;                       // tamanho de cada pixel
+        float half_width;                       // metade da largura (do mundo)
+        float half_height;                      // metade da altura (do mundo)
+        Matrix transform;                       // view transform matrix
+
+        // construtor com valor padrão para a matrix de transformação
+        Camera(unsigned horizontal, 
+               unsigned vertical, 
+               float field_of_view, 
+               Matrix view_transform = Matrix::Identity); 
+        
+        // retorna raio que passa por (px,py)
+        Ray RayForPixel(unsigned px, unsigned py);
+        
+        // retorna imagem da rederização do mundo 
+        Canvas Render(World & world);
+    };
+
+    // ---------------------------------------------------------------------------------------
 }
 
 #endif

@@ -2,7 +2,7 @@
 // World (Arquivo de Código Fonte)
 //
 // Criação:		04 Jul 2021
-// Atualização:	08 Jul 2021
+// Atualização:	09 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Um mundo contém uma coleção de objetos e fontes de luz.
@@ -10,6 +10,7 @@
 **********************************************************************************/
 
 #include "World.h"
+#include <cmath>
 #include <algorithm>
 using std::find;
 using std::sort;
@@ -131,6 +132,65 @@ namespace RayTracer
         };
 
         return orientation * Translation(-from.x, -from.y, -from.z);
+    }
+
+    // -------------------------------------------------------------------------------
+
+    Camera::Camera(unsigned horizontal, unsigned vertical, float field_of_view, Matrix view_transform)
+        : hsize(horizontal), vsize(vertical), fov(field_of_view), transform(view_transform) 
+    {
+        float half_view = tan(fov/2);
+        float aspect = float(hsize)/vsize;
+
+        if (aspect >= 1)
+        {
+            // aspecto horizontal
+            // half_view é metade da largura
+            half_width = half_view;
+            half_height = half_view / aspect;
+        }
+        else
+        {
+            // aspecto vertical
+            // half_view é metade da altura
+            half_width = half_view * aspect;
+            half_height = half_view;
+        }
+
+        pixel_size = (half_width * 2) / hsize;
+    }
+
+    Ray Camera::RayForPixel(unsigned px, unsigned py)
+    {
+        // offset da borda da tela ao centro do pixel
+        float x_offset = (px + 0.5) * pixel_size;
+        float y_offset = (py + 0.5) * pixel_size;
+
+        // coordenadas do pixel no espaço do mundo
+        float world_x = half_width - x_offset;
+        float world_y = half_height - y_offset;
+
+        Matrix invTrans = transform.Inverse();
+        Point pixel =  invTrans * Point(world_x, world_y, -1);
+        Point origin = invTrans * Point(0,0,0);
+        Vector direction = Vector(pixel - origin).Normalized();
+
+        return Ray{origin, direction};
+    }
+
+    Canvas Camera::Render(World & world)
+    {
+        Canvas image {hsize, vsize};
+        for (unsigned y = 0; y < vsize - 1; ++y)
+        {
+            for (unsigned x = 0; x < hsize - 1; ++x)
+            {
+                Ray ray = RayForPixel(x,y);
+                Color color = world.ColorAt(ray);
+                image.Paint(x, y, color);
+            }
+        }
+        return image;
     }
 
     // -------------------------------------------------------------------------------

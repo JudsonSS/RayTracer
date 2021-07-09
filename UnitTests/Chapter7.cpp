@@ -12,7 +12,9 @@
 **********************************************************************************/
 
 #include <gtest/gtest.h>
+#include <cmath>
 #include "World.h"
+#include "Canvas.h"
 using namespace RayTracer;
 
 namespace Chapter7
@@ -183,5 +185,67 @@ namespace Chapter7
             } 
         };
         EXPECT_EQ(view, T);
+    }
+
+    TEST(Camera, Constructor)
+	{
+        unsigned hsize = 160;
+        unsigned vsize = 120;
+        float fov = PI/2;
+        Camera cam {hsize, vsize, fov};
+        
+        EXPECT_EQ(cam.hsize, 160);
+        EXPECT_EQ(cam.vsize, 120);
+        EXPECT_EQ(cam.fov, PI/2);
+        EXPECT_EQ(cam.transform, Matrix::Identity);
+    }
+
+    TEST(Camera, HorizontalCanvas)
+	{
+        Camera cam {200, 125, PI/2};
+        EXPECT_TRUE(Equal(cam.pixel_size, 0.01));
+    }
+
+    TEST(Camera, VerticalCanvas)
+	{
+        Camera cam {125, 200, PI/2};
+        EXPECT_TRUE(Equal(cam.pixel_size, 0.01));
+    }
+
+    TEST(Camera, RayThroughCenter)
+	{
+        Camera cam {201, 101, PI/2};
+        Ray ray = cam.RayForPixel(100, 50);
+        EXPECT_TRUE(ray.origin == Point(0,0,0));
+        EXPECT_TRUE(ray.direction == Vector(0,0,-1));
+    }
+
+    TEST(Camera, RayThroughCorner)
+	{
+        Camera cam {201, 101, PI/2};
+        Ray ray = cam.RayForPixel(0, 0);
+        EXPECT_TRUE(ray.origin == Point(0,0,0));
+        EXPECT_TRUE(ray.direction == Vector(0.66519, 0.33259, -0.66851));
+    }
+
+    TEST(Camera, RayWithCameraTrasformed)
+	{
+        Camera cam {201, 101, PI/2};
+        cam.transform = RotationY(PI/4) * Translation(0, -2, 5);
+        Ray ray = cam.RayForPixel(100, 50);
+        EXPECT_TRUE(ray.origin == Point(0,2,-5));
+        EXPECT_TRUE(ray.direction == Vector(sqrt(2)/2, 0, -sqrt(2)/2));
+    }
+
+    TEST(Camera, RenderingWorld)
+	{
+        World world {World::Default};
+        Camera cam {11, 11, PI/2};
+        Point from {0,0,-5};
+        Point to {0,0,0};
+        Vector up {0,1,0};
+        cam.transform = ViewTransform(from, to, up);
+        Color result = cam.Render(world).At(5,5);
+        EXPECT_TRUE(result == Color(0.38066, 0.47583, 0.2855));
     }
 }
