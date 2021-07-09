@@ -61,7 +61,7 @@ namespace RayTracer
     }
 
     World::~World()
-    {    
+    {   
         for (Object * obj : objects)
             delete obj;
     }
