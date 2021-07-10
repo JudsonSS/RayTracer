@@ -29,6 +29,7 @@ namespace RayTracer
         float time;                             // valor de distância ao longo do raio
         Object * object;                        // objeto em que ocorreu a interseção
         Point point;                            // posição em coordenadas do mundo
+        Point over_point;                       // posição para cálculo da sombra
         Vector eye;                             // vetor na direção do observador
         Vector normal;                          // vetor normal no local da interseção 
         bool inside;                            // observador está dentro do objeto

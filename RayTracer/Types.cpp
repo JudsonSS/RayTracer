@@ -2,7 +2,7 @@
 // Types (Arquivo de Código Fonte)
 //
 // Criação:		27 Jun 2020
-// Atualização:	08 Jul 2021
+// Atualização:	10 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os tipos básicos necessários para a construção de um 
@@ -19,11 +19,9 @@ namespace RayTracer
 	// Comparação Ponto-Flutuante
 	// -------------------------------------------------------------------------------
 
-	const float Epsilon = 0.0001f;
-
 	bool Equal(float a, float b)
 	{
-		if (abs(a - b) < Epsilon)
+		if (abs(a - b) < EPSILON)
 			return true;
 		else
 			return false;

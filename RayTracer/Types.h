@@ -2,7 +2,7 @@
 // Types (Arquivo de Cabeçalho)
 //
 // Criação:		27 Jun 2020
-// Atualização:	07 Jul 2021
+// Atualização:	10 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os tipos básicos necessários para a construção de um 
@@ -32,6 +32,8 @@ namespace RayTracer
 		Tuple();										// construtor padrão
 		Tuple(float px, float py, float pz, float pw); 	// construtor com valores
 	};
+
+	const float EPSILON = 0.00001f;						// valor de erro para comparação
 
 	bool Equal(float a, float b);	   					// comparação de pontos-flutuantes
 	bool operator==(const Tuple &a, const Tuple &b);	// comparação de igualdade

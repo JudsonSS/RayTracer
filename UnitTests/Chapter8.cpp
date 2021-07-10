@@ -62,5 +62,31 @@ namespace Chapter8
         EXPECT_FALSE(world.IsShadowed(p));
 	}
 
+    TEST(Shadows, IntersectionInShadow)
+	{
+        World world {World::Empty};
+        world.light = PointLight{ Point{0,0,-10}, Color{1,1,1} };
+        Sphere * s1 = new Sphere;
+        Sphere * s2 = new Sphere;
+        s2->transform = Translation(0,0,10);
+        world.objects.push_back(s1);
+        world.objects.push_back(s2);
 
+        Ray ray { Point{0,0,5}, Vector{0,0,1} };
+        Intersection i {4, *s2};
+        HitData hit = PrepareComputations(i, ray);
+        Color color = world.ShadeHit(hit);
+        EXPECT_TRUE(color == Color(0.1, 0.1, 0.1));
+    }
+
+    TEST(Shadows, OverPoint)
+	{
+        Ray ray { Point{0,0,-5}, Vector{0,0,1} };
+        Sphere shape;
+        shape.transform = Translation(0,0,1);
+        Intersection i {5, shape};
+        HitData hit = PrepareComputations(i, ray);
+        EXPECT_TRUE(hit.over_point.z < -EPSILON/2);
+        EXPECT_TRUE(hit.point.z > hit.over_point.z);
+    }
 }

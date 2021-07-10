@@ -35,6 +35,8 @@ namespace RayTracer
             hit.inside = true;
             hit.normal = -hit.normal;
         }
+
+        hit.over_point = hit.point + hit.normal * EPSILON;
         
         return hit;
     }
@@ -99,12 +101,14 @@ namespace RayTracer
 
     Color World::ShadeHit(HitData &hit)
     {
+        bool shadowed = IsShadowed(hit.over_point);
+
         return Lighting(hit.object->material,
                         light,
-                        hit.point,
+                        hit.over_point,
                         hit.eye,
                         hit.normal,
-                        false);
+                        shadowed);
     }
 
     Color World::ColorAt(Ray &r)
