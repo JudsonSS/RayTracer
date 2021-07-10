@@ -2,7 +2,7 @@
 // World (Arquivo de Código Fonte)
 //
 // Criação:		04 Jul 2021
-// Atualização:	09 Jul 2021
+// Atualização:	10 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Um mundo contém uma coleção de objetos e fontes de luz.
@@ -83,7 +83,7 @@ namespace RayTracer
 
     // -------------------------------------------------------------------------------
 
-    vector<Intersection> World::Intersect(Ray r)
+    vector<Intersection> World::Intersect(Ray &r)
     {
         vector<Intersection> world_intersections;
 
@@ -97,7 +97,7 @@ namespace RayTracer
         return world_intersections;
     }
 
-    Color World::ShadeHit(HitData hit)
+    Color World::ShadeHit(HitData &hit)
     {
         return Lighting(hit.object->material,
                         light,
@@ -107,7 +107,7 @@ namespace RayTracer
                         false);
     }
 
-    Color World::ColorAt(Ray r)
+    Color World::ColorAt(Ray &r)
     {
         vector<Intersection> intersections = Intersect(r);
         if (intersections.size() == 0)
@@ -116,6 +116,21 @@ namespace RayTracer
         Intersection intersection = Hit(intersections);
         HitData hit = PrepareComputations(intersection, r);
         return ShadeHit(hit);
+    }
+
+    bool World::IsShadowed(Point &p)
+    {
+        Vector v = light.position - p;
+        float distance = v.Magnitude();
+        Vector direction = v.Normalized();
+        Ray shadow_ray {p, direction};
+        auto intersections = Intersect(shadow_ray);
+        Intersection hit = Hit(intersections);
+        
+        if (hit.object != nullptr && hit.time < distance)
+            return true;
+        else
+            return false;
     }
 
     Matrix ViewTransform(Point from, Point to, Vector up)

@@ -2,7 +2,7 @@
 // World (Arquivo de Cabeçalho)
 //
 // Criação:		04 Jul 2021
-// Atualização:	09 Jul 2021
+// Atualização:	10 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Um mundo contém uma coleção de objetos e fontes de luz.
@@ -51,9 +51,10 @@ namespace RayTracer
         ~World();                               // destrutor
 
         bool Contains(Object &obj);             // mundo contém objeto        
-        vector<Intersection> Intersect(Ray r);  // retorna pontos de interseção
-        Color ShadeHit(HitData hit);            // retorna cor no ponto de interseção
-        Color ColorAt(Ray r);                   // retorna cor na interseção com o raio
+        vector<Intersection> Intersect(Ray &r); // retorna pontos de interseção
+        Color ShadeHit(HitData &hit);           // retorna cor no ponto de interseção
+        Color ColorAt(Ray &r);                  // retorna cor na interseção com o raio
+        bool IsShadowed(Point &p);              // retorna se o ponto está na sombra
 	};    
 
     // retorna matrix de transformação da câmera
