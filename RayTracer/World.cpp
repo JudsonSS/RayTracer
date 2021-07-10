@@ -103,7 +103,8 @@ namespace RayTracer
                         light,
                         hit.point,
                         hit.eye,
-                        hit.normal);
+                        hit.normal,
+                        false);
     }
 
     Color World::ColorAt(Ray r)

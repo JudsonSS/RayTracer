@@ -2,7 +2,7 @@
 // Ray (Arquivo de Código Fonte)
 //
 // Criação:		25 Jun 2021
-// Atualização:	08 Jul 2021
+// Atualização:	09 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define a representação de um raio, 
@@ -85,23 +85,28 @@ namespace RayTracer
     }
 
     Color Lighting(const Material &material,      // material da superfície
-                     const PointLight &light,       // ponto de luz
-                     const Point &point,            // ponto da superfície
-                     const Vector &eye,             // direção do olho
-                     const Vector &normal)          // normal da supercífie
+                   const PointLight &light,       // ponto de luz
+                   const Point &point,            // ponto da superfície
+                   const Vector &eye,             // direção do olho
+                   const Vector &normal,          // normal da supercífie
+                   bool position_in_shadow)       // posição está na sombra
     {
         // combina a cor da superfície com a cor da luz
         Color effective_color = material.color * light.intensity;
 
-        // encontra a direção para a fonte de luz
-        Vector lightv = Vector(light.position - point).Normalized();
-
         // calcula a contribuição do ambiente
         Color ambient = effective_color * material.ambient;
 
+        // apenas o ambiente contribui para o cor final
+        if (position_in_shadow)
+            return ambient;        
+        
+        // encontra a direção para a fonte de luz
+        Vector light_vector = Vector(light.position - point).Normalized();
+
         // representa o cosseno do ângulo entre o vetor da luz e o vetor normal
         // um número negativo quer dizer que a luz está atrás da superfície
-        float light_dot_normal = lightv.Dot(normal); 
+        float light_dot_normal = light_vector.Dot(normal); 
         Color diffuse {0,0,0};
         Color specular {0,0,0};
         if (light_dot_normal >= 0)
@@ -110,7 +115,7 @@ namespace RayTracer
             diffuse = effective_color * material.diffuse * light_dot_normal;
 
             // calcula vetor reflexão
-            Vector in = -lightv;
+            Vector in = -light_vector;
             Vector reflectv = in.Reflect(normal);
 
             // representa o cosseno do ângulo entre o vetor reflexão e o olho

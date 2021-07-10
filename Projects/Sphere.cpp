@@ -2,7 +2,7 @@
 // Sphere (Arquivo de Código Fonte)
 //
 // Criação:     29 Jun 2021
-// Atualização:	08 Jul 2021
+// Atualização:	09 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Aplicação desenha a silhueta de uma esfera no plano. 
@@ -57,7 +57,7 @@ int main()
                 Point hit_point = ray.Position(hit.time);
                 Vector hit_normal = shape.Normal(hit_point);
                 Vector eye = -ray.direction;
-                Color color = Lighting(shape.material, light, hit_point, eye, hit_normal);
+                Color color = Lighting(shape.material, light, hit_point, eye, hit_normal, false);
                 canvas.Paint(x,y,color);
             }
         }

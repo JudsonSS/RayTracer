@@ -129,7 +129,7 @@ namespace Chapter6
         Vector eye {0,0,-1};
         Vector normal {0,0,-1};
         PointLight light {Point(0,0,-10), Color(1,1,1)};
-        Color result = Lighting(m, light, position, eye, normal);
+        Color result = Lighting(m, light, position, eye, normal, false);
         EXPECT_TRUE(result == Color(1.9, 1.9, 1.9));
 	}
 
@@ -140,7 +140,7 @@ namespace Chapter6
         Vector eye (0, sqrt(2)/2, -sqrt(2)/2); 
         Vector normal {0,0,-1};
         PointLight light {Point(0,0,-10), Color(1,1,1)};
-        Color result = Lighting(m, light, position, eye, normal);
+        Color result = Lighting(m, light, position, eye, normal, false);
         EXPECT_TRUE(result == Color(1.0, 1.0, 1.0));
 	}
 
@@ -151,7 +151,7 @@ namespace Chapter6
         Vector eye {0, 0, -1}; 
         Vector normal {0,0,-1};
         PointLight light {Point(0,10,-10), Color(1,1,1)};
-        Color result = Lighting(m, light, position, eye, normal);
+        Color result = Lighting(m, light, position, eye, normal, false);
         EXPECT_TRUE(result == Color(0.7364, 0.7364, 0.7364));
 	}
 
@@ -162,7 +162,7 @@ namespace Chapter6
         Vector eye (0, -sqrt(2)/2, -sqrt(2)/2);
         Vector normal {0,0,-1};
         PointLight light {Point(0,10,-10), Color(1,1,1)};
-        Color result = Lighting(m, light, position, eye, normal);
+        Color result = Lighting(m, light, position, eye, normal, false);
         EXPECT_EQ(result, Color(1.63638, 1.63638, 1.63638));
 	}
 
@@ -173,7 +173,7 @@ namespace Chapter6
         Vector eye {0,0,-1};
         Vector normal {0,0,-1};
         PointLight light {Point(0,0,10), Color(1,1,1)};
-        Color result = Lighting(m, light, position, eye, normal);
+        Color result = Lighting(m, light, position, eye, normal, false);
         EXPECT_TRUE(result == Color(0.1, 0.1, 0.1));
 	}
 }

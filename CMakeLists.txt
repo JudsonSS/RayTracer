@@ -39,7 +39,8 @@ set (TEST_FILES
     "UnitTests/Chapter4.cpp"
     "UnitTests/Chapter5.cpp"
     "UnitTests/Chapter6.cpp"
-    "UnitTests/Chapter7.cpp")
+    "UnitTests/Chapter7.cpp"
+    "UnitTests/Chapter8.cpp")
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/RayTracer")
 add_executable(Projectile "Projects/Projectile.cpp" ${PROJECTILE_FILES})
