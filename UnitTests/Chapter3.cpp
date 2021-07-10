@@ -2,7 +2,7 @@
 // Test3 (Arquivo de Código Fonte)
 //
 // Criação:		18 Jun 2021
-// Atualização:	04 Jul 2021
+// Atualização:	10 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados no Capítulo 3,
@@ -386,9 +386,9 @@ namespace Chapter3
         
         EXPECT_EQ(A.Determinant(), 532);
         EXPECT_EQ(A.Cofactor(2,3), -160);
-        EXPECT_EQ(B(3,2), -160.0f/532.0f);
+        EXPECT_EQ(B(3,2), -160.0/532.0);
         EXPECT_EQ(A.Cofactor(3,2), 105);
-        EXPECT_EQ(B(2,3), 105.0f/532.0f);
+        EXPECT_EQ(B(2,3), 105.0/532.0);
 
         Matrix Inv {4,4};
 

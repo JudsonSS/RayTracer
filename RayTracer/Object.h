@@ -24,47 +24,46 @@ namespace RayTracer
     
     enum ObjectTypes
     {
-        UNKNOWN_T,
-        SPHERE_T
+        UNKNOWN_T,                                                  // desconhecido
+        SPHERE_T                                                    // esfera
     };
 
     // ---------------------------------------------------------------------------------------
-	// Object
+	// Objeto
 	// ---------------------------------------------------------------------------------------
 
     struct Object
     {
-        unsigned type;                                      // tipo do objeto 
-        Matrix transform;                                   // matrix de transformação
-        Material material;                                  // material da superfície
-        
-        Object();                                           // construtor padrão
-        virtual ~Object();                                  // destrutor da classe base
-        virtual vector<Intersection> Intersect(Ray r) = 0;  // retorna pontos de interseção
-        virtual Vector Normal(Point p) = 0;                 // obtém a normal no ponto P
+        unsigned type;                                              // tipo do objeto 
+        Matrix transform;                                           // matrix de transformação
+        Material material;                                          // material da superfície
+
+        Object();                                                   // construtor padrão
+        virtual ~Object();                                          // destrutor da classe base
+        virtual vector<Intersection> Intersect(const Ray &r) = 0;   // retorna pontos de interseção
+        virtual Vector Normal(const Point &p) = 0;                  // obtém a normal no ponto P
     };
 
     // ---------------------------------------------------------------------------------------
-	// Sphere
+	// Esfera
 	// ---------------------------------------------------------------------------------------
 
     class Sphere : public Object
     {
     private:
-        Point center;                                       // posição do centro 
-        float radius;                                       // tamanho do raio
+        Point center;                                               // posição do centro 
+        double radius;                                              // tamanho do raio
 
     public:
-        Sphere();                                           // construtor padrão
-        vector<Intersection> Intersect(Ray r);              // retorna pontos de interseção
-        Vector Normal(Point p);                             // obtém a normal no ponto P
+        Sphere();                                                   // construtor padrão
+        vector<Intersection> Intersect(const Ray &r);               // retorna pontos de interseção
+        Vector Normal(const Point &p);                              // obtém a normal no ponto P
         
         // compara igualdade de esferas
         friend bool operator==(const Sphere &a, const Sphere &b);
     };
 
     // ---------------------------------------------------------------------------------------
-
 }
 
 #endif

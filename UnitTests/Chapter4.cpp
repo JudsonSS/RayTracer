@@ -2,7 +2,7 @@
 // Test4 (Arquivo de Código Fonte)
 //
 // Criação:		21 Jun 2021
-// Atualização:	04 Jul 2021
+// Atualização:	10 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados para o Capítulo 4,
@@ -83,7 +83,7 @@ namespace Chapter4
         Matrix HalfQuarter = RotationX(PI/4);
         Matrix FullQuarter = RotationX(PI/2); 
         
-        Point hq {0, sqrt(2.0f)/2.0f, sqrt(2.0f)/2.0f};
+        Point hq {0, sqrt(2.0)/2.0, sqrt(2.0)/2.0};
         Point fq {0, 0, 1};
 		EXPECT_TRUE(HalfQuarter * p == hq);
         EXPECT_TRUE(FullQuarter * p == fq);
@@ -92,7 +92,7 @@ namespace Chapter4
     TEST(Transformations, RotationXInv)
 	{
         Point p {0, 1, 0};
-        Point hq {0, sqrt(2.0f)/2.0f, sqrt(2.0f)/2.0f};
+        Point hq {0, sqrt(2.0)/2.0, sqrt(2.0)/2.0};
         Matrix HalfQuarter = RotationX(PI/4);
         Matrix HQInv = HalfQuarter.Inverse(); 
         
@@ -105,7 +105,7 @@ namespace Chapter4
         Matrix HalfQuarter = RotationY(PI/4);
         Matrix FullQuarter = RotationY(PI/2); 
         
-        Point hq {sqrt(2.0f)/2.0f, 0, sqrt(2.0f)/2.0f};
+        Point hq {sqrt(2.0)/2.0, 0, sqrt(2.0)/2.0};
         Point fq {1, 0, 0};
 		EXPECT_TRUE(HalfQuarter * p == hq);
         EXPECT_TRUE(FullQuarter * p == fq);
@@ -117,7 +117,7 @@ namespace Chapter4
         Matrix HalfQuarter = RotationZ(PI/4);
         Matrix FullQuarter = RotationZ(PI/2); 
         
-        Point hq {-sqrt(2.0f)/2.0f, sqrt(2.0f)/2.0f, 0};
+        Point hq {-sqrt(2.0)/2.0, sqrt(2.0)/2.0, 0};
         Point fq {-1, 0, 0};
 		EXPECT_TRUE(HalfQuarter * p == hq);
         EXPECT_TRUE(FullQuarter * p == fq);

@@ -2,7 +2,7 @@
 // Matrix (Arquivo de Código Fonte)
 //
 // Criação:		19 Jun 2021
-// Atualização:	28 Jun 2021
+// Atualização:	10 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define uma classe para uma matriz dinâmica com as operações
@@ -33,15 +33,15 @@ namespace RayTracer
 		: mRows(rows),
 		  mCols(cols),
 		  mSize(rows * cols),
-		  mData(new float[mSize]{0}) {}
+		  mData(new double[mSize]{0}) {}
 
-	Matrix::Matrix(unsigned rows, unsigned cols, initializer_list<float> init)
+	Matrix::Matrix(unsigned rows, unsigned cols, const initializer_list<double> &init)
 		: mRows(rows),
 		  mCols(cols),
 		  mSize(rows * cols),
-		  mData(new float[mSize]{0})
+		  mData(new double[mSize]{0})
 	{
-		initializer_list<float>::iterator it;
+		initializer_list<double>::iterator it;
 		unsigned i;
 		for (i = 0, it = init.begin(); it != init.end() && i < mSize; ++it)
 			mData[i++] = *it;
@@ -51,7 +51,7 @@ namespace RayTracer
 		: mRows(mat.mRows),
 		  mCols(mat.mCols),
 		  mSize(mat.mSize),
-		  mData(new float[mSize])
+		  mData(new double[mSize])
 	{
 		for (int i = 0; i < mat.mSize; ++i)
 			mData[i] = mat.mData[i];
@@ -80,7 +80,7 @@ namespace RayTracer
 		mSize = mat.mSize;
 
 		delete[] mData;
-		mData = new float[mSize];
+		mData = new double[mSize];
 
 		for (int i = 0; i < mSize; ++i)
 			mData[i] = mat.mData[i];
@@ -99,9 +99,9 @@ namespace RayTracer
 		return *this;
 	}
 
-	Matrix &Matrix::operator=(std::initializer_list<float> init)
+	Matrix &Matrix::operator=(const initializer_list<double> &init)
 	{
-		initializer_list<float>::iterator it;
+		initializer_list<double>::iterator it;
 		unsigned i;
 		for (i = 0, it = init.begin(); it != init.end() && i < mSize; ++it)
 			mData[i++] = *it;
@@ -110,12 +110,12 @@ namespace RayTracer
 
 	// -------------------------------------------------------------------------------
 
-	float &Matrix::operator()(unsigned i, unsigned j)
+	double &Matrix::operator()(unsigned i, unsigned j)
 	{
 		return mData[i * mCols + j];
 	}
 
-	float Matrix::operator()(unsigned i, unsigned j) const
+	double Matrix::operator()(unsigned i, unsigned j) const
 	{
 		return mData[i * mCols + j];
 	}
@@ -138,9 +138,7 @@ namespace RayTracer
 	}
 
 	bool operator!=(const Matrix &m1, const Matrix &m2)
-	{
-		return !(m1 == m2);
-	}
+	{ return !(m1 == m2); }
 
 	// -------------------------------------------------------------------------------
 
@@ -157,7 +155,7 @@ namespace RayTracer
 		return M;
 	}
 
-	Tuple operator*(const Matrix &m, const Tuple t)
+	Tuple operator*(const Matrix &m, const Tuple &t)
 	{
 		assert(m.mRows == 4);
 		assert(m.mCols == 4);
@@ -182,12 +180,12 @@ namespace RayTracer
 		return T;
 	}
 
-	float Matrix::Determinant() const
+	double Matrix::Determinant() const
 	{
 		// só existe determinante para matrizes quadradas
 		assert(mRows == mCols);
 
-		float det = 0;
+		double det = 0;
 
 		if (mRows == 2)
 		{
@@ -249,27 +247,23 @@ namespace RayTracer
 		return S;
 	}
 
-	float Matrix::Minor(unsigned row, unsigned col) const
-	{
-		return Submatrix(row, col).Determinant();
-	}
+	double Matrix::Minor(unsigned row, unsigned col) const
+	{ return Submatrix(row, col).Determinant(); }
 
-	float Matrix::Cofactor(unsigned row, unsigned col) const
+	double Matrix::Cofactor(unsigned row, unsigned col) const
 	{
-		float minor = Minor(row, col);
+		double minor = Minor(row, col);
 		// se linha + coluna é um número ímpar retorna -minor
 		return ((row + col) % 2 == 0) ? minor : -minor;
 	}
 
 	bool Matrix::Invertible() const
-	{
-		return (Determinant() == 0) ? false : true;
-	}
+	{ return (Determinant() == 0) ? false : true; }
 
 	Matrix Matrix::Inverse() const
 	{
 		assert(Invertible());
-		float det = Determinant();
+		double det = Determinant();
 
 		Matrix M{mRows, mCols};
 
@@ -283,7 +277,7 @@ namespace RayTracer
 
 	// -------------------------------------------------------------------------------
 
-	Matrix Translation(float x, float y, float z)
+	Matrix Translation(double x, double y, double z)
 	{
 		Matrix T{Matrix::Identity};
 		T(0, 3) = x;
@@ -292,7 +286,7 @@ namespace RayTracer
 		return T;
 	}
 
-	Matrix Scaling(float x, float y, float z)
+	Matrix Scaling(double x, double y, double z)
 	{
 		Matrix S{Matrix::Identity};
 		S(0, 0) = x;
@@ -301,7 +295,7 @@ namespace RayTracer
 		return S;
 	}
 
-	Matrix RotationX(float radians)
+	Matrix RotationX(double radians)
 	{
 		Matrix R{Matrix::Identity};
 		R(1, 1) = cos(radians);
@@ -311,7 +305,7 @@ namespace RayTracer
 		return R;
 	}
 
-	Matrix RotationY(float radians)
+	Matrix RotationY(double radians)
 	{
 		Matrix R{Matrix::Identity};
 		R(0, 0) = cos(radians);
@@ -321,7 +315,7 @@ namespace RayTracer
 		return R;
 	}
 
-	Matrix RotationZ(float radians)
+	Matrix RotationZ(double radians)
 	{
 		Matrix R{Matrix::Identity};
 		R(0, 0) = cos(radians);
@@ -331,7 +325,7 @@ namespace RayTracer
 		return R;
 	}
 
-	Matrix Shearing(float xy, float xz, float yx, float yz, float zx, float zy)
+	Matrix Shearing(double xy, double xz, double yx, double yz, double zx, double zy)
 	{
 		Matrix S{Matrix::Identity};
 		S(0, 1) = xy;

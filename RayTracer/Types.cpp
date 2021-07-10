@@ -19,7 +19,7 @@ namespace RayTracer
 	// Comparação Ponto-Flutuante
 	// -------------------------------------------------------------------------------
 
-	bool Equal(float a, float b)
+	bool Equal(double a, double b)
 	{
 		if (abs(a - b) < EPSILON)
 			return true;
@@ -32,9 +32,9 @@ namespace RayTracer
 	// -------------------------------------------------------------------------------
 
 	Tuple::Tuple()
-		: x(0.0f), y(0.0f), z(0.0f), w(0.0f) {}
+		: x(0.0), y(0.0), z(0.0), w(0.0) {}
 
-	Tuple::Tuple(float px, float py, float pz, float pw)
+	Tuple::Tuple(double px, double py, double pz, double pw)
 		: x(px), y(py), z(pz), w(pw) {}
 
 	bool operator==(const Tuple &a, const Tuple &b)
@@ -49,13 +49,13 @@ namespace RayTracer
 	Tuple operator-(const Tuple &t)
 	{ return Tuple(-t.x, -t.y, -t.z, -t.w); }
 
-	Tuple operator*(const Tuple &t, float v)
+	Tuple operator*(const Tuple &t, double v)
 	{ return Tuple(t.x * v, t.y * v, t.z * v, t.w * v); }
 
-	Tuple operator/(const Tuple &t, float v)
+	Tuple operator/(const Tuple &t, double v)
 	{ return Tuple(t.x / v, t.y / v, t.z / v, t.w / v); }
 
-	Tuple operator*(float v, const Tuple &t)
+	Tuple operator*(double v, const Tuple &t)
 	{ return Tuple(t.x * v, t.y * v, t.z * v, t.w * v); }
 
 	// -------------------------------------------------------------------------------
@@ -63,43 +63,43 @@ namespace RayTracer
 	// -------------------------------------------------------------------------------
 
 	Point::Point()
-		: Tuple(0.0f, 0.0f, 0.0f, 1.0f) {}
+		: Tuple(0.0, 0.0, 0.0, 1.0) {}
 
-	Point::Point(float px, float py, float pz)
-		: Tuple(px, py, pz, 1.0f) {}
+	Point::Point(double px, double py, double pz)
+		: Tuple(px, py, pz, 1.0) {}
 
 	Point::Point(Tuple &&t)
-		: Tuple(t.x, t.y, t.z, 1.0f) {}
+		: Tuple(t.x, t.y, t.z, 1.0) {}
 
 	// -------------------------------------------------------------------------------
 	// Vetor
 	// -------------------------------------------------------------------------------
 
 	Vector::Vector()
-		: Tuple(0.0f, 0.0f, 0.0f, 0.0f) {}
+		: Tuple(0.0, 0.0, 0.0, 0.0) {}
 
-	Vector::Vector(float px, float py, float pz)
-		: Tuple(px, py, pz, 0.0f) {}
+	Vector::Vector(double px, double py, double pz)
+		: Tuple(px, py, pz, 0.0) {}
 
 	Vector::Vector(Tuple &&t)
-		: Tuple(t.x, t.y, t.z, 0.0f) {}
+		: Tuple(t.x, t.y, t.z, 0.0) {}
 
-	float Vector::Magnitude()
+	double Vector::Magnitude() const
 	{ return sqrt(x * x + y * y + z * z + w * w); }
 
-	Vector Vector::Normalized()
+	Vector Vector::Normalized() const
 	{
-		float mag = Magnitude();
+		double mag = Magnitude();
 		return Vector(x / mag, y / mag, z / mag);
 	}
 
-	float Vector::Dot(Vector v)
+	double Vector::Dot(const Vector &v)
 	{ return x * v.x + y * v.y + z * v.z; }
 
-	Vector Vector::Cross(Vector v)
+	Vector Vector::Cross(const Vector &v)
 	{ return Vector(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x); }
 
-	Vector Vector::Reflect(Vector normal)
+	Vector Vector::Reflect(const Vector &normal)
 	{ return (*this) - normal * 2 * this->Dot(normal); }
 
 	// -------------------------------------------------------------------------------
@@ -107,13 +107,13 @@ namespace RayTracer
 	// -------------------------------------------------------------------------------
 
 	Color::Color()
-		: Tuple(0.0f, 0.0f, 0.0f, 0.0f) {}
+		: Tuple(0.0, 0.0, 0.0, 0.0) {}
 
-	Color::Color(float r, float g, float b)
-		: Tuple(r, g, b, 0.0f) {}
+	Color::Color(double r, double g, double b)
+		: Tuple(r, g, b, 0.0) {}
 
 	Color::Color(Tuple &&t)
-		: Tuple(t.x, t.y, t.z, 0.0f) {}
+		: Tuple(t.x, t.y, t.z, 0.0) {}
 
 	Color operator*(const Color &c1, const Color &c2)
 	{ return Color(c1.x * c2.x, c1.y * c2.y, c1.z * c2.z); }

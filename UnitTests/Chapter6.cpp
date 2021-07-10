@@ -2,7 +2,7 @@
 // Test6 (Arquivo de Código Fonte)
 //
 // Criação:		29 Jun 2021
-// Atualização:	04 Jul 2021
+// Atualização:	10 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados para o Capítulo 6,
@@ -45,14 +45,14 @@ namespace Chapter6
     TEST(Normal, PointNonAxial)
 	{
         Sphere s;
-        Vector n = s.Normal(Point(sqrt(3.0f)/3.0f, sqrt(3.0f)/3.0f, sqrt(3.0f)/3.0f));
-        EXPECT_TRUE(n == Vector(sqrt(3.0f)/3.0f, sqrt(3.0f)/3.0f, sqrt(3.0f)/3.0f));
+        Vector n = s.Normal(Point(sqrt(3.0)/3.0, sqrt(3.0)/3.0, sqrt(3.0)/3.0));
+        EXPECT_TRUE(n == Vector(sqrt(3.0)/3.0, sqrt(3.0)/3.0, sqrt(3.0)/3.0));
 	}
 
     TEST(Normal, NormalizedVector)
 	{
         Sphere s;
-        Vector n = s.Normal(Point(sqrt(3.0f)/3.0f, sqrt(3.0f)/3.0f, sqrt(3.0f)/3.0f));
+        Vector n = s.Normal(Point(sqrt(3.0)/3.0, sqrt(3.0)/3.0, sqrt(3.0)/3.0));
         EXPECT_TRUE(n == n.Normalized());
 	}
 
@@ -101,10 +101,10 @@ namespace Chapter6
 	{
         Material m;
         EXPECT_TRUE(m.color == Color(1,1,1));
-        EXPECT_TRUE(m.ambient == 0.1f);
-        EXPECT_TRUE(m.diffuse == 0.9f);
-        EXPECT_TRUE(m.specular == 0.9f);
-        EXPECT_TRUE(m.shininess == 200.0f);
+        EXPECT_TRUE(m.ambient == 0.1);
+        EXPECT_TRUE(m.diffuse == 0.9);
+        EXPECT_TRUE(m.specular == 0.9);
+        EXPECT_TRUE(m.shininess == 200.0);
 	}
 
     TEST(Reflection, SphereDefaults)
@@ -163,7 +163,7 @@ namespace Chapter6
         Vector normal {0,0,-1};
         PointLight light {Point(0,10,-10), Color(1,1,1)};
         Color result = Lighting(m, light, position, eye, normal, false);
-        EXPECT_EQ(result, Color(1.63638, 1.63638, 1.63638));
+        EXPECT_EQ(result, Color(1.6364, 1.6364, 1.6364));
 	}
 
     TEST(Lighting, LightBehindSurface)

@@ -2,7 +2,7 @@
 // Ray (Arquivo de Código Fonte)
 //
 // Criação:		25 Jun 2021
-// Atualização:	09 Jul 2021
+// Atualização:	10 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define a representação de um raio, 
@@ -18,38 +18,38 @@ using std::sort;
 
 namespace RayTracer
 {
-    // -------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------
+	// Raio
+	// ---------------------------------------------------------------------------------------
 
-    Ray::Ray(Point orig, Vector dir)
+    Ray::Ray(const Point &orig, const Vector &dir)
         : origin(orig), direction(dir) {}
 
-    Point Ray::Position(float t)
+    Point Ray::Position(double t) const
     { return origin + direction * t; }
 
-    Ray Ray::Transform(Matrix m)
+    Ray Ray::Transform(const Matrix &m) const
     { return Ray {m * origin, m * direction}; }
 
-    // -------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------
+	// Interseção
+	// ---------------------------------------------------------------------------------------
 
     Intersection::Intersection()
         : time(0), object(nullptr) {}
 
-    Intersection::Intersection(float t, Object &obj)
+    Intersection::Intersection(double t, Object &obj)
         : time(t), object(&obj) {}
 
     bool operator==(const Intersection &a, const Intersection &b)
-    {
-        return (a.time == b.time) && (a.object == b.object);
-    }
+    { return (a.time == b.time) && (a.object == b.object); }
 
     bool operator<(const Intersection &a, const Intersection &b)
-    {
-        return a.time < b.time;
-    }
+    { return a.time < b.time; }
 
-    // -------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------
 
-    Intersection Hit(vector<Intersection> & intersections)
+    Intersection Hit(vector<Intersection> &intersections)
     {
         for (auto &i : intersections)
         {
@@ -59,21 +59,25 @@ namespace RayTracer
         return Intersection();
     }
 
-    // -------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------
+	// Ponto de Luz
+	// ---------------------------------------------------------------------------------------
 
     bool operator==(const PointLight &a, const PointLight &b)
     {
         return (a.position == b.position && a.intensity == b.intensity);
     }
 
-    // -------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------
+	// Material
+	// ---------------------------------------------------------------------------------------
 
     Material::Material()
         : color(Color(1,1,1)), 
-          ambient(0.1f), 
-          diffuse(0.9f), 
-          specular(0.9f), 
-          shininess(200.0f) {}
+          ambient(0.1), 
+          diffuse(0.9), 
+          specular(0.9), 
+          shininess(200.0) {}
 
     bool operator==(const Material &a, const Material &b)
     {
@@ -83,6 +87,8 @@ namespace RayTracer
                a.specular == b.specular &&
                a.shininess == b.shininess;
     }
+
+    // ---------------------------------------------------------------------------------------
 
     Color Lighting(const Material &material,      // material da superfície
                    const PointLight &light,       // ponto de luz
@@ -106,7 +112,7 @@ namespace RayTracer
 
         // representa o cosseno do ângulo entre o vetor da luz e o vetor normal
         // um número negativo quer dizer que a luz está atrás da superfície
-        float light_dot_normal = light_vector.Dot(normal); 
+        double light_dot_normal = light_vector.Dot(normal); 
         Color diffuse {0,0,0};
         Color specular {0,0,0};
         if (light_dot_normal >= 0)
@@ -120,11 +126,11 @@ namespace RayTracer
 
             // representa o cosseno do ângulo entre o vetor reflexão e o olho
             // um número negativo quer dizer que a luz reflete na direção oposta ao olho
-            float reflect_dot_eye = reflectv.Dot(eye); 
+            double reflect_dot_eye = reflectv.Dot(eye); 
             if (reflect_dot_eye >= 0) 
             {
                 // calcula a contribuição especular
-                float factor = pow(reflect_dot_eye, material.shininess);
+                double factor = pow(reflect_dot_eye, material.shininess);
                 specular = light.intensity * material.specular * factor;
             }
         }

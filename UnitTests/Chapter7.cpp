@@ -2,7 +2,7 @@
 // Test7 (Arquivo de Código Fonte)
 //
 // Criação:		29 Jun 2021
-// Atualização:	04 Jul 2021
+// Atualização:	10 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados para o Capítulo 6,
@@ -194,10 +194,10 @@ namespace Chapter7
         float fov = PI/2;
         Camera cam {hsize, vsize, fov};
         
-        EXPECT_EQ(cam.hsize, 160);
-        EXPECT_EQ(cam.vsize, 120);
-        EXPECT_EQ(cam.fov, PI/2);
-        EXPECT_EQ(cam.transform, Matrix::Identity);
+        EXPECT_TRUE(cam.hsize == 160);
+        EXPECT_TRUE(cam.vsize == 120);
+        EXPECT_TRUE(Equal(cam.fov, PI/2));
+        EXPECT_TRUE(cam.transform == Matrix::Identity);
     }
 
     TEST(Camera, HorizontalCanvas)

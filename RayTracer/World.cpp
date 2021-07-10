@@ -17,7 +17,9 @@ using std::sort;
 
 namespace RayTracer
 {
-    // -------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------
+	// HitData
+	// ---------------------------------------------------------------------------------------
 
     HitData PrepareComputations(Intersection &intersection, Ray &ray)
     {
@@ -37,11 +39,12 @@ namespace RayTracer
         }
 
         hit.over_point = hit.point + hit.normal * EPSILON;
-        
         return hit;
     }
 
-    // -------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------
+	// Mundo
+	// ---------------------------------------------------------------------------------------
 
     World::World(int config)
     {
@@ -99,6 +102,8 @@ namespace RayTracer
         return world_intersections;
     }
 
+    // -------------------------------------------------------------------------------
+
     Color World::ShadeHit(HitData &hit)
     {
         bool shadowed = IsShadowed(hit.over_point);
@@ -111,6 +116,8 @@ namespace RayTracer
                         shadowed);
     }
 
+    // -------------------------------------------------------------------------------
+
     Color World::ColorAt(Ray &r)
     {
         vector<Intersection> intersections = Intersect(r);
@@ -122,10 +129,12 @@ namespace RayTracer
         return ShadeHit(hit);
     }
 
+    // -------------------------------------------------------------------------------
+
     bool World::IsShadowed(Point &p)
     {
         Vector v = light.position - p;
-        float distance = v.Magnitude();
+        double distance = v.Magnitude();
         Vector direction = v.Normalized();
         Ray shadow_ray {p, direction};
         auto intersections = Intersect(shadow_ray);
@@ -137,7 +146,9 @@ namespace RayTracer
             return false;
     }
 
-    Matrix ViewTransform(Point from, Point to, Vector up)
+    // -------------------------------------------------------------------------------
+
+    Matrix ViewTransform(const Point &from, const Point &to, const Vector &up)
     {
         Vector forward = Vector(to - from).Normalized();
         Vector left = forward.Cross(up.Normalized());
@@ -154,13 +165,15 @@ namespace RayTracer
         return orientation * Translation(-from.x, -from.y, -from.z);
     }
 
-    // -------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------
+	// Camera
+	// ---------------------------------------------------------------------------------------
 
-    Camera::Camera(unsigned horizontal, unsigned vertical, float field_of_view, Matrix view_transform)
+    Camera::Camera(unsigned horizontal, unsigned vertical, double field_of_view, Matrix view_transform)
         : hsize(horizontal), vsize(vertical), fov(field_of_view), transform(view_transform) 
     {
-        float half_view = tan(fov/2);
-        float aspect = float(hsize)/vsize;
+        double half_view = tan(fov/2);
+        double aspect = double(hsize)/vsize;
 
         if (aspect >= 1)
         {
@@ -180,15 +193,17 @@ namespace RayTracer
         pixel_size = (half_width * 2) / hsize;
     }
 
+    // -------------------------------------------------------------------------------
+
     Ray Camera::RayForPixel(unsigned px, unsigned py)
     {
         // offset da borda da tela ao centro do pixel
-        float x_offset = (px + 0.5) * pixel_size;
-        float y_offset = (py + 0.5) * pixel_size;
+        double x_offset = (px + 0.5) * pixel_size;
+        double y_offset = (py + 0.5) * pixel_size;
 
         // coordenadas do pixel no espaço do mundo
-        float world_x = half_width - x_offset;
-        float world_y = half_height - y_offset;
+        double world_x = half_width - x_offset;
+        double world_y = half_height - y_offset;
 
         Matrix invTrans = transform.Inverse();
         Point pixel =  invTrans * Point(world_x, world_y, -1);
@@ -197,6 +212,8 @@ namespace RayTracer
 
         return Ray{origin, direction};
     }
+
+    // -------------------------------------------------------------------------------
 
     Canvas Camera::Render(World & world)
     {

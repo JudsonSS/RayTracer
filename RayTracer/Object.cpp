@@ -15,7 +15,10 @@
 
 namespace RayTracer
 {
-    // -------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------
+	// Objeto
+	// ---------------------------------------------------------------------------------------
+
 
     Object::Object()
         : type(UNKNOWN_T), 
@@ -23,7 +26,9 @@ namespace RayTracer
         
     Object::~Object() {}
 
-    // -------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------
+	// Esfera
+	// ---------------------------------------------------------------------------------------
 
     Sphere::Sphere()
         : center(Point{0,0,0}), radius(1)
@@ -31,24 +36,24 @@ namespace RayTracer
         type = SPHERE_T;
     }
 
-    // -------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------
 
-    vector<Intersection> Sphere::Intersect(Ray ray)
+    vector<Intersection> Sphere::Intersect(const Ray &r)
     {
         // aplica inversa da transformação da esfera
         // ao raio antes de testar a interseção
-        ray = ray.Transform(transform.Inverse());
+        Ray ray = r.Transform(transform.Inverse());
 
         // vetor do centro da esfera, posição (0,0,0), até a origem do raio
         Vector center_origin = ray.origin - Point{0, 0, 0};
 
         // coeficientes da equação do segundo grau: at2 + bt + c = 0
-        float a = ray.direction.Dot(ray.direction);
-        float b = 2 * ray.direction.Dot(center_origin);
-        float c = center_origin.Dot(center_origin) - 1;
+        double a = ray.direction.Dot(ray.direction);
+        double b = 2 * ray.direction.Dot(center_origin);
+        double c = center_origin.Dot(center_origin) - 1;
 
         // discriminante da equação do segundo grau
-        float discriminant = b * b - 4 * a * c;
+        double discriminant = b * b - 4 * a * c;
 
         // se o discriminante é negativo não há raízes reais
         if (discriminant < 0)
@@ -63,7 +68,9 @@ namespace RayTracer
         return v;
     }
 
-    Vector Sphere::Normal(Point point_world)
+    // ---------------------------------------------------------------------------------------
+
+    Vector Sphere::Normal(const Point &point_world)
     {
         // A transposta da inversa fornece o vetor normal 
         // correto após a transformação do objeto
@@ -75,17 +82,19 @@ namespace RayTracer
         return normal_world.Normalized();
     }
 
+    // ---------------------------------------------------------------------------------------
+
     bool operator==(const Sphere &a, const Sphere &b)
     {
-        if (a.type == b.type 
-        && a.radius == b.radius 
-        && a.center == b.center
-        && a.material == b.material
-        && a.transform == b.transform)
-        {
+        if (a.type == b.type && 
+            a.radius == b.radius && 
+            a.center == b.center && 
+            a.material == b.material && 
+            a.transform == b.transform)
+
             return true;
-        }
-        return false;
+        else
+            return false;
     }
 
     // -------------------------------------------------------------------------------

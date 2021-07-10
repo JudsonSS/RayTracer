@@ -1,7 +1,7 @@
 /**********************************************************************************
 // Ray (Arquivo de Cabeçalho)
 //
-// Criação:		25 Jun 2021
+// Criação:     25 Jun 2021
 // Atualização:	09 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
@@ -22,7 +22,7 @@ namespace RayTracer
 {
     // ---------------------------------------------------------------------------------------
 
-    class Object;                               // protótipo da classe
+    class Object;                                   // declaração adiantada
 
     // ---------------------------------------------------------------------------------------
 	// Raio
@@ -30,12 +30,12 @@ namespace RayTracer
 
 	struct Ray
 	{
-        Point origin;                           // ponto de origem do raio
-        Vector direction;                       // direção do raio
+        Point origin;                               // ponto de origem do raio
+        Vector direction;                           // direção do raio
 
-		Ray(Point orig, Vector dir);            // construtor
-        Point Position(float t);                // retorna posição na distância t ao longo do raio
-        Ray Transform(Matrix m);                // retorna raio transformado pela matrix
+		Ray(const Point &orig, const Vector &dir);  // construtor
+        Point Position(double t) const;             // retorna posição na distância t ao longo do raio
+        Ray Transform(const Matrix &m) const;       // retorna raio transformado pela matrix
 	};
 
     // ---------------------------------------------------------------------------------------
@@ -44,10 +44,10 @@ namespace RayTracer
 
     struct Intersection
     {           
-        float time;                             // valor de distância ao longo do raio
-        Object * object;                        // objeto em que ocorreu a interseção
-        Intersection();                         // construtor padrão
-        Intersection(float t, Object & obj);    // construtor com tempo e objeto
+        double time;                                // valor de distância ao longo do raio
+        Object * object;                            // objeto em que ocorreu a interseção
+        Intersection();                             // construtor padrão
+        Intersection(double t, Object & obj);       // construtor com tempo e objeto
     };
     
     // comparação de igualdade entre interseções
@@ -57,7 +57,7 @@ namespace RayTracer
     bool operator<(const Intersection &a, const Intersection &b);
 
     // retorna interseção com menor valor não-negativo   
-    Intersection Hit(vector<Intersection> & intersections);          
+    Intersection Hit(vector<Intersection> &intersections);          
 
     // ---------------------------------------------------------------------------------------
 	// Ponto de Luz
@@ -65,8 +65,8 @@ namespace RayTracer
 
 	struct PointLight
 	{
-        Point position;                         // posição da luz
-        Color intensity;                        // intensidade da luz
+        Point position;                             // posição da luz
+        Color intensity;                            // intensidade da luz
 	};
 
     // comparação de igualdade entre pontos de luz
@@ -78,13 +78,12 @@ namespace RayTracer
 
 	struct Material
 	{
-        Color color;                            // cor do material
-        float ambient;                          // intensidade da luz do ambiente
-        float diffuse;                          // intensidade da reflexão da luz
-        float specular;                         // intensidade do ponto de luz
-        float shininess;                        // tamanho do reflexo do ponto de luz
-
-        Material();                             // construtor padrão
+        Color color;                                // cor do material
+        double ambient;                             // intensidade da luz do ambiente
+        double diffuse;                             // intensidade da reflexão da luz
+        double specular;                            // intensidade do ponto de luz
+        double shininess;                           // tamanho do reflexo do ponto de luz
+        Material();                                 // construtor padrão
 	};
 
     // comparação de igualdade entre materiais

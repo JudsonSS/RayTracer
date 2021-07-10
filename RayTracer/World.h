@@ -26,7 +26,7 @@ namespace RayTracer
 
     struct HitData
     {
-        float time;                             // valor de distância ao longo do raio
+        double time;                            // valor de distância ao longo do raio
         Object * object;                        // objeto em que ocorreu a interseção
         Point point;                            // posição em coordenadas do mundo
         Point over_point;                       // posição para cálculo da sombra
@@ -59,7 +59,7 @@ namespace RayTracer
 	};    
 
     // retorna matrix de transformação da câmera
-    Matrix ViewTransform(Point from, Point to, Vector up);
+    Matrix ViewTransform(const Point &from, const Point &to, const Vector &up);
 
     // ---------------------------------------------------------------------------------------
 	// Camera
@@ -69,16 +69,16 @@ namespace RayTracer
     {
         unsigned hsize;                         // tamanho horizontal (em pixels)
         unsigned vsize;                         // tamanho vertical (em pixels)
-        float fov;                              // field of view (ângulo em radianos)
-        float pixel_size;                       // tamanho de cada pixel
-        float half_width;                       // metade da largura (do mundo)
-        float half_height;                      // metade da altura (do mundo)
+        double fov;                             // field of view (ângulo em radianos)
+        double pixel_size;                      // tamanho de cada pixel
+        double half_width;                      // metade da largura (do mundo)
+        double half_height;                     // metade da altura (do mundo)
         Matrix transform;                       // view transform matrix
 
         // construtor com valor padrão para a matrix de transformação
         Camera(unsigned horizontal, 
                unsigned vertical, 
-               float field_of_view, 
+               double field_of_view, 
                Matrix view_transform = Matrix::Identity); 
         
         // retorna raio que passa por (px,py)

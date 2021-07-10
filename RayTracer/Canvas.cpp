@@ -18,6 +18,8 @@ using std::cerr;
 
 namespace RayTracer
 {
+    // -------------------------------------------------------------------------------
+
     Canvas::Canvas(unsigned width, unsigned height)
         : mWidth(width), mHeight(height), mSize(width * height)
     {
@@ -50,6 +52,8 @@ namespace RayTracer
         delete[] mGrid;
     }
 
+    // -------------------------------------------------------------------------------
+
     Canvas & Canvas::operator=(Canvas &c)
     {
         mWidth = c.mWidth;
@@ -79,24 +83,18 @@ namespace RayTracer
 
     // Retorna largura da grade
     int Canvas::Width() const
-    {
-        return mWidth;
-    }
+    { return mWidth; }
 
     // Retorna altura da grade
     int Canvas::Height() const
-    {
-        return mHeight;
-    }
+    { return mHeight; }
 
     // Retorna cor da posição (x,y)
     Color Canvas::At(int x, int y)
-    {
-        return mGrid[y * mWidth + x];
-    }
+    { return mGrid[y * mWidth + x]; }
 
     // pinta pixel com uma cor
-    void Canvas::Paint(int x, int y, Color c)
+    void Canvas::Paint(int x, int y, const Color &c)
     {
         if (x >= 0 && x < mWidth && y >= 0 && y < mHeight)
             mGrid[y * mWidth + x] = c;
@@ -105,7 +103,7 @@ namespace RayTracer
     // -------------------------------------------------------------------------------
 
     // calcula a quantidade de dígitos de um inteiro
-    int IntLength(int num)
+    int Length(int num)
     {
         unsigned digitos = 1;
         while (num /= 10)
@@ -157,9 +155,9 @@ namespace RayTracer
                     b = 255;
 
                 // o quanto char_count irá crescer com cada cor
-                int tamR = IntLength(r) + 1;
-                int tamG = IntLength(g) + 1;
-                int tamB = IntLength(b) + 1;
+                int tamR = Length(r) + 1;
+                int tamG = Length(g) + 1;
+                int tamB = Length(b) + 1;
 
                 // tentando inserir R na linha
                 if (char_count + tamR < 70)

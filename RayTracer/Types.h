@@ -22,27 +22,27 @@ namespace RayTracer
 	// Tupla
 	// ---------------------------------------------------------------------------------------
 
+	const double EPSILON = 0.00001;							// diferença máxima para comparações
+	
 	struct Tuple
 	{
-		float x;
-		float y;
-		float z;
-		float w;
+		double x;											// coordenada no eixo x
+		double y;											// coordenada no eixo y
+		double z;											// coordenada no eixo z
+		double w;											// ponto ou vetor
 
-		Tuple();										// construtor padrão
-		Tuple(float px, float py, float pz, float pw); 	// construtor com valores
+		Tuple();											// construtor padrão
+		Tuple(double px, double py, double pz, double pw); 	// construtor com valores
 	};
 
-	const float EPSILON = 0.00001f;						// valor de erro para comparação
-
-	bool Equal(float a, float b);	   					// comparação de pontos-flutuantes
-	bool operator==(const Tuple &a, const Tuple &b);	// comparação de igualdade
-	Tuple operator+(const Tuple &a, const Tuple &b);	// soma 
-	Tuple operator-(const Tuple &a, const Tuple &b);	// subtração
-	Tuple operator-(const Tuple &t);					// menos unário
-	Tuple operator*(const Tuple &t, float v);			// multiplicação por escalar
-	Tuple operator*(float v, const Tuple &t); 			// multiplicação por escalar
-	Tuple operator/(const Tuple &t, float v);			// divisão por escalar
+	bool Equal(double a, double b);	   						// comparação de pontos-flutuantes
+	bool operator==(const Tuple &a, const Tuple &b);		// comparação de igualdade
+	Tuple operator+(const Tuple &a, const Tuple &b);		// soma 
+	Tuple operator-(const Tuple &a, const Tuple &b);		// subtração
+	Tuple operator-(const Tuple &t);						// menos unário
+	Tuple operator*(const Tuple &t, double v);				// multiplicação por escalar
+	Tuple operator*(double v, const Tuple &t); 				// multiplicação por escalar
+	Tuple operator/(const Tuple &t, double v);				// divisão por escalar
 
 	// ---------------------------------------------------------------------------------------
 	// Ponto
@@ -51,9 +51,9 @@ namespace RayTracer
 	class Point : public Tuple
 	{
 	public:
-		Point();										// construtor padrão
-		Point(float px, float py, float pz); 			// construtor com coordenadas
-		Point(Tuple &&t);					 			// conversão de tupla para ponto
+		Point();											// construtor padrão
+		Point(double px, double py, double pz); 			// construtor com coordenadas
+		Point(Tuple &&t);					 				// conversão de tupla para ponto
 	};
 
 	// ---------------------------------------------------------------------------------------
@@ -63,15 +63,15 @@ namespace RayTracer
 	class Vector : public Tuple
 	{
 	public:
-		Vector();										// construtor padrão
-		Vector(float px, float py, float pz); 			// construtor com coordenadas
-		Vector(Tuple &&t);					  			// conversão de tupla para vetor
+		Vector();											// construtor padrão
+		Vector(double px, double py, double pz); 			// construtor com coordenadas
+		Vector(Tuple &&t);					  				// conversão de tupla para vetor
 
-		float Magnitude();								// comprimento do vetor
-		Vector Normalized();							// vetor normalizado
-		float Dot(Vector v);							// produto escalar entre vetores
-		Vector Cross(Vector v); 						// produto vetorial entre vetores
-		Vector Reflect(Vector normal);					// obtém reflexão do vetor com a normal
+		double Magnitude() const;							// comprimento do vetor
+		Vector Normalized() const;							// vetor normalizado
+		double Dot(const Vector &v);						// produto escalar entre vetores
+		Vector Cross(const Vector &v); 						// produto vetorial entre vetores
+		Vector Reflect(const Vector &normal);				// obtém reflexão do vetor com a normal
 	};
 
 	// ---------------------------------------------------------------------------------------
@@ -81,12 +81,12 @@ namespace RayTracer
 	class Color : public Tuple
 	{
 	public:
-		Color();										// construtor padrão
-		Color(float red, float green, float blue); 		// construtor
-		Color(Tuple &&t);						   		// conversão de tupla para cor
+		Color();											// construtor padrão
+		Color(double red, double green, double blue); 		// construtor
+		Color(Tuple &&t);						   			// conversão de tupla para cor
 	};
 
-	Color operator*(const Color &c1, const Color &c2); 	// multiplicação de cores (blend)
+	Color operator*(const Color &c1, const Color &c2); 		// mistura de cores (blend)
 
 	// ---------------------------------------------------------------------------------------
 }

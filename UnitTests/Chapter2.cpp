@@ -2,7 +2,7 @@
 // Test1 (Arquivo de Código Fonte)
 //
 // Criação:		27 Jun 2020
-// Atualização:	04 Jul 2021
+// Atualização:	10 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados no Capítulo 2, Desenhando
@@ -26,25 +26,25 @@ namespace Chapter2
 	TEST(Colors, ColorZero)
 	{
 		Color c;
-		EXPECT_EQ(c.x, 0.0f);
-		EXPECT_EQ(c.y, 0.0f);
-		EXPECT_EQ(c.z, 0.0f);
-		EXPECT_EQ(c.w, 0.0f);
+		EXPECT_EQ(c.x, 0.0);
+		EXPECT_EQ(c.y, 0.0);
+		EXPECT_EQ(c.z, 0.0);
+		EXPECT_EQ(c.w, 0.0);
 	}
 	
 	TEST(Colors, ColorsAreTuples)
 	{
-		Color c{-0.5f, 0.4f, 1.7f};
-		EXPECT_EQ(c.x, -0.5f);
-		EXPECT_EQ(c.y, 0.4f);
-		EXPECT_EQ(c.z, 1.7f);
+		Color c{-0.5, 0.4, 1.7};
+		EXPECT_EQ(c.x, -0.5);
+		EXPECT_EQ(c.y, 0.4);
+		EXPECT_EQ(c.z, 1.7);
 	}
 
 	TEST(Colors, AddColors)
 	{
-		Color c1{0.9f, 0.6f, 0.75f};
-		Color c2{0.7f, 0.1f, 0.25f};
-		Color r{1.6f, 0.7f, 1.0f};
+		Color c1{0.9, 0.6, 0.75};
+		Color c2{0.7, 0.1, 0.25};
+		Color r {1.6, 0.7, 1.0};
 
 		Color add = c1 + c2;
 
@@ -53,9 +53,9 @@ namespace Chapter2
 
 	TEST(Colors, SubtractColors)
 	{
-		Color c1{0.9f, 0.6f, 0.75f};
-		Color c2{0.7f, 0.1f, 0.25f};
-		Color r{0.2f, 0.5f, 0.5f};
+		Color c1{0.9, 0.6, 0.75};
+		Color c2{0.7, 0.1, 0.25};
+		Color r {0.2, 0.5, 0.5};
 
 		Color sub = c1 - c2;
 
@@ -64,18 +64,18 @@ namespace Chapter2
 
 	TEST(Colors, ScaleColors)
 	{
-		Color c{0.2f, 0.3f, 0.4f};
-		Color r{0.4f, 0.6f, 0.8f};
+		Color c{0.2, 0.3, 0.4};
+		Color r{0.4, 0.6, 0.8};
 
-		EXPECT_TRUE(c * 2.0f == r);
-		EXPECT_TRUE(2.0f * c == r);
+		EXPECT_TRUE(c * 2.0 == r);
+		EXPECT_TRUE(2.0 * c == r);
 	}
 
 	TEST(Colors, MultiplyColors)
 	{
-		Color c1{1.0f, 0.2f, 0.4f};
-		Color c2{0.9f, 1.0f, 0.1f};
-		Color r{0.9f, 0.2f, 0.04f};
+		Color c1{1.0, 0.2, 0.4};
+		Color c2{0.9, 1.0, 0.1};
+		Color r{0.9, 0.2, 0.04};
 
 		EXPECT_TRUE(c1 * c2 == r);
 	}
@@ -165,7 +165,7 @@ namespace Chapter2
 	TEST(Canvas, LongLinesPPM)
 	{
 		Canvas c {10,2};
-		Color orange {1.0f, 0.8f, 0.6f};
+		Color orange {1.0, 0.8, 0.6};
 
 		for (int x=0; x<10; x++)
 			for (int y=0; y<2; y++)

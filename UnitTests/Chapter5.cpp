@@ -2,7 +2,7 @@
 // Test5 (Arquivo de Código Fonte)
 //
 // Criação:		25 Jun 2021
-// Atualização:	04 Jul 2021
+// Atualização:	10 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados para o Capítulo 5,
@@ -45,8 +45,8 @@ namespace Chapter5
         vector<Intersection> xs = s.Intersect(r);
 
 		EXPECT_EQ(xs.size(), 2);
-        EXPECT_EQ(xs[0].time, 5.0f);
-        EXPECT_EQ(xs[1].time, 5.0f);
+        EXPECT_EQ(xs[0].time, 5.0);
+        EXPECT_EQ(xs[1].time, 5.0);
     }
 
     TEST(Ray, NoIntersection)
@@ -64,8 +64,8 @@ namespace Chapter5
         vector<Intersection> xs = s.Intersect(r);
 		
         EXPECT_EQ(xs.size(), 2);
-        EXPECT_EQ(xs[0].time, -1.0f);
-        EXPECT_EQ(xs[1].time, 1.0f);
+        EXPECT_EQ(xs[0].time, -1.0);
+        EXPECT_EQ(xs[1].time, 1.0);
     }
 
     TEST(Ray, AfterSphere)
@@ -75,8 +75,8 @@ namespace Chapter5
         vector<Intersection> xs = s.Intersect(r);
 		
         EXPECT_EQ(xs.size(), 2);
-        EXPECT_EQ(xs[0].time, -6.0f);
-        EXPECT_EQ(xs[1].time, -4.0f);
+        EXPECT_EQ(xs[0].time, -6.0);
+        EXPECT_EQ(xs[1].time, -4.0);
     }
 
     TEST(Ray, ObjectIntersection)
