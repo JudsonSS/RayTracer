@@ -1,7 +1,7 @@
 /**********************************************************************************
 // Projectile (Arquivo de Código Fonte)
 //
-// Criação:		01 Jul 2020
+// Criação:     01 Jul 2020
 // Atualização:	30 Jun 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //

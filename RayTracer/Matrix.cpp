@@ -1,7 +1,7 @@
 /**********************************************************************************
 // Matrix (Arquivo de Código Fonte)
 //
-// Criação:		19 Jun 2021
+// Criação:     19 Jun 2021
 // Atualização:	10 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
