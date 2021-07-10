@@ -42,5 +42,5 @@ int main()
     }
 
     canvas.Save("clock.ppm");
-	return 0;
+    return 0;
 }

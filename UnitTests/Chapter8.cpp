@@ -23,7 +23,7 @@ using namespace RayTracer;
 namespace Chapter8
 {
     TEST(Shadows, SurfaceInShadow)
-	{
+    {
         Material m;
         Point position {0,0,0}; 
         Vector eye {0,0,-1};
@@ -32,38 +32,38 @@ namespace Chapter8
         bool in_shadow = true;
         Color result = Lighting(m, light, position, eye, normal, in_shadow);
         EXPECT_TRUE(result == Color(0.1, 0.1, 0.1));
-	}
+    }
 
     TEST(Shadows, Scenario1)
-	{
+    {
         World world {World::Default};
         Point p {0, 10, 0};
         EXPECT_FALSE(world.IsShadowed(p));
-	}
+    }
 
     TEST(Shadows, Scenario2)
-	{
+    {
         World world {World::Default};
         Point p {10, -10, 10};
         EXPECT_TRUE(world.IsShadowed(p));
-	}
+    }
 
     TEST(Shadows, Scenario3)
-	{
+    {
         World world {World::Default};
         Point p {-20, 20, -20};
         EXPECT_FALSE(world.IsShadowed(p));
-	}
+    }
 
     TEST(Shadows, Scenario4)
-	{
+    {
         World world {World::Default};
         Point p {-2, 2, -2};
         EXPECT_FALSE(world.IsShadowed(p));
-	}
+    }
 
     TEST(Shadows, IntersectionInShadow)
-	{
+    {
         World world {World::Empty};
         world.light = PointLight{ Point{0,0,-10}, Color{1,1,1} };
         Sphere * s1 = new Sphere;
@@ -80,7 +80,7 @@ namespace Chapter8
     }
 
     TEST(Shadows, OverPoint)
-	{
+    {
         Ray ray { Point{0,0,-5}, Vector{0,0,1} };
         Sphere shape;
         shape.transform = Translation(0,0,1);

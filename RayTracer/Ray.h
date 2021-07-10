@@ -25,22 +25,22 @@ namespace RayTracer
     class Object;                                   // declaração adiantada
 
     // ---------------------------------------------------------------------------------------
-	// Raio
-	// ---------------------------------------------------------------------------------------
+    // Raio
+    // ---------------------------------------------------------------------------------------
 
-	struct Ray
-	{
+    struct Ray
+    {
         Point origin;                               // ponto de origem do raio
         Vector direction;                           // direção do raio
 
-		Ray(const Point &orig, const Vector &dir);  // construtor
+        Ray(const Point &orig, const Vector &dir);  // construtor
         Point Position(double t) const;             // retorna posição na distância t ao longo do raio
         Ray Transform(const Matrix &m) const;       // retorna raio transformado pela matrix
-	};
+    };
 
     // ---------------------------------------------------------------------------------------
-	// Interseção
-	// ---------------------------------------------------------------------------------------
+    // Interseção
+    // ---------------------------------------------------------------------------------------
 
     struct Intersection
     {           
@@ -60,31 +60,31 @@ namespace RayTracer
     Intersection Hit(vector<Intersection> &intersections);          
 
     // ---------------------------------------------------------------------------------------
-	// Ponto de Luz
-	// ---------------------------------------------------------------------------------------
+    // Ponto de Luz
+    // ---------------------------------------------------------------------------------------
 
-	struct PointLight
-	{
+    struct PointLight
+    {
         Point position;                             // posição da luz
         Color intensity;                            // intensidade da luz
-	};
+    };
 
     // comparação de igualdade entre pontos de luz
     bool operator==(const PointLight &a, const PointLight &b);
 
     // ---------------------------------------------------------------------------------------
-	// Material
-	// ---------------------------------------------------------------------------------------
+    // Material
+    // ---------------------------------------------------------------------------------------
 
-	struct Material
-	{
+    struct Material
+    {
         Color color;                                // cor do material
         double ambient;                             // intensidade da luz do ambiente
         double diffuse;                             // intensidade da reflexão da luz
         double specular;                            // intensidade do ponto de luz
         double shininess;                           // tamanho do reflexo do ponto de luz
         Material();                                 // construtor padrão
-	};
+    };
 
     // comparação de igualdade entre materiais
     bool operator==(const Material &a, const Material &b);

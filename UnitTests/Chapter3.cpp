@@ -19,7 +19,7 @@ using namespace RayTracer;
 namespace Chapter3
 {
     TEST(Matrix, M4x4)
-	{
+    {
         Matrix M {4,4};
         
         M = 
@@ -30,14 +30,14 @@ namespace Chapter3
             13.5, 14.5, 15.5, 16.5
         };
 
-		EXPECT_EQ(M(0,0), 1);
-		EXPECT_EQ(M(0,3), 4);
+        EXPECT_EQ(M(0,0), 1);
+        EXPECT_EQ(M(0,3), 4);
         EXPECT_EQ(M(1,0), 5.5);
         EXPECT_EQ(M(1,2), 7.5);
         EXPECT_EQ(M(2,2), 11);
         EXPECT_EQ(M(3,0), 13.5);
         EXPECT_EQ(M(3,2), 15.5);
-	}
+    }
 
     TEST(Matrix, M3x3)
     {
@@ -72,7 +72,7 @@ namespace Chapter3
     }
 
     TEST(Matrix, Equality)
-	{
+    {
         Matrix A {4,4};
         
         A = 
@@ -93,11 +93,11 @@ namespace Chapter3
             5,4,3,2
         };
 
-		EXPECT_TRUE(A == B);
-	}
+        EXPECT_TRUE(A == B);
+    }
 
     TEST(Matrix, Inequality)
-	{
+    {
         Matrix A {4,4};
         
         A = 
@@ -118,8 +118,8 @@ namespace Chapter3
             4,3,2,1
         };
 
-		EXPECT_TRUE(A != B);
-	}
+        EXPECT_TRUE(A != B);
+    }
 
     TEST(Matrix, Empty)
     {

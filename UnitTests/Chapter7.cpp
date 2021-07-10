@@ -20,14 +20,14 @@ using namespace RayTracer;
 namespace Chapter7
 {
     TEST(World, Empty)
-	{
+    {
         World world;
         EXPECT_TRUE(world.objects.size() == 0);
         EXPECT_TRUE(world.light == PointLight());
     }
 
     TEST(World, Default)
-	{
+    {
         PointLight light {Point{-10,10,-10}, Color{1,1,1}};
 
         Sphere s1, s2;
@@ -44,7 +44,7 @@ namespace Chapter7
     }
 
     TEST(World, RayIntersect)
-	{
+    {
         World world(World::Default);
         Ray ray { Point{0,0,-5}, Vector{0,0,1} };
         vector<Intersection> xs = world.Intersect(ray);
@@ -57,7 +57,7 @@ namespace Chapter7
     }
 
     TEST(World, StateOfIntersection)
-	{
+    {
         Ray ray { Point{0,0,-5}, Vector{0,0,1} };
         Sphere shape;
         Intersection i {4, shape};
@@ -71,7 +71,7 @@ namespace Chapter7
     }
 
     TEST(World, HitOutsideObject)
-	{
+    {
         Ray ray { Point{0,0,-5}, Vector{0,0,1} };
         Sphere shape;
         Intersection i {4, shape};
@@ -80,7 +80,7 @@ namespace Chapter7
     }
 
     TEST(World, HitInsideObject)
-	{
+    {
         Ray ray { Point{0,0,0}, Vector{0,0,1} };
         Sphere shape;
         Intersection i {1, shape};
@@ -92,7 +92,7 @@ namespace Chapter7
     }
 
     TEST(World, ShadingIntersection)
-	{
+    {
         World world(World::Default);
         Ray ray { Point{0,0,-5}, Vector{0,0,1} };
         Sphere & shape = *((Sphere*) world.objects[0]); 
@@ -103,7 +103,7 @@ namespace Chapter7
     }
 
     TEST(World, ShadingFromInside)
-	{
+    {
         World world(World::Default);
         world.light = PointLight{Point{0,0.25,0}, Color{1,1,1}};
         Ray ray { Point{0,0,0}, Vector{0,0,1} };
@@ -115,7 +115,7 @@ namespace Chapter7
     }
 
     TEST(World, ColorRayMisses)
-	{
+    {
         World world(World::Default);
         Ray ray { Point{0,0,-5}, Vector{0,1,0} };
         Color color = world.ColorAt(ray);
@@ -123,7 +123,7 @@ namespace Chapter7
     }
 
     TEST(World, ColorRayHits)
-	{
+    {
         World world(World::Default);
         Ray ray { Point{0,0,-5}, Vector{0,0,1} };
         Color color = world.ColorAt(ray);
@@ -131,7 +131,7 @@ namespace Chapter7
     }
 
     TEST(World, ColorBehindRay)
-	{
+    {
         World world(World::Default);
         Sphere & outer = *((Sphere*) world.objects[0]); 
         Sphere & inner = *((Sphere*) world.objects[1]);
@@ -144,7 +144,7 @@ namespace Chapter7
     }
 
     TEST(World, DefaultViewTransform)
-	{
+    {
         Point from {0, 0, 0};
         Point to {0, 0, -1};
         Vector up { 0, 1, 0};
@@ -153,7 +153,7 @@ namespace Chapter7
     }
 
     TEST(World, LookingPositiveZ)
-	{
+    {
         Point from {0, 0, 0};
         Point to {0, 0, 1};
         Vector up { 0, 1, 0};
@@ -162,7 +162,7 @@ namespace Chapter7
     }
 
     TEST(World, ViewTransformMovesWorld)
-	{
+    {
         Point from {0, 0, 8};
         Point to {0, 0, 0};
         Vector up { 0, 1, 0};
@@ -171,7 +171,7 @@ namespace Chapter7
     }
 
     TEST(World, ArbitraryViewTransform)
-	{
+    {
         Point from {1, 3, 2};
         Point to {4, -2, 8};
         Vector up { 1, 1, 0};
@@ -188,7 +188,7 @@ namespace Chapter7
     }
 
     TEST(Camera, Constructor)
-	{
+    {
         unsigned hsize = 160;
         unsigned vsize = 120;
         float fov = PI/2;
@@ -201,19 +201,19 @@ namespace Chapter7
     }
 
     TEST(Camera, HorizontalCanvas)
-	{
+    {
         Camera cam {200, 125, PI/2};
         EXPECT_TRUE(Equal(cam.pixel_size, 0.01));
     }
 
     TEST(Camera, VerticalCanvas)
-	{
+    {
         Camera cam {125, 200, PI/2};
         EXPECT_TRUE(Equal(cam.pixel_size, 0.01));
     }
 
     TEST(Camera, RayThroughCenter)
-	{
+    {
         Camera cam {201, 101, PI/2};
         Ray ray = cam.RayForPixel(100, 50);
         EXPECT_TRUE(ray.origin == Point(0,0,0));
@@ -221,7 +221,7 @@ namespace Chapter7
     }
 
     TEST(Camera, RayThroughCorner)
-	{
+    {
         Camera cam {201, 101, PI/2};
         Ray ray = cam.RayForPixel(0, 0);
         EXPECT_TRUE(ray.origin == Point(0,0,0));
@@ -229,7 +229,7 @@ namespace Chapter7
     }
 
     TEST(Camera, RayWithCameraTrasformed)
-	{
+    {
         Camera cam {201, 101, PI/2};
         cam.transform = RotationY(PI/4) * Translation(0, -2, 5);
         Ray ray = cam.RayForPixel(100, 50);
@@ -238,7 +238,7 @@ namespace Chapter7
     }
 
     TEST(Camera, RenderingWorld)
-	{
+    {
         World world {World::Default};
         Camera cam {11, 11, PI/2};
         Point from {0,0,-5};

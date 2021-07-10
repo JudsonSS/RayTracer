@@ -21,8 +21,8 @@ using std::vector;
 namespace RayTracer
 {
     // ---------------------------------------------------------------------------------------
-	// HitData
-	// ---------------------------------------------------------------------------------------
+    // HitData
+    // ---------------------------------------------------------------------------------------
 
     struct HitData
     {
@@ -39,12 +39,12 @@ namespace RayTracer
     HitData PrepareComputations(Intersection &intersection, Ray &ray);
 
     // ---------------------------------------------------------------------------------------
-	// Mundo
-	// ---------------------------------------------------------------------------------------
+    // Mundo
+    // ---------------------------------------------------------------------------------------
 
-	struct World
-	{
-		vector<Object*> objects;			    // coleção de objetos
+    struct World
+    {
+        vector<Object*> objects;			    // coleção de objetos
         PointLight light;                       // ponto de luz
 
         enum {Empty, Default};                  // opções do construtor
@@ -56,14 +56,14 @@ namespace RayTracer
         Color ShadeHit(HitData &hit);           // retorna cor no ponto de interseção
         Color ColorAt(Ray &r);                  // retorna cor na interseção com o raio
         bool IsShadowed(Point &p);              // retorna se o ponto está na sombra
-	};    
+    };    
 
     // retorna matrix de transformação da câmera
     Matrix ViewTransform(const Point &from, const Point &to, const Vector &up);
 
     // ---------------------------------------------------------------------------------------
-	// Camera
-	// ---------------------------------------------------------------------------------------
+    // Camera
+    // ---------------------------------------------------------------------------------------
 
     struct Camera
     {

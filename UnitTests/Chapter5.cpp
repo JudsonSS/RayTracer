@@ -21,89 +21,89 @@ using namespace RayTracer;
 namespace Chapter5
 {
     TEST(Ray, Creation)
-	{
+    {
         Point origin {1,2,3};
         Vector direction {4,5,6};
         Ray ray {origin, direction};
-		EXPECT_TRUE(ray.origin == origin);
+        EXPECT_TRUE(ray.origin == origin);
         EXPECT_TRUE(ray.direction == direction);
-	}
+    }
 
     TEST(Ray, Position)
-	{
+    {
         Ray ray {Point(2,3,4), Vector(1,0,0)};
-		EXPECT_TRUE(ray.Position(0) == Point(2,3,4));
+        EXPECT_TRUE(ray.Position(0) == Point(2,3,4));
         EXPECT_TRUE(ray.Position(1) == Point(3,3,4));
         EXPECT_TRUE(ray.Position(-1) == Point(1,3,4));
         EXPECT_TRUE(ray.Position(2.5) == Point(4.5,3,4));
-	}
+    }
 
     TEST(Ray, TangentIntersect)
-	{
+    {
         Ray r {Point(0,1,-5), Vector(0,0,1)};
         Sphere s;
         vector<Intersection> xs = s.Intersect(r);
 
-		EXPECT_EQ(xs.size(), 2);
+        EXPECT_EQ(xs.size(), 2);
         EXPECT_EQ(xs[0].time, 5.0);
         EXPECT_EQ(xs[1].time, 5.0);
     }
 
     TEST(Ray, NoIntersection)
-	{
+    {
         Ray r {Point(0,2,-5), Vector(0,0,1)};
         Sphere s;
         vector<Intersection> xs = s.Intersect(r);
-		EXPECT_EQ(xs.size(), 0);
+        EXPECT_EQ(xs.size(), 0);
     }
 
     TEST(Ray, InsideSphere)
-	{
+    {
         Ray r {Point(0,0,0), Vector(0,0,1)};
         Sphere s;
         vector<Intersection> xs = s.Intersect(r);
-		
+        
         EXPECT_EQ(xs.size(), 2);
         EXPECT_EQ(xs[0].time, -1.0);
         EXPECT_EQ(xs[1].time, 1.0);
     }
 
     TEST(Ray, AfterSphere)
-	{
+    {
         Ray r {Point(0,0,5), Vector(0,0,1)};
         Sphere s;
         vector<Intersection> xs = s.Intersect(r);
-		
+        
         EXPECT_EQ(xs.size(), 2);
         EXPECT_EQ(xs[0].time, -6.0);
         EXPECT_EQ(xs[1].time, -4.0);
     }
 
     TEST(Ray, ObjectIntersection)
-	{
+    {
         Sphere s;
         Intersection i {3.5,s};
-		
+        
         EXPECT_EQ(i.time, 3.5);
         EXPECT_EQ(i.object, &s);
     }	
 
     TEST(Ray, AgregatingIntersection)
-	{
+    {
         Sphere s;
         Intersection i1 {1,s};
         Intersection i2 {2,s};
         vector<Intersection> intersections;
         intersections.push_back(i1);
         intersections.push_back(i2);
-		
+        
         EXPECT_EQ(intersections.size(), 2);
         EXPECT_EQ(intersections[0].time, 1);
         EXPECT_EQ(intersections[1].time, 2);
     }
 
     TEST(Ray, SetObjectOnIntersection)
-	{
+    {
         Ray r {Point(0,0,-5), Vector(0,0,1)};
         Sphere s;
         vector<Intersection> xs = s.Intersect(r);
@@ -114,7 +114,7 @@ namespace Chapter5
     }   
 
     TEST(Ray, HitAllPositive)
-	{
+    {
         Sphere s;
         Intersection i1 {1,s};
         Intersection i2 {2,s};
@@ -124,7 +124,7 @@ namespace Chapter5
     }
 
     TEST(Ray, HitSomeNegative)
-	{
+    {
         Sphere s;
         Intersection i1 {-1,s};
         Intersection i2 {1,s};
@@ -134,7 +134,7 @@ namespace Chapter5
     }
 
     TEST(Ray, HitAllNegative)
-	{
+    {
         Sphere s;
         Intersection i1 {-2,s};
         Intersection i2 {-1,s};
@@ -144,7 +144,7 @@ namespace Chapter5
     }
 
     TEST(Ray, HitAlwaysLowest)
-	{
+    {
         Sphere s;
         Intersection i1 {5,s};
         Intersection i2 {7,s};
@@ -175,13 +175,13 @@ namespace Chapter5
     }
 
     TEST(Ray, SphereDefaultTransform)
-	{
+    {
         Sphere s;
         EXPECT_TRUE(s.transform == Matrix::Identity);
     }
 
     TEST(Ray, ChangingSphereTransform)
-	{
+    {
         Sphere s;
         Matrix T = Translation(2,3,4);
         s.transform = T;
@@ -189,7 +189,7 @@ namespace Chapter5
     }
 
     TEST(Ray, IntersectScaledSphere)
-	{
+    {
         Ray r {Point(0,0,-5), Vector(0,0,1)};
         Sphere s;
         s.transform = Scaling(2,2,2);
@@ -201,7 +201,7 @@ namespace Chapter5
     }
 
     TEST(Ray, IntersectTranslatedSphere)
-	{
+    {
         Ray r {Point(0,0,-5), Vector(0,0,1)};
         Sphere s;
         s.transform = Translation(5,0,0);

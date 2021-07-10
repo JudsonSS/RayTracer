@@ -19,29 +19,29 @@ using std::string;
 
 namespace RayTracer
 {
-	class Canvas
-	{
-	private:
-		Color * mGrid;									// grade de pixels
-		unsigned mWidth;								// largura do canvas
-		unsigned mHeight;								// altura do canvas
-		unsigned mSize;									// total de pixels
+    class Canvas
+    {
+    private:
+        Color * mGrid;									// grade de pixels
+        unsigned mWidth;								// largura do canvas
+        unsigned mHeight;								// altura do canvas
+        unsigned mSize;									// total de pixels
 
-	public:
-		Canvas(unsigned width, unsigned height);		// construtor 
-		Canvas(Canvas &c);								// construtor de cópia
-		Canvas(Canvas &&c);								// construtor de transferência
-		~Canvas();										// destrutor
+    public:
+        Canvas(unsigned width, unsigned height);		// construtor 
+        Canvas(Canvas &c);								// construtor de cópia
+        Canvas(Canvas &&c);								// construtor de transferência
+        ~Canvas();										// destrutor
 
-		Canvas& operator=(Canvas& mat);                 // atribuição por cópia
+        Canvas& operator=(Canvas& mat);                 // atribuição por cópia
         Canvas& operator=(Canvas&& mat);               	// atribuição por transferência
 
-		int Width() const;								// retorna largura 
-		int Height() const;								// retorna altura
-		Color At(int x, int y);							// retorna cor da posição (x,y)
-		void Paint(int x, int y, const Color &c);		// pinta pixel (x,y) com uma cor
-		bool Save(string filename);						// grava canvas no formato PPM
-	};
+        int Width() const;								// retorna largura 
+        int Height() const;								// retorna altura
+        Color At(int x, int y);							// retorna cor da posição (x,y)
+        void Paint(int x, int y, const Color &c);		// pinta pixel (x,y) com uma cor
+        bool Save(string filename);						// grava canvas no formato PPM
+    };
 }
 
 #endif

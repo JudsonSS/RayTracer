@@ -34,7 +34,7 @@ namespace RayTracer
           mSize(c.mSize)
     {
         for (int i = 0; i < mSize; ++i)
-			mGrid[i] = c.mGrid[i];
+            mGrid[i] = c.mGrid[i];
     }
 
     Canvas::Canvas(Canvas &&c)
@@ -63,9 +63,9 @@ namespace RayTracer
         delete [] mGrid;
         mGrid = new Color[mSize];
         for (int i = 0; i < mSize; ++i)
-			mGrid[i] = c.mGrid[i];
+            mGrid[i] = c.mGrid[i];
 
-		return *this;
+        return *this;
     }
 
     Canvas & Canvas::operator=(Canvas &&c)
@@ -76,7 +76,7 @@ namespace RayTracer
         delete [] mGrid;
         mGrid = c.mGrid;
         c.mGrid = nullptr;
-		return *this;
+        return *this;
     }
 
     // -------------------------------------------------------------------------------
