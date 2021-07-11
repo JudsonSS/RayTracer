@@ -20,50 +20,70 @@ using std::vector;
 
 namespace RayTracer
 {
-    // ---------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
     
     enum ObjectTypes
     {
-        UNKNOWN_T,                                                  // desconhecido
-        SPHERE_T                                                    // esfera
+        UNKNOWN_T,                                                      // desconhecido
+        SPHERE_T,                                                       // esfera
+        PLANE_T                                                         // plano
     };
 
-    // ---------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
     // Objeto
-    // ---------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
 
-    struct Object
+    class Object
     {
-        unsigned type;                                              // tipo do objeto 
-        Matrix transform;                                           // matrix de transformação
-        Material material;                                          // material da superfície
+    private:
+        virtual vector<Intersection> ShapeIntersect(const Ray &r) = 0;  // retorna pontos de interseção
+        virtual Vector ShapeNormal(const Point &p) = 0;                 // obtém a normal no ponto
 
-        Object();                                                   // construtor padrão
-        virtual ~Object();                                          // destrutor da classe base
-        virtual vector<Intersection> Intersect(const Ray &r) = 0;   // retorna pontos de interseção
-        virtual Vector Normal(const Point &p) = 0;                  // obtém a normal no ponto P
+    public:
+        unsigned type;                                                  // tipo do objeto 
+        Matrix transform;                                               // matrix de transformação
+        Material material;                                              // material da superfície
+
+        Object();                                                       // construtor padrão
+        virtual ~Object();                                              // destrutor da classe base
+        vector<Intersection> Intersect(const Ray &r);                   // retorna pontos de interseção
+        Vector Normal(const Point &p);                                  // obtém a normal no ponto P
     };
 
-    // ---------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
     // Esfera
-    // ---------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
 
     class Sphere : public Object
     {
     private:
-        Point center;                                               // posição do centro 
-        double radius;                                              // tamanho do raio
+        Point center;                                                   // posição do centro 
+        double radius;                                                  // tamanho do raio
+        vector<Intersection> ShapeIntersect(const Ray &r);              // retorna pontos de interseção
+        Vector ShapeNormal(const Point &p);                             // obtém a normal no ponto
 
     public:
-        Sphere();                                                   // construtor padrão
-        vector<Intersection> Intersect(const Ray &r);               // retorna pontos de interseção
-        Vector Normal(const Point &p);                              // obtém a normal no ponto P
+        Sphere();                                                       // construtor padrão
         
         // compara igualdade de esferas
         friend bool operator==(const Sphere &a, const Sphere &b);
     };
 
-    // ---------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
+    // Plano
+    // -------------------------------------------------------------------------------------------------
+
+    class Plane : public Object
+    {
+    private:
+        vector<Intersection> ShapeIntersect(const Ray &r);              // retorna pontos de interseção
+        Vector ShapeNormal(const Point &p);                             // obtém a normal no ponto
+
+    public:
+        Plane();                                                        // construtor padrão
+    };
+
+    // -------------------------------------------------------------------------------------------------
 }
 
 #endif

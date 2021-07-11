@@ -93,13 +93,13 @@ namespace RayTracer
         return Vector(x / mag, y / mag, z / mag);
     }
 
-    double Vector::Dot(const Vector &v)
+    double Vector::Dot(const Vector &v) const
     { return x * v.x + y * v.y + z * v.z; }
 
-    Vector Vector::Cross(const Vector &v)
+    Vector Vector::Cross(const Vector &v) const
     { return Vector(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x); }
 
-    Vector Vector::Reflect(const Vector &normal)
+    Vector Vector::Reflect(const Vector &normal) const
     { return (*this) - normal * 2 * this->Dot(normal); }
 
     // -------------------------------------------------------------------------------

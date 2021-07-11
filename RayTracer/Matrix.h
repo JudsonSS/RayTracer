@@ -39,6 +39,7 @@ namespace RayTracer
         Matrix(unsigned rows, unsigned cols);                           // construtor com linhas e colunas
         Matrix(unsigned rows, unsigned cols, 
                const initializer_list<double> &init);                   // construtor com lista de valores
+
         Matrix(Matrix& mat);                                            // construtor de cópia
         Matrix(Matrix&& mat);                                           // construtor de transferência (move)
         ~Matrix();                                                      // destrutor
@@ -47,7 +48,7 @@ namespace RayTracer
 
         // funções membro da classe 
         Matrix& operator=(Matrix& mat);                                 // atribuição por cópia
-        Matrix& operator=(Matrix&& mat);                                // atribuição por transferência (cópia)
+        Matrix& operator=(Matrix&& mat);                                // atribuição por transferência
         Matrix& operator=(const initializer_list<double> &init);        // atribuição de lista de valores
         double &operator()(unsigned i, unsigned j);                     // retorna referência a elemento
         double operator()(unsigned i, unsigned j) const;                // retorna cópia do elemento

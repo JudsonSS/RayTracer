@@ -69,9 +69,9 @@ namespace RayTracer
 
         double Magnitude() const;							// comprimento do vetor
         Vector Normalized() const;							// vetor normalizado
-        double Dot(const Vector &v);						// produto escalar entre vetores
-        Vector Cross(const Vector &v); 						// produto vetorial entre vetores
-        Vector Reflect(const Vector &normal);				// obtém reflexão do vetor com a normal
+        double Dot(const Vector &v) const;				    // produto escalar entre vetores
+        Vector Cross(const Vector &v) const; 				// produto vetorial entre vetores
+        Vector Reflect(const Vector &normal) const;			// obtém reflexão do vetor com a normal
     };
 
     // ---------------------------------------------------------------------------------------

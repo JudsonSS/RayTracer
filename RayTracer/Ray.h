@@ -33,7 +33,8 @@ namespace RayTracer
         Point origin;                               // ponto de origem do raio
         Vector direction;                           // direção do raio
 
-        Ray(const Point &orig, const Vector &dir);  // construtor
+        Ray();                                      // construtor padrão
+        Ray(const Point &orig, const Vector &dir);  // construtor com origem e direção
         Point Position(double t) const;             // retorna posição na distância t ao longo do raio
         Ray Transform(const Matrix &m) const;       // retorna raio transformado pela matrix
     };

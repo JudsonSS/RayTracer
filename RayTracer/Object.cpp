@@ -27,6 +27,34 @@ namespace RayTracer
     Object::~Object() {}
 
     // ---------------------------------------------------------------------------------------
+
+    vector<Intersection> Object::Intersect(const Ray &r)
+    {
+        // ao invés de calcular a interseção em coordenadas globais,
+        // faz a transformada inversa sobre o raio, trazendo-o para as
+        // coordenadas locais do objeto, antes de calcular a interseção
+        Ray ray = r.Transform(transform.Inverse());
+
+        // realiza os cáculos específicos de cada forma geométrica
+        return ShapeIntersect(ray);
+    }
+
+    Vector Object::Normal(const Point &point)
+    {
+        // converte o ponto em coordenadas locais do objeto
+        Matrix invT = transform.Inverse(); 
+        Point local_point = invT * point;
+
+        // realiza os cáculos específicos de cada forma geométrica
+        Vector local_normal = ShapeNormal(local_point);
+
+        // a transposta da inversa fornece a normal correta para o objeto transformado
+        Vector world_normal = invT.Transpose() * local_normal;
+        world_normal.w = 0;
+        return world_normal.Normalized();
+    }
+
+    // ---------------------------------------------------------------------------------------
     // Esfera
     // ---------------------------------------------------------------------------------------
 
@@ -38,12 +66,8 @@ namespace RayTracer
 
     // ---------------------------------------------------------------------------------------
 
-    vector<Intersection> Sphere::Intersect(const Ray &r)
+    vector<Intersection> Sphere::ShapeIntersect(const Ray &ray)
     {
-        // aplica inversa da transformação da esfera
-        // ao raio antes de testar a interseção
-        Ray ray = r.Transform(transform.Inverse());
-
         // vetor do centro da esfera, posição (0,0,0), até a origem do raio
         Vector center_origin = ray.origin - Point{0, 0, 0};
 
@@ -70,16 +94,9 @@ namespace RayTracer
 
     // ---------------------------------------------------------------------------------------
 
-    Vector Sphere::Normal(const Point &point_world)
+    Vector Sphere::ShapeNormal(const Point &point)
     {
-        // A transposta da inversa fornece o vetor normal 
-        // correto após a transformação do objeto
-        Matrix invT = transform.Inverse(); 
-        Point point_object = invT * point_world;
-        Vector normal_object = point_object - center;
-        Vector normal_world = invT.Transpose() * normal_object;
-        normal_world.w = 0;
-        return normal_world.Normalized();
+        return point - center;
     }
 
     // ---------------------------------------------------------------------------------------
@@ -97,5 +114,38 @@ namespace RayTracer
             return false;
     }
 
-    // -------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------
+    // Plano
+    // ---------------------------------------------------------------------------------------
+
+    Plane::Plane()
+    {
+        type = PLANE_T;
+    }
+
+    // ---------------------------------------------------------------------------------------
+
+    vector<Intersection> Plane::ShapeIntersect(const Ray &ray)
+    {
+        // se a componente y é zero (ou muito próxima)
+        // o raio é coplanar ou paralelo ao plano 
+        if (abs(ray.direction.y) < EPSILON)
+            return vector<Intersection>();
+        
+        // esse cálculo só funciona para o pleno em xz
+        double t = -ray.origin.y / ray.direction.y;
+
+        vector<Intersection> intersections;
+        intersections.push_back(Intersection(t, *this));
+        return intersections;
+    }
+
+    // ---------------------------------------------------------------------------------------
+
+    Vector Plane::ShapeNormal(const Point &point)
+    {
+        return Vector{0,1,0};
+    }
+
+    // ---------------------------------------------------------------------------------------
 }

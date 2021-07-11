@@ -22,6 +22,9 @@ namespace RayTracer
     // Raio
     // ---------------------------------------------------------------------------------------
 
+    Ray::Ray()
+        : origin(Point{0,0,0}), direction(Vector{0,0,0}) {}
+
     Ray::Ray(const Point &orig, const Vector &dir)
         : origin(orig), direction(dir) {}
 
