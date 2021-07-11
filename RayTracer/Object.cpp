@@ -127,15 +127,17 @@ namespace RayTracer
 
     vector<Intersection> Plane::ShapeIntersect(const Ray &ray)
     {
+        vector<Intersection> intersections;
+
         // se a componente y é zero (ou muito próxima)
         // o raio é coplanar ou paralelo ao plano 
         if (abs(ray.direction.y) < EPSILON)
-            return vector<Intersection>();
+            return intersections;
         
         // esse cálculo só funciona para o pleno em xz
         double t = -ray.origin.y / ray.direction.y;
 
-        vector<Intersection> intersections;
+        // sempre haverá no máximo uma interseção
         intersections.push_back(Intersection(t, *this));
         return intersections;
     }
@@ -144,6 +146,7 @@ namespace RayTracer
 
     Vector Plane::ShapeNormal(const Point &point)
     {
+        // considera que o plano está em xz
         return Vector{0,1,0};
     }
 

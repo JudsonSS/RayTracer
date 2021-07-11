@@ -120,11 +120,17 @@ namespace RayTracer
 
     Color World::ColorAt(Ray &r)
     {
+        // se não há interseções do raio com o mundo
         vector<Intersection> intersections = Intersect(r);
         if (intersections.size() == 0)
             return Color {0,0,0};
 
         Intersection intersection = Hit(intersections);
+
+        // se não há interseções válidas (t >= 0) 
+        if (intersection.object == nullptr)
+            return Color{0,0,0};
+
         HitData hit = PrepareComputations(intersection, r);
         return ShadeHit(hit);
     }
