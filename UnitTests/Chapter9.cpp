@@ -2,7 +2,7 @@
 // Chapter9 (Arquivo de Código Fonte)
 //
 // Criação:     10 Jul 2021
-// Atualização:	10 Jul 2021
+// Atualização:	15 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados para o Capítulo 9,
@@ -13,6 +13,8 @@
 
 #include <gtest/gtest.h>
 #include <cmath>
+#include "Ray.h"
+#include "Vector.h"
 #include "Object.h"
 using namespace RayTracer;
 

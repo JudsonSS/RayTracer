@@ -2,7 +2,7 @@
 // Test7 (Arquivo de Código Fonte)
 //
 // Criação:     29 Jun 2021
-// Atualização:	10 Jul 2021
+// Atualização:	15 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados para o Capítulo 6,
@@ -13,6 +13,8 @@
 
 #include <gtest/gtest.h>
 #include <cmath>
+#include "Ray.h"
+#include "Object.h"
 #include "World.h"
 #include "Canvas.h"
 using namespace RayTracer;

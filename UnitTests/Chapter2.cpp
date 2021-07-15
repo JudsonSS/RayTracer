@@ -2,7 +2,7 @@
 // Test1 (Arquivo de Código Fonte)
 //
 // Criação:     27 Jun 2020
-// Atualização:	10 Jul 2021
+// Atualização:	15 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados no Capítulo 2, Desenhando
@@ -15,6 +15,8 @@
 #include <fstream>
 #include <string>
 #include "Types.h"
+#include "Tuple.h"
+#include "Color.h"
 #include "Canvas.h"
 
 using std::string;

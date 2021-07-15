@@ -20,7 +20,7 @@ namespace RayTracer
 {
     // -------------------------------------------------------------------------------
 
-    Canvas::Canvas(unsigned width, unsigned height)
+    Canvas::Canvas(uint width, uint height)
         : mWidth(width), mHeight(height), mSize(width * height)
     {
         // aloca vetor dinâmico
@@ -90,8 +90,10 @@ namespace RayTracer
     { return mHeight; }
 
     // Retorna cor da posição (x,y)
-    Color Canvas::At(int x, int y)
+    Color Canvas::At(int x, int y) const
     { return mGrid[y * mWidth + x]; }
+
+    // -------------------------------------------------------------------------------
 
     // pinta pixel com uma cor
     void Canvas::Paint(int x, int y, const Color &c)
@@ -105,7 +107,7 @@ namespace RayTracer
     // calcula a quantidade de dígitos de um inteiro
     int Length(int num)
     {
-        unsigned digitos = 1;
+        uint digitos = 1;
         while (num /= 10)
             digitos++;
         return digitos;
@@ -225,4 +227,6 @@ namespace RayTracer
         fout.close();
         return true;
     }
+
+    // -------------------------------------------------------------------------------
 }

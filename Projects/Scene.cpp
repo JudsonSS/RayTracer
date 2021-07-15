@@ -2,7 +2,7 @@
 // Scene (Arquivo de Código Fonte)
 //
 // Criação:     09 Jul 2021
-// Atualização:	10 Jul 2021
+// Atualização:	15 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Desenho de uma cena usando várias esferas. 
@@ -69,5 +69,5 @@ int main()
     camera.transform = ViewTransform(Point{0, 1.5, -5}, Point{0,1,0}, Vector{0,1,0});
 
     Canvas canvas = camera.Render(world);
-    canvas.Save("Scene.ppm");
+    canvas.Save("scene.ppm");
 }

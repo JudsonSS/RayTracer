@@ -2,11 +2,11 @@
 // Object (Arquivo de Cabeçalho)
 //
 // Criação:     26 Jun 2021
-// Atualização:	04 Jul 2021
+// Atualização:	15 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define uma classe base para objetos 3D e classes para alguns 
-//              objetos comuns como esferas, cubos, cilíndros, etc.
+//              objetos comuns como esferas, planos, cubos, cilíndros, etc.
 //
 **********************************************************************************/
 
@@ -14,8 +14,10 @@
 #define RAY_TRACER_OBJECT
 
 #include <vector>
-#include "Ray.h"
+#include "Point.h"
+#include "Vector.h"
 #include "Matrix.h"
+#include "Ray.h"
 using std::vector;
 
 namespace RayTracer
@@ -40,7 +42,7 @@ namespace RayTracer
         virtual Vector ShapeNormal(const Point &p) = 0;                 // obtém a normal no ponto
 
     public:
-        unsigned type;                                                  // tipo do objeto 
+        uint type;                                                      // tipo do objeto 
         Matrix transform;                                               // matrix de transformação
         Material material;                                              // material da superfície
 

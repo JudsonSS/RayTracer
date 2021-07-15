@@ -2,7 +2,7 @@
 // Test4 (Arquivo de Código Fonte)
 //
 // Criação:     21 Jun 2021
-// Atualização:	10 Jul 2021
+// Atualização:	15 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados para o Capítulo 4,
@@ -14,6 +14,8 @@
 #include <gtest/gtest.h>
 #include <cmath>
 #include "Types.h"
+#include "Point.h"
+#include "Vector.h"
 #include "Matrix.h"
 using namespace RayTracer;
 

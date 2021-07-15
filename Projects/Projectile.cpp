@@ -15,6 +15,10 @@
 
 #include <iostream>
 #include "Types.h"
+#include "Tuple.h"
+#include "Point.h"
+#include "Vector.h"
+#include "Color.h"
 #include "Canvas.h"
 
 using namespace std;

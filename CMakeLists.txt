@@ -13,18 +13,29 @@ project(RayTracer)
 
 # Projectile
 set (PROJECTILE_FILES 
-    "RayTracer/Types.cpp" 
+    "RayTracer/Types.cpp"
+    "RayTracer/Tuple.cpp"
+    "RayTracer/Point.cpp"
+    "RayTracer/Vector.cpp"
+    "RayTracer/Color.cpp" 
     "RayTracer/Canvas.cpp")
 
 # Clock
 set (CLOCK_FILES 
-    "RayTracer/Types.cpp" 
+    "RayTracer/Types.cpp"
+    "RayTracer/Tuple.cpp"
+    "RayTracer/Point.cpp"
+    "RayTracer/Color.cpp" 
     "RayTracer/Canvas.cpp" 
     "RayTracer/Matrix.cpp")
 
 # RayTracer
 set (RAYTRACER_FILES 
-    "RayTracer/Types.cpp" 
+    "RayTracer/Types.cpp"
+    "RayTracer/Tuple.cpp"
+    "RayTracer/Point.cpp"
+    "RayTracer/Vector.cpp"
+    "RayTracer/Color.cpp" 
     "RayTracer/Canvas.cpp" 
     "RayTracer/Matrix.cpp"
     "RayTracer/Ray.cpp"

@@ -11,6 +11,9 @@
 **********************************************************************************/
 
 #include "Types.h"
+#include "Tuple.h"
+#include "Point.h"
+#include "Color.h"
 #include "Canvas.h"
 #include "Matrix.h"
 using namespace RayTracer;

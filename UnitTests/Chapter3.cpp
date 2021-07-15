@@ -2,7 +2,7 @@
 // Test3 (Arquivo de Código Fonte)
 //
 // Criação:     18 Jun 2021
-// Atualização:	10 Jul 2021
+// Atualização:	15 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados no Capítulo 3,
@@ -13,6 +13,7 @@
 
 #include <gtest/gtest.h>
 #include "Types.h"
+#include "Tuple.h"
 #include "Matrix.h"
 using namespace RayTracer;
 

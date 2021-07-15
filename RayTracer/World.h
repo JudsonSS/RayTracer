@@ -2,7 +2,7 @@
 // World (Arquivo de Cabeçalho)
 //
 // Criação:     04 Jul 2021
-// Atualização:	10 Jul 2021
+// Atualização:	15 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Um mundo contém uma coleção de objetos e fontes de luz.
@@ -67,8 +67,8 @@ namespace RayTracer
 
     struct Camera
     {
-        unsigned hsize;                         // tamanho horizontal (em pixels)
-        unsigned vsize;                         // tamanho vertical (em pixels)
+        uint hsize;                         // tamanho horizontal (em pixels)
+        uint vsize;                         // tamanho vertical (em pixels)
         double fov;                             // field of view (ângulo em radianos)
         double pixel_size;                      // tamanho de cada pixel
         double half_width;                      // metade da largura (do mundo)
@@ -76,13 +76,13 @@ namespace RayTracer
         Matrix transform;                       // view transform matrix
 
         // construtor com valor padrão para a matrix de transformação
-        Camera(unsigned horizontal, 
-               unsigned vertical, 
+        Camera(uint horizontal, 
+               uint vertical, 
                double field_of_view, 
                Matrix view_transform = Matrix::Identity); 
         
         // retorna raio que passa por (px,py)
-        Ray RayForPixel(unsigned px, unsigned py);
+        Ray RayForPixel(uint px, uint py);
         
         // retorna imagem da rederização do mundo 
         Canvas Render(World & world);

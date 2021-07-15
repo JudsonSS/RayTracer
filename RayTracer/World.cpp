@@ -2,7 +2,7 @@
 // World (Arquivo de Código Fonte)
 //
 // Criação:     04 Jul 2021
-// Atualização:	10 Jul 2021
+// Atualização:	15 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Um mundo contém uma coleção de objetos e fontes de luz.
@@ -175,7 +175,7 @@ namespace RayTracer
     // Camera
     // ---------------------------------------------------------------------------------------
 
-    Camera::Camera(unsigned horizontal, unsigned vertical, double field_of_view, Matrix view_transform)
+    Camera::Camera(uint horizontal, uint vertical, double field_of_view, Matrix view_transform)
         : hsize(horizontal), vsize(vertical), fov(field_of_view), transform(view_transform) 
     {
         double half_view = tan(fov/2);
@@ -201,7 +201,7 @@ namespace RayTracer
 
     // -------------------------------------------------------------------------------
 
-    Ray Camera::RayForPixel(unsigned px, unsigned py)
+    Ray Camera::RayForPixel(uint px, uint py)
     {
         // offset da borda da tela ao centro do pixel
         double x_offset = (px + 0.5) * pixel_size;
@@ -224,9 +224,9 @@ namespace RayTracer
     Canvas Camera::Render(World & world)
     {
         Canvas image {hsize, vsize};
-        for (unsigned y = 0; y < vsize - 1; ++y)
+        for (uint y = 0; y < vsize - 1; ++y)
         {
-            for (unsigned x = 0; x < hsize - 1; ++x)
+            for (uint x = 0; x < hsize - 1; ++x)
             {
                 Ray ray = RayForPixel(x,y);
                 Color color = world.ColorAt(ray);

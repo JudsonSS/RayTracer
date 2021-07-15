@@ -2,7 +2,7 @@
 // Matrix (Arquivo de Código Fonte)
 //
 // Criação:     19 Jun 2021
-// Atualização:	10 Jul 2021
+// Atualização:	15 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define uma classe para uma matriz dinâmica com as operações
@@ -10,9 +10,9 @@
 //
 **********************************************************************************/
 
+#include "Matrix.h"
 #include <cmath>
 #include <assert.h>
-#include "Matrix.h"
 
 namespace RayTracer 
 {
@@ -29,20 +29,20 @@ namespace RayTracer
           mSize(0),
           mData(nullptr) {}
 
-    Matrix::Matrix(unsigned rows, unsigned cols)
+    Matrix::Matrix(uint rows, uint cols)
         : mRows(rows),
           mCols(cols),
           mSize(rows * cols),
           mData(new double[mSize]{0}) {}
 
-    Matrix::Matrix(unsigned rows, unsigned cols, const initializer_list<double> &init)
+    Matrix::Matrix(uint rows, uint cols, const initializer_list<double> &init)
         : mRows(rows),
           mCols(cols),
           mSize(rows * cols),
           mData(new double[mSize]{0})
     {
         initializer_list<double>::iterator it;
-        unsigned i;
+        uint i;
         for (i = 0, it = init.begin(); it != init.end() && i < mSize; ++it)
             mData[i++] = *it;
     }
@@ -102,7 +102,7 @@ namespace RayTracer
     Matrix &Matrix::operator=(const initializer_list<double> &init)
     {
         initializer_list<double>::iterator it;
-        unsigned i;
+        uint i;
         for (i = 0, it = init.begin(); it != init.end() && i < mSize; ++it)
             mData[i++] = *it;
         return *this;
@@ -110,12 +110,12 @@ namespace RayTracer
 
     // -------------------------------------------------------------------------------
 
-    double &Matrix::operator()(unsigned i, unsigned j)
+    double &Matrix::operator()(uint i, uint j)
     {
         return mData[i * mCols + j];
     }
 
-    double Matrix::operator()(unsigned i, unsigned j) const
+    double Matrix::operator()(uint i, uint j) const
     {
         return mData[i * mCols + j];
     }
@@ -180,6 +180,8 @@ namespace RayTracer
         return T;
     }
 
+    // -------------------------------------------------------------------------------
+
     double Matrix::Determinant() const
     {
         // só existe determinante para matrizes quadradas
@@ -198,7 +200,7 @@ namespace RayTracer
             // determinante de matrizes maiores depende
             // de cofatores, que dependem de minor, que
             // dependem do determinte de submatrizes
-            for (unsigned col = 0; col < mCols; ++col)
+            for (uint col = 0; col < mCols; ++col)
             {
                 // det = det + M[0,col] * cofactor(M, 0, col)
                 det += mData[col] * Cofactor(0, col);
@@ -208,7 +210,9 @@ namespace RayTracer
         return det;
     }
 
-    Matrix Matrix::Submatrix(unsigned row, unsigned col) const
+    // -------------------------------------------------------------------------------
+
+    Matrix Matrix::Submatrix(uint row, uint col) const
     {
         // linha e coluna precisa existir na matrix
         assert(row < mRows);
@@ -222,43 +226,51 @@ namespace RayTracer
         // -------
         // Q3 | Q4
 
-        Matrix S{mRows - 1, mCols - 1};
+        Matrix S {mRows - 1, mCols - 1};
 
         // cópia do quadrante 1
-        for (unsigned i = 0; i < row; ++i)
-            for (unsigned j = 0; j < col; ++j)
+        for (uint i = 0; i < row; ++i)
+            for (uint j = 0; j < col; ++j)
                 S(i, j) = mData[i * mCols + j];
 
         // cópia do quadrante 2
-        for (unsigned i = 0; i < row; ++i)
-            for (unsigned j = col + 1; j < mCols; ++j)
+        for (uint i = 0; i < row; ++i)
+            for (uint j = col + 1; j < mCols; ++j)
                 S(i, j - 1) = mData[i * mCols + j];
 
         // cópia do quadrante 3
-        for (unsigned i = row + 1; i < mRows; ++i)
-            for (unsigned j = 0; j < col; ++j)
+        for (uint i = row + 1; i < mRows; ++i)
+            for (uint j = 0; j < col; ++j)
                 S(i - 1, j) = mData[i * mCols + j];
 
         // cópia do quadrante 4
-        for (unsigned i = row + 1; i < mRows; ++i)
-            for (unsigned j = col + 1; j < mCols; ++j)
+        for (uint i = row + 1; i < mRows; ++i)
+            for (uint j = col + 1; j < mCols; ++j)
                 S(i - 1, j - 1) = mData[i * mCols + j];
 
         return S;
     }
 
-    double Matrix::Minor(unsigned row, unsigned col) const
+    // -------------------------------------------------------------------------------
+
+    double Matrix::Minor(uint row, uint col) const
     { return Submatrix(row, col).Determinant(); }
 
-    double Matrix::Cofactor(unsigned row, unsigned col) const
+    // -------------------------------------------------------------------------------
+
+    double Matrix::Cofactor(uint row, uint col) const
     {
         double minor = Minor(row, col);
         // se linha + coluna é um número ímpar retorna -minor
         return ((row + col) % 2 == 0) ? minor : -minor;
     }
 
+    // -------------------------------------------------------------------------------
+
     bool Matrix::Invertible() const
     { return (Determinant() == 0) ? false : true; }
+
+    // -------------------------------------------------------------------------------
 
     Matrix Matrix::Inverse() const
     {
@@ -267,8 +279,8 @@ namespace RayTracer
 
         Matrix M{mRows, mCols};
 
-        for (unsigned row = 0; row < mRows; ++row)
-            for (unsigned col = 0; col < mCols; ++col)
+        for (uint row = 0; row < mRows; ++row)
+            for (uint col = 0; col < mCols; ++col)
                 // usar [col,row] em vez de [row,col] faz a transposição da matriz
                 M(col, row) = Cofactor(row, col) / det;
 
