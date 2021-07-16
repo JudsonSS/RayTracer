@@ -49,7 +49,6 @@ namespace RayTracer
 
         enum {Empty, Default};                  // opções do construtor
         World(int config = Empty);		        // construtor padrão
-        ~World();                               // destrutor
 
         bool Contains(Object &obj);             // mundo contém objeto        
         vector<Intersection> Intersect(Ray &r); // retorna pontos de interseção

@@ -13,17 +13,38 @@
 #define RAY_TRACER_COLOR
 
 #include "Tuple.h"
+#include "Point.h"
 
 namespace RayTracer
 {
+    // ---------------------------------------------------------------------------------------
+    // Color
+    // ---------------------------------------------------------------------------------------
+
     struct Color : public Tuple
     {
         Color();											// construtor padrão
         Color(double red, double green, double blue); 		// construtor
         Color(Tuple &&t);						   			// conversão de tupla para cor
+
+        // membros estáticos
+        static Color Black;                                 // cor preta
+        static Color White;                                 // cor branca
     };
 
     Color operator*(const Color &c1, const Color &c2); 		// mistura de cores (blend)
+
+    // ---------------------------------------------------------------------------------------
+    // Stripe
+    // ---------------------------------------------------------------------------------------
+
+    struct Stripe
+    {
+        Color a;
+        Color b;
+
+        Color At(const Point &p) const;
+    };
 }
 
 #endif

@@ -82,6 +82,7 @@ namespace RayTracer
 
     struct Material
     {
+        Stripe * pattern;                           // padrão do material
         Color color;                                // cor do material
         double ambient;                             // intensidade da luz do ambiente
         double diffuse;                             // intensidade da reflexão da luz

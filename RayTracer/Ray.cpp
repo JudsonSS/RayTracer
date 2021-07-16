@@ -76,7 +76,8 @@ namespace RayTracer
     // ---------------------------------------------------------------------------------------
 
     Material::Material()
-        : color(Color(1,1,1)), 
+        : pattern(nullptr),
+          color(Color(1,1,1)), 
           ambient(0.1), 
           diffuse(0.9), 
           specular(0.9), 
@@ -84,7 +85,8 @@ namespace RayTracer
 
     bool operator==(const Material &a, const Material &b)
     {
-        return a.color == b.color &&
+        return a.pattern == b.pattern &&
+               a.color == b.color &&
                a.ambient == b.ambient &&
                a.diffuse == b.diffuse &&
                a.specular == b.specular &&
@@ -100,8 +102,16 @@ namespace RayTracer
                    const Vector &normal,          // normal da supercífie
                    bool position_in_shadow)       // posição está na sombra
     {
+        Color surface_color;
+
+        // se o material possui um padrão
+        if (material.pattern)
+            surface_color = material.pattern->At(point);
+        else
+            surface_color = material.color;
+
         // combina a cor da superfície com a cor da luz
-        Color effective_color = material.color * light.intensity;
+        Color effective_color = surface_color * light.intensity;
 
         // calcula a contribuição do ambiente
         Color ambient = effective_color * material.ambient;

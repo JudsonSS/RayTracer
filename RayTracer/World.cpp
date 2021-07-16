@@ -65,12 +65,6 @@ namespace RayTracer
         }
     }
 
-    World::~World()
-    {   
-        for (Object * obj : objects)
-            delete obj;
-    }
-
     // -------------------------------------------------------------------------------
 
     bool World::Contains(Object &obj)
