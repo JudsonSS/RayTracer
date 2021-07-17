@@ -35,10 +35,12 @@ set (RAYTRACER_FILES
     "RayTracer/Tuple.cpp"
     "RayTracer/Point.cpp"
     "RayTracer/Vector.cpp"
-    "RayTracer/Color.cpp" 
-    "RayTracer/Canvas.cpp" 
     "RayTracer/Matrix.cpp"
+    "RayTracer/Color.cpp" 
+    "RayTracer/Pattern.cpp"
+    "RayTracer/Canvas.cpp"
     "RayTracer/Ray.cpp"
+    "RayTracer/Light.cpp"
     "RayTracer/Object.cpp"
     "RayTracer/World.cpp")
 

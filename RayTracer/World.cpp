@@ -103,6 +103,7 @@ namespace RayTracer
         bool shadowed = IsShadowed(hit.over_point);
 
         return Lighting(hit.object->material,
+                        *hit.object,
                         light,
                         hit.over_point,
                         hit.eye,

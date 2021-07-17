@@ -14,6 +14,9 @@
 #include <gtest/gtest.h>
 #include "Color.h"
 #include "Ray.h"
+#include "Light.h"
+#include "Pattern.h"
+#include "Object.h"
 using namespace RayTracer;
 
 namespace Chapter10
@@ -63,11 +66,37 @@ namespace Chapter10
         Vector eye {0,0,-1};
         Vector normal {0,0,-1};
         PointLight light { Point{0,0,-10}, Color{1,1,1} };
+        Sphere sphere;
 
-        Color c1 = Lighting(m, light, Point{0.9,0,0}, eye, normal, false);
-        Color c2 = Lighting(m, light, Point{1.1,0,0}, eye, normal, false);
+        Color c1 = Lighting(m, sphere, light, Point{0.9,0,0}, eye, normal, false);
+        Color c2 = Lighting(m, sphere, light, Point{1.1,0,0}, eye, normal, false);
 
         EXPECT_EQ(c1, Color::White);
         EXPECT_EQ(c2, Color::Black);
+    }
+
+    TEST(Patterns, StripeObjectTransform)
+    {
+        Sphere sphere;
+        sphere.transform = Scaling(2,2,2);
+        Stripe pattern {Color::White, Color::Black};
+        EXPECT_EQ(pattern.AtObject(sphere, Point{1.5,0,0}), Color::White);
+    }
+
+    TEST(Patterns, StripePatternTransform)
+    {
+        Sphere sphere;
+        Stripe pattern {Color::White, Color::Black};
+        pattern.transform = Scaling(2,2,2);
+        EXPECT_EQ(pattern.AtObject(sphere, Point{1.5,0,0}), Color::White);
+    }
+
+    TEST(Patterns, ObjectPatternTransform)
+    {
+        Sphere sphere;
+        sphere.transform = Scaling(2,2,2);
+        Stripe pattern {Color::White, Color::Black};
+        pattern.transform = Translation(0.5,0,0);
+        EXPECT_EQ(pattern.AtObject(sphere, Point{2.5,0,0}), Color::White);
     }
 }

@@ -2,7 +2,7 @@
 // Test6 (Arquivo de Código Fonte)
 //
 // Criação:     29 Jun 2021
-// Atualização:	15 Jul 2021
+// Atualização:	17 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados para o Capítulo 6,
@@ -129,7 +129,8 @@ namespace Chapter6
         Vector eye {0,0,-1};
         Vector normal {0,0,-1};
         PointLight light {Point(0,0,-10), Color(1,1,1)};
-        Color result = Lighting(m, light, position, eye, normal, false);
+        Sphere sphere;
+        Color result = Lighting(m, sphere, light, position, eye, normal, false);
         EXPECT_TRUE(result == Color(1.9, 1.9, 1.9));
     }
 
@@ -140,7 +141,8 @@ namespace Chapter6
         Vector eye (0, sqrt(2)/2, -sqrt(2)/2); 
         Vector normal {0,0,-1};
         PointLight light {Point(0,0,-10), Color(1,1,1)};
-        Color result = Lighting(m, light, position, eye, normal, false);
+        Sphere sphere;
+        Color result = Lighting(m, sphere, light, position, eye, normal, false);
         EXPECT_TRUE(result == Color(1.0, 1.0, 1.0));
     }
 
@@ -151,7 +153,8 @@ namespace Chapter6
         Vector eye {0, 0, -1}; 
         Vector normal {0,0,-1};
         PointLight light {Point(0,10,-10), Color(1,1,1)};
-        Color result = Lighting(m, light, position, eye, normal, false);
+        Sphere sphere;
+        Color result = Lighting(m, sphere, light, position, eye, normal, false);
         EXPECT_TRUE(result == Color(0.7364, 0.7364, 0.7364));
     }
 
@@ -162,7 +165,8 @@ namespace Chapter6
         Vector eye (0, -sqrt(2)/2, -sqrt(2)/2);
         Vector normal {0,0,-1};
         PointLight light {Point(0,10,-10), Color(1,1,1)};
-        Color result = Lighting(m, light, position, eye, normal, false);
+        Sphere sphere;
+        Color result = Lighting(m, sphere, light, position, eye, normal, false);
         EXPECT_EQ(result, Color(1.6364, 1.6364, 1.6364));
     }
 
@@ -173,7 +177,8 @@ namespace Chapter6
         Vector eye {0,0,-1};
         Vector normal {0,0,-1};
         PointLight light {Point(0,0,10), Color(1,1,1)};
-        Color result = Lighting(m, light, position, eye, normal, false);
+        Sphere sphere;
+        Color result = Lighting(m, sphere, light, position, eye, normal, false);
         EXPECT_TRUE(result == Color(0.1, 0.1, 0.1));
     }
 }

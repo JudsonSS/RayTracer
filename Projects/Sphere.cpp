@@ -57,7 +57,7 @@ int main()
                 Point hit_point = ray.Position(hit.time);
                 Vector hit_normal = shape.Normal(hit_point);
                 Vector eye = -ray.direction;
-                Color color = Lighting(shape.material, light, hit_point, eye, hit_normal, false);
+                Color color = Lighting(shape.material, shape, light, hit_point, eye, hit_normal, false);
                 canvas.Paint(x,y,color);
             }
         }

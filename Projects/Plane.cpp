@@ -16,6 +16,7 @@
 #include "Object.h"
 #include "World.h"
 #include "Ray.h"
+#include "Pattern.h"
 using namespace RayTracer;
 using std::vector;
 
@@ -42,6 +43,26 @@ int main()
     left.material.color = Color(1, 1, 0);
     left.material.diffuse = 0.9;
     left.material.specular = 0.9;
+
+    // ------------------------------------------
+    // padrão listrado 
+    // ------------------------------------------
+    
+    Stripe white_red {Color{1,1,1}, Color{1,0,0}};
+    Stripe white_blue {Color{1,1,1}, Color{0,0,1}};
+    Stripe white_green {Color{1,1,1}, Color{0,1,0}};
+    Stripe white_yellow {Color{1,1,1}, Color{1,1,0}};
+    
+    white_blue.transform = RotationZ(PI/4) * Scaling(0.6, 0.6, 0.6);
+    white_green.transform = Scaling(0.3, 0.3, 0.3);
+    white_yellow.transform =  RotationZ(PI/3) * Scaling(0.4, 0.4, 0.4) * Translation(0.5, 0.5, 0.5);
+
+    floor.material.pattern = &white_red;
+    middle.material.pattern = &white_blue;
+    right.material.pattern = &white_green;
+    left.material.pattern = &white_yellow;
+
+    // ------------------------------------------
 
     World world {World::Empty};
     world.objects.push_back(&floor);

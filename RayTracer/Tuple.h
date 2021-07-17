@@ -2,7 +2,7 @@
 // Tuple (Arquivo de Cabeçalho)
 //
 // Criação:     27 Jun 2020
-// Atualização:	15 Jul 2021
+// Atualização:	17 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define o tipo base tupla, necessário para a construção 
@@ -12,8 +12,6 @@
 
 #ifndef RAY_TRACER_TUPLE
 #define RAY_TRACER_TUPLE
-
-#include "Types.h"
 
 namespace RayTracer
 {

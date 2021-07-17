@@ -14,10 +14,12 @@
 #define RAY_TRACER_OBJECT
 
 #include <vector>
+#include "Types.h"
 #include "Point.h"
 #include "Vector.h"
 #include "Matrix.h"
 #include "Ray.h"
+#include "Light.h"
 using std::vector;
 
 namespace RayTracer

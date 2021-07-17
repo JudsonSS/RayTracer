@@ -33,7 +33,8 @@ namespace Chapter8
         Vector normal {0,0,-1};
         PointLight light {Point(0,0,-10), Color(1,1,1)};
         bool in_shadow = true;
-        Color result = Lighting(m, light, position, eye, normal, in_shadow);
+        Sphere sphere;
+        Color result = Lighting(m, sphere, light, position, eye, normal, in_shadow);
         EXPECT_TRUE(result == Color(0.1, 0.1, 0.1));
     }
 
