@@ -2,7 +2,7 @@
 // Pattern (Arquivo de Código Fonte)
 //
 // Criação:     17 Jul 2020
-// Atualização:	17 Jul 2021
+// Atualização:	18 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define padrões de cores, como listrado, gradiente, circular, etc.
@@ -60,6 +60,23 @@ namespace RayTracer
             return first;
         else
             return second;
+    }
+
+    // -------------------------------------------------------------------------------------------------
+    // Gradiente
+    // -------------------------------------------------------------------------------------------------
+
+    Gradient::Gradient() {}
+
+    Gradient::Gradient(const Color &a, const Color &b)
+        : Pattern(a,b) {}
+
+    // ---------------------------------------------------------------------------------------
+
+    Color Gradient::At(const Point &p) const
+    {
+        // interpolação linear entre as cores
+        return first + (second - first) * (p.x - floor(p.x));
     }
 
     // ---------------------------------------------------------------------------------------

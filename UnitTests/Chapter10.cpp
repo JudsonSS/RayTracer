@@ -171,4 +171,13 @@ namespace Chapter10
         Color c = pattern.AtShape(shape, Point{2.5, 3, 3.5});
         EXPECT_TRUE(c == Color(0.75, 0.5, 0.25));
     }
+
+    TEST(Patterns, Gradient)
+    {
+        Gradient pattern {Color::White, Color::Black};
+        EXPECT_TRUE(pattern.At(Point(0,0,0)) == Color::White);
+        EXPECT_TRUE(pattern.At(Point(0.25,0,0)) == Color(0.75, 0.75, 0.75));
+        EXPECT_TRUE(pattern.At(Point(0.50,0,0)) == Color(0.50, 0.50, 0.50));
+        EXPECT_TRUE(pattern.At(Point(0.75,0,0)) == Color(0.25, 0.25, 0.25));
+    }
 }
