@@ -24,8 +24,8 @@ namespace Chapter10
     TEST(Patterns, StripePattern)
     {
         Stripe pattern {Color::White, Color::Black};
-        EXPECT_EQ(pattern.a, Color::White);
-        EXPECT_EQ(pattern.b, Color::Black);
+        EXPECT_EQ(pattern.first, Color::White);
+        EXPECT_EQ(pattern.second, Color::Black);
     }
 
     TEST(Patterns, StripeConstantY)
@@ -98,5 +98,77 @@ namespace Chapter10
         Stripe pattern {Color::White, Color::Black};
         pattern.transform = Translation(0.5,0,0);
         EXPECT_EQ(pattern.AtShape(sphere, Point{2.5,0,0}), Color::White);
+    }
+
+    TEST(Patterns, DefaultPattern)
+    {
+        struct TestPattern : public Pattern
+        {
+            Color At(const Point &p) const 
+            { return Color(); }
+        };
+
+        TestPattern p;
+        EXPECT_TRUE(p.transform == Matrix::Identity);
+
+    }
+
+    TEST(Patterns, AssigningPattern)
+    {
+        struct TestPattern : public Pattern
+        {
+            Color At(const Point &p) const 
+            { return Color(); }
+        };
+
+        TestPattern p;
+        p.transform = Translation(1,2,3);
+        EXPECT_TRUE(p.transform == Translation(1,2,3));
+    }
+
+    TEST(Patterns, WithObjectTransform)
+    {
+        struct TestPattern : public Pattern
+        {
+            Color At(const Point &p) const 
+            { return Color(p.x, p.y, p.z); }
+        };
+
+        Sphere shape;
+        shape.transform = Scaling(2,2,2);
+        TestPattern pattern;
+        Color c = pattern.AtShape(shape, Point{2,3,4});
+        EXPECT_TRUE(c == Color(1, 1.5, 2));
+    }
+
+    TEST(Patterns, WithPatternTransform)
+    {
+        struct TestPattern : public Pattern
+        {
+            Color At(const Point &p) const 
+            { return Color(p.x, p.y, p.z); }
+        };
+
+        Sphere shape;
+        TestPattern pattern;
+        pattern.transform = Scaling(2,2,2);
+        Color c = pattern.AtShape(shape, Point{2,3,4});
+        EXPECT_TRUE(c == Color(1, 1.5, 2));
+    }
+
+    TEST(Patterns, WithObjectPatternTransform)
+    {
+        struct TestPattern : public Pattern
+        {
+            Color At(const Point &p) const 
+            { return Color(p.x, p.y, p.z); }
+        };
+
+        Sphere shape;
+        shape.transform = Scaling(2,2,2);
+        TestPattern pattern;
+        pattern.transform = Translation(0.5, 1, 1.5);
+        Color c = pattern.AtShape(shape, Point{2.5, 3, 3.5});
+        EXPECT_TRUE(c == Color(0.75, 0.5, 0.25));
     }
 }

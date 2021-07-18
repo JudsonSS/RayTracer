@@ -19,16 +19,32 @@
 
 namespace RayTracer
 {
-    struct Stripe
-    {
-        Color a;                                                    // primeira cor da listra
-        Color b;                                                    // segunda cor da listra
-        Matrix transform;                                           // matrix de transformação
+    // -------------------------------------------------------------------------------------------------
+    // Padrão
+    // -------------------------------------------------------------------------------------------------
 
-        Stripe();                                                   // construtor padrão
-        Stripe(const Color &c1, const Color &c2);                   // construtor com cores
-        Color At(const Point &p) const;                             // retorna cor no ponto indicado
-        Color AtShape(const Shape &shape, const Point &p) const;    // considera transformações
+    struct Pattern
+    {
+        Color first;                                                        // primeira cor
+        Color second;                                                       // segunda cor
+        Matrix transform;                                                   // matrix de transformação
+
+        Pattern();                                                          // construtor padrão
+        Pattern(const Color &a, const Color &b);                            // construtor com cores
+        virtual ~Pattern();                                                 // destrutor
+        virtual Color At(const Point &p) const = 0;                         // retorna cor no ponto
+        Color AtShape(const Shape &shape, const Point &p) const;            // considera transformações
+    };
+
+    // -------------------------------------------------------------------------------------------------
+    // Listra
+    // -------------------------------------------------------------------------------------------------
+
+    struct Stripe : public Pattern
+    {
+        Stripe();                                                           // construtor padrão
+        Stripe(const Color &a, const Color &b);                             // construtor com cores
+        Color At(const Point &p) const;                                     // retorna cor no ponto indicado
     };
 }
 

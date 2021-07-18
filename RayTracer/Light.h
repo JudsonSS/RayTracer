@@ -2,7 +2,7 @@
 // Light (Arquivo de Cabeçalho)
 //
 // Criação:     17 Jul 2021
-// Atualização:	17 Jul 2021
+// Atualização:	18 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define a representação de um ponto de luz e os dados necessários 
@@ -22,7 +22,7 @@
 namespace RayTracer
 {
     // declarações adiantadas
-    struct Stripe;   
+    struct Pattern;   
     class  Shape;                               
 
     // ---------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ namespace RayTracer
 
     struct Material
     {
-        Stripe * pattern;                           // padrão do material
+        Pattern * pattern;                          // padrão do material
         Color color;                                // cor do material
         double ambient;                             // intensidade da luz do ambiente
         double diffuse;                             // intensidade da reflexão da luz

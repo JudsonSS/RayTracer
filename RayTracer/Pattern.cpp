@@ -14,15 +14,42 @@
 
 namespace RayTracer
 {
+    // -------------------------------------------------------------------------------------------------
+    // Padrão
+    // -------------------------------------------------------------------------------------------------
+
+    Pattern::Pattern()
+        : first(Color::White),
+          second(Color::Black),
+          transform(Matrix::Identity) {}
+
+    Pattern::Pattern(const Color &a, const Color &b)
+        : first(a),
+          second(b),
+          transform(Matrix::Identity) {}
+
+    Pattern::~Pattern() {}
+    
     // ---------------------------------------------------------------------------------------
 
-    Stripe::Stripe()
-        : transform(Matrix::Identity) {}
+    Color Pattern::AtShape(const Shape &shape, const Point &p) const
+    {
+        // converte ponto para coordenadas do objeto
+        Point local_point = shape.transform.Inverse() * p;
+        // converte ponto para coordenadas do padrão
+        Point pattern_point = this->transform.Inverse() * local_point;
+        // retorna cor do ponto transformado
+        return At(pattern_point);
+    }
 
-    Stripe::Stripe(const Color &c1, const Color &c2)
-        : a(c1), 
-          b(c2), 
-          transform(Matrix::Identity) {}
+    // -------------------------------------------------------------------------------------------------
+    // Listra
+    // -------------------------------------------------------------------------------------------------
+
+    Stripe::Stripe() {}
+
+    Stripe::Stripe(const Color &a, const Color &b)
+        : Pattern(a,b) {}
 
     // ---------------------------------------------------------------------------------------
 
@@ -30,21 +57,9 @@ namespace RayTracer
     {
         // a medida que a coordenada x muda, a listra alterna entre as cores 'a' e 'b'
         if (int(floor(p.x)) % 2 == 0)
-            return a;
+            return first;
         else
-            return b;
-    }
-    
-    // ---------------------------------------------------------------------------------------
-
-    Color Stripe::AtShape(const Shape &shape, const Point &p) const
-    {
-        // converte ponto para coordenadas do objeto
-        Point local_point = shape.transform.Inverse() * p;
-        // converte ponto para coordenadas do padrão
-        Point pattern_point = this->transform.Inverse() * local_point;
-        // retorna cor do ponto transformado
-        return this->At(pattern_point);
+            return second;
     }
 
     // ---------------------------------------------------------------------------------------
