@@ -1,17 +1,17 @@
 /**********************************************************************************
-// Object (Arquivo de Cabeçalho)
+// Shape (Arquivo de Cabeçalho)
 //
 // Criação:     26 Jun 2021
-// Atualização:	15 Jul 2021
+// Atualização:	17 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
-// Descrição:	Define uma classe base para objetos 3D e classes para alguns 
-//              objetos comuns como esferas, planos, cubos, cilíndros, etc.
+// Descrição:	Define uma classe base para as formas 3D e classes para algumas 
+//              formas comuns como esferas, planos, cubos, cilíndros, etc.
 //
 **********************************************************************************/
 
-#ifndef RAY_TRACER_OBJECT
-#define RAY_TRACER_OBJECT
+#ifndef RAY_TRACER_SHAPE
+#define RAY_TRACER_SHAPE
 
 #include <vector>
 #include "Types.h"
@@ -26,7 +26,7 @@ namespace RayTracer
 {
     // -------------------------------------------------------------------------------------------------
     
-    enum ObjectTypes
+    enum ShapeTypes
     {
         UNKNOWN_T,                                                      // desconhecido
         SPHERE_T,                                                       // esfera
@@ -34,22 +34,22 @@ namespace RayTracer
     };
 
     // -------------------------------------------------------------------------------------------------
-    // Objeto
+    // Forma Geométrica
     // -------------------------------------------------------------------------------------------------
 
-    class Object
+    class Shape
     {
     private:
         virtual vector<Intersection> ShapeIntersect(const Ray &r) = 0;  // retorna pontos de interseção
         virtual Vector ShapeNormal(const Point &p) = 0;                 // obtém a normal no ponto
 
     public:
-        uint type;                                                      // tipo do objeto 
+        uint type;                                                      // identifica forma geométrica
         Matrix transform;                                               // matrix de transformação
         Material material;                                              // material da superfície
 
-        Object();                                                       // construtor padrão
-        virtual ~Object();                                              // destrutor da classe base
+        Shape();                                                        // construtor padrão
+        virtual ~Shape();                                               // destrutor da classe base
         vector<Intersection> Intersect(const Ray &r);                   // retorna pontos de interseção
         Vector Normal(const Point &p);                                  // obtém a normal no ponto P
     };
@@ -58,7 +58,7 @@ namespace RayTracer
     // Esfera
     // -------------------------------------------------------------------------------------------------
 
-    class Sphere : public Object
+    class Sphere : public Shape
     {
     private:
         Point center;                                                   // posição do centro 
@@ -77,7 +77,7 @@ namespace RayTracer
     // Plano
     // -------------------------------------------------------------------------------------------------
 
-    class Plane : public Object
+    class Plane : public Shape
     {
     private:
         vector<Intersection> ShapeIntersect(const Ray &r);              // retorna pontos de interseção

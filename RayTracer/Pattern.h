@@ -15,7 +15,7 @@
 #include "Color.h"
 #include "Point.h"
 #include "Matrix.h"
-#include "Object.h"
+#include "Shape.h"
 
 namespace RayTracer
 {
@@ -28,7 +28,7 @@ namespace RayTracer
         Stripe();                                                   // construtor padrão
         Stripe(const Color &c1, const Color &c2);                   // construtor com cores
         Color At(const Point &p) const;                             // retorna cor no ponto indicado
-        Color AtObject(const Object &obj, const Point &p) const;    // considera transformações
+        Color AtShape(const Shape &shape, const Point &p) const;    // considera transformações
     };
 }
 

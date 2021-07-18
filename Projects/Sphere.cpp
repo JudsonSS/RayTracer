@@ -2,7 +2,7 @@
 // Sphere (Arquivo de Código Fonte)
 //
 // Criação:     29 Jun 2021
-// Atualização:	10 Jul 2021
+// Atualização:	17 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Aplicação desenha a silhueta de uma esfera no plano. 
@@ -13,7 +13,7 @@
 #include "Types.h"
 #include "Canvas.h"
 #include "Matrix.h"
-#include "Object.h"
+#include "Shape.h"
 #include "Ray.h"
 using namespace RayTracer;
 using std::vector;

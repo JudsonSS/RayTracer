@@ -23,7 +23,7 @@ namespace RayTracer
 {
     // declarações adiantadas
     struct Stripe;   
-    class  Object;                               
+    class  Shape;                               
 
     // ---------------------------------------------------------------------------------------
     // Ponto de Luz
@@ -63,7 +63,7 @@ namespace RayTracer
 
     // função de iluminação
     Color Lighting(const Material &material,        // material da superfície
-                   const Object &object,            // objeto 
+                   const Shape &shape,              // forma geométrica 
                    const PointLight &light,         // ponto de luz
                    const Point &point,              // ponto da superfície
                    const Vector &eye,               // direção do olho

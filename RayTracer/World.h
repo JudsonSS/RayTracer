@@ -2,7 +2,7 @@
 // World (Arquivo de Cabeçalho)
 //
 // Criação:     04 Jul 2021
-// Atualização:	15 Jul 2021
+// Atualização:	17 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Um mundo contém uma coleção de objetos e fontes de luz.
@@ -13,7 +13,7 @@
 #define RAY_TRACER_WORLD
 
 #include <vector>
-#include "Object.h"
+#include "Shape.h"
 #include "Canvas.h"
 #include "Ray.h"
 using std::vector;
@@ -27,7 +27,7 @@ namespace RayTracer
     struct HitData
     {
         double time;                            // valor de distância ao longo do raio
-        Object * object;                        // objeto em que ocorreu a interseção
+        Shape * object;                         // objeto em que ocorreu a interseção
         Point point;                            // posição em coordenadas do mundo
         Point over_point;                       // posição para cálculo da sombra
         Vector eye;                             // vetor na direção do observador
@@ -44,13 +44,13 @@ namespace RayTracer
 
     struct World
     {
-        vector<Object*> objects;			    // coleção de objetos
+        vector<Shape*> objects;			        // coleção de objetos
         PointLight light;                       // ponto de luz
 
         enum {Empty, Default};                  // opções do construtor
         World(int config = Empty);		        // construtor padrão
 
-        bool Contains(Object &obj);             // mundo contém objeto        
+        bool Contains(Shape &obj);              // mundo contém objeto        
         vector<Intersection> Intersect(Ray &r); // retorna pontos de interseção
         Color ShadeHit(HitData &hit);           // retorna cor no ponto de interseção
         Color ColorAt(Ray &r);                  // retorna cor na interseção com o raio
@@ -66,8 +66,8 @@ namespace RayTracer
 
     struct Camera
     {
-        uint hsize;                         // tamanho horizontal (em pixels)
-        uint vsize;                         // tamanho vertical (em pixels)
+        uint hsize;                             // tamanho horizontal (em pixels)
+        uint vsize;                             // tamanho vertical (em pixels)
         double fov;                             // field of view (ângulo em radianos)
         double pixel_size;                      // tamanho de cada pixel
         double half_width;                      // metade da largura (do mundo)

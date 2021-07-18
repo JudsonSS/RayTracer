@@ -41,7 +41,7 @@ set (RAYTRACER_FILES
     "RayTracer/Canvas.cpp"
     "RayTracer/Ray.cpp"
     "RayTracer/Light.cpp"
-    "RayTracer/Object.cpp"
+    "RayTracer/Shape.cpp"
     "RayTracer/World.cpp")
 
 # Testes de Unidade

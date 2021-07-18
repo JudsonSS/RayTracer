@@ -1,5 +1,5 @@
 /**********************************************************************************
-// Test6 (Arquivo de Código Fonte)
+// Chapter6 (Arquivo de Código Fonte)
 //
 // Criação:     29 Jun 2021
 // Atualização:	17 Jul 2021
@@ -16,7 +16,7 @@
 #include "Vector.h"
 #include "Ray.h"
 #include "Matrix.h"
-#include "Object.h"
+#include "Shape.h"
 using namespace RayTracer;
 
 namespace Chapter6

@@ -1,34 +1,33 @@
 /**********************************************************************************
-// Object (Arquivo de Código Fonte)
+// Shape (Arquivo de Código Fonte)
 //
 // Criação:     26 Jun 2021
-// Atualização:	04 Jul 2021
+// Atualização:	17 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
-// Descrição:	Define uma classe base para objetos 3D e classes para alguns 
-//              objetos comuns como esferas, cubos, cilíndros, etc.
+// Descrição:	Define uma classe base para as formas 3D e classes para algumas 
+//              formas comuns como esferas, planos, cubos, cilíndros, etc.
 //
 **********************************************************************************/
 
 #include <cmath>
-#include "Object.h"
+#include "Shape.h"
 
 namespace RayTracer
 {
     // ---------------------------------------------------------------------------------------
-    // Objeto
+    // Forma Geométrica
     // ---------------------------------------------------------------------------------------
 
-
-    Object::Object()
+    Shape::Shape()
         : type(UNKNOWN_T), 
           transform(Matrix::Identity) {}
         
-    Object::~Object() {}
+    Shape::~Shape() {}
 
     // ---------------------------------------------------------------------------------------
 
-    vector<Intersection> Object::Intersect(const Ray &r)
+    vector<Intersection> Shape::Intersect(const Ray &r)
     {
         // ao invés de calcular a interseção em coordenadas globais,
         // faz a transformada inversa sobre o raio, trazendo-o para as
@@ -39,7 +38,7 @@ namespace RayTracer
         return ShapeIntersect(ray);
     }
 
-    Vector Object::Normal(const Point &point)
+    Vector Shape::Normal(const Point &point)
     {
         // converte o ponto em coordenadas locais do objeto
         Matrix invT = transform.Inverse(); 

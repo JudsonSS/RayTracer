@@ -2,7 +2,7 @@
 // World (Arquivo de Código Fonte)
 //
 // Criação:     04 Jul 2021
-// Atualização:	15 Jul 2021
+// Atualização:	17 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Um mundo contém uma coleção de objetos e fontes de luz.
@@ -67,9 +67,9 @@ namespace RayTracer
 
     // -------------------------------------------------------------------------------
 
-    bool World::Contains(Object &obj)
+    bool World::Contains(Shape &obj)
     {
-        for (Object * item : objects)
+        for (Shape * item : objects)
         {
             if (item->type == SPHERE_T && obj.type == SPHERE_T)
             {
@@ -86,7 +86,7 @@ namespace RayTracer
     {
         vector<Intersection> world_intersections;
 
-        for (Object * obj : objects)
+        for (Shape * obj : objects)
         {
             vector<Intersection> object_intersections = obj->Intersect(r);
             for (Intersection & i : object_intersections)

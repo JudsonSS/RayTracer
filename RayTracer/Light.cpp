@@ -14,7 +14,7 @@
 #include <cmath>
 #include "Light.h"
 #include "Pattern.h"
-#include "Object.h"
+#include "Shape.h"
 
 namespace RayTracer
 {
@@ -55,7 +55,7 @@ namespace RayTracer
 
 
     Color Lighting(const Material &material,      // material da superfície
-                   const Object &object,          // objeto 
+                   const Shape &shape,            // forma geométrica 
                    const PointLight &light,       // ponto de luz
                    const Point &point,            // ponto da superfície
                    const Vector &eye,             // direção do olho
@@ -66,7 +66,7 @@ namespace RayTracer
 
         // se o material possui um padrão
         if (material.pattern)
-            surface_color = material.pattern->AtObject(object, point);
+            surface_color = material.pattern->AtShape(shape, point);
         else
             surface_color = material.color;
 

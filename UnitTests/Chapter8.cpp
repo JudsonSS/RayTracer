@@ -2,7 +2,7 @@
 // Chapter8 (Arquivo de Código Fonte)
 //
 // Criação:     09 Jul 2021
-// Atualização:	15 Jul 2021
+// Atualização:	17 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados para o Capítulo 8,
@@ -19,7 +19,7 @@
 #include "Color.h"
 #include "Matrix.h"
 #include "Ray.h"
-#include "Object.h"
+#include "Shape.h"
 #include "World.h"
 using namespace RayTracer;
 

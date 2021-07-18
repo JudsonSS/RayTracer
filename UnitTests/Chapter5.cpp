@@ -1,8 +1,8 @@
 /**********************************************************************************
-// Test5 (Arquivo de Código Fonte)
+// Chapter5 (Arquivo de Código Fonte)
 //
 // Criação:     25 Jun 2021
-// Atualização:	15 Jul 2021
+// Atualização:	17 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados para o Capítulo 5,
@@ -16,7 +16,7 @@
 #include "Vector.h"
 #include "Ray.h"
 #include "Matrix.h"
-#include "Object.h"
+#include "Shape.h"
 using namespace RayTracer;
 
 namespace Chapter5

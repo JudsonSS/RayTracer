@@ -2,7 +2,7 @@
 // Ray (Arquivo de Código Fonte)
 //
 // Criação:     25 Jun 2021
-// Atualização:	15 Jul 2021
+// Atualização:	17 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define a representação de um raio, 
@@ -13,7 +13,7 @@
 #include <cmath>
 #include <algorithm>
 #include "Ray.h"
-#include "Object.h"
+#include "Shape.h"
 using std::sort;
 
 namespace RayTracer
@@ -41,7 +41,7 @@ namespace RayTracer
     Intersection::Intersection()
         : time(0), object(nullptr) {}
 
-    Intersection::Intersection(double t, Object &obj)
+    Intersection::Intersection(double t, Shape &obj)
         : time(t), object(&obj) {}
 
     bool operator==(const Intersection &a, const Intersection &b)

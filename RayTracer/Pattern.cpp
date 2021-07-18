@@ -37,10 +37,10 @@ namespace RayTracer
     
     // ---------------------------------------------------------------------------------------
 
-    Color Stripe::AtObject(const Object &obj, const Point &p) const
+    Color Stripe::AtShape(const Shape &shape, const Point &p) const
     {
         // converte ponto para coordenadas do objeto
-        Point local_point = obj.transform.Inverse() * p;
+        Point local_point = shape.transform.Inverse() * p;
         // converte ponto para coordenadas do padrão
         Point pattern_point = this->transform.Inverse() * local_point;
         // retorna cor do ponto transformado

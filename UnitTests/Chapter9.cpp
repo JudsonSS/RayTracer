@@ -2,7 +2,7 @@
 // Chapter9 (Arquivo de Código Fonte)
 //
 // Criação:     10 Jul 2021
-// Atualização:	15 Jul 2021
+// Atualização:	17 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados para o Capítulo 9,
@@ -15,14 +15,14 @@
 #include <cmath>
 #include "Ray.h"
 #include "Vector.h"
-#include "Object.h"
+#include "Shape.h"
 using namespace RayTracer;
 
 namespace Chapter9
 {
     TEST(Planes, DefaultTransformation)
     {
-        class TestShape : public Object
+        class TestShape : public Shape
         {
             vector<Intersection> ShapeIntersect(const Ray &r)
             { return vector<Intersection>(); }
@@ -37,7 +37,7 @@ namespace Chapter9
 
     TEST(Planes, AssigningTransformation)
     {
-        class TestShape : public Object
+        class TestShape : public Shape
         {
             vector<Intersection> ShapeIntersect(const Ray &r)
             { return vector<Intersection>(); }
@@ -53,7 +53,7 @@ namespace Chapter9
 
     TEST(Planes, DefaultMaterial)
     {
-        class TestShape : public Object
+        class TestShape : public Shape
         {
             vector<Intersection> ShapeIntersect(const Ray &r)
             { return vector<Intersection>(); }
@@ -69,7 +69,7 @@ namespace Chapter9
 
     TEST(Planes, AssigningMaterial)
     {
-        class TestShape : public Object
+        class TestShape : public Shape
         {
             vector<Intersection> ShapeIntersect(const Ray &r)
             { return vector<Intersection>(); }
@@ -87,7 +87,7 @@ namespace Chapter9
 
     TEST(Planes, IntersectScaledShape)
     {
-        class TestShape : public Object
+        class TestShape : public Shape
         {
         public:
             Ray saved_ray;
@@ -110,7 +110,7 @@ namespace Chapter9
     
     TEST(Planes, IntersectTranslatedShape)
     {
-        class TestShape : public Object
+        class TestShape : public Shape
         {
         public:
             Ray saved_ray;
@@ -133,7 +133,7 @@ namespace Chapter9
 
     TEST(Planes, NormalTranslatedShape)
     {
-        class TestShape : public Object
+        class TestShape : public Shape
         {
             vector<Intersection> ShapeIntersect(const Ray &r)
             { return vector<Intersection>(); }
@@ -150,7 +150,7 @@ namespace Chapter9
     
     TEST(Planes, NormalTransformedShape)
     {
-        class TestShape : public Object
+        class TestShape : public Shape
         {
             vector<Intersection> ShapeIntersect(const Ray &r)
             { return vector<Intersection>(); }

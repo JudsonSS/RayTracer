@@ -2,7 +2,7 @@
 // Chapter9 (Arquivo de Código Fonte)
 //
 // Criação:     16 Jul 2021
-// Atualização:	16 Jul 2021
+// Atualização:	17 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define os testes de unidade criados para o Capítulo 10,
@@ -16,7 +16,7 @@
 #include "Ray.h"
 #include "Light.h"
 #include "Pattern.h"
-#include "Object.h"
+#include "Shape.h"
 using namespace RayTracer;
 
 namespace Chapter10
@@ -80,7 +80,7 @@ namespace Chapter10
         Sphere sphere;
         sphere.transform = Scaling(2,2,2);
         Stripe pattern {Color::White, Color::Black};
-        EXPECT_EQ(pattern.AtObject(sphere, Point{1.5,0,0}), Color::White);
+        EXPECT_EQ(pattern.AtShape(sphere, Point{1.5,0,0}), Color::White);
     }
 
     TEST(Patterns, StripePatternTransform)
@@ -88,7 +88,7 @@ namespace Chapter10
         Sphere sphere;
         Stripe pattern {Color::White, Color::Black};
         pattern.transform = Scaling(2,2,2);
-        EXPECT_EQ(pattern.AtObject(sphere, Point{1.5,0,0}), Color::White);
+        EXPECT_EQ(pattern.AtShape(sphere, Point{1.5,0,0}), Color::White);
     }
 
     TEST(Patterns, ObjectPatternTransform)
@@ -97,6 +97,6 @@ namespace Chapter10
         sphere.transform = Scaling(2,2,2);
         Stripe pattern {Color::White, Color::Black};
         pattern.transform = Translation(0.5,0,0);
-        EXPECT_EQ(pattern.AtObject(sphere, Point{2.5,0,0}), Color::White);
+        EXPECT_EQ(pattern.AtShape(sphere, Point{2.5,0,0}), Color::White);
     }
 }

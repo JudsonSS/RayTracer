@@ -2,7 +2,7 @@
 // Plane (Arquivo de Código Fonte)
 //
 // Criação:     11 Jul 2021
-// Atualização:	15 Jul 2021
+// Atualização:	17 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Desenho de uma cena com um plano e três esferas. 
@@ -13,7 +13,7 @@
 #include "Types.h"
 #include "Canvas.h"
 #include "Matrix.h"
-#include "Object.h"
+#include "Shape.h"
 #include "World.h"
 #include "Ray.h"
 #include "Pattern.h"

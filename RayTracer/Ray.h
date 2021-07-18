@@ -41,16 +41,18 @@ namespace RayTracer
     // Interseção
     // ---------------------------------------------------------------------------------------
 
-    class Object;                                   // declaração adiantada
+    class Shape;                                   // declaração adiantada
 
     struct Intersection
     {           
-        double time;                                // valor de distância ao longo do raio
-        Object * object;                            // objeto em que ocorreu a interseção
+        double time;                               // valor de distância ao longo do raio
+        Shape * object;                            // objeto em que ocorreu a interseção
 
-        Intersection();                             // construtor padrão
-        Intersection(double t, Object & obj);       // construtor com tempo e objeto
+        Intersection();                            // construtor padrão
+        Intersection(double t, Shape & obj);       // construtor com tempo e objeto
     };
+
+    // ---------------------------------------------------------------------------------------
     
     // comparação de igualdade entre interseções
     bool operator==(const Intersection &a, const Intersection &b);
