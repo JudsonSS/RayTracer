@@ -57,6 +57,28 @@ namespace RayTracer
         Gradient(const Color &a, const Color &b);                           // construtor com cores
         Color At(const Point &p) const;                                     // retorna cor no ponto indicado
     };
+
+    // -------------------------------------------------------------------------------------------------
+    // Circular
+    // -------------------------------------------------------------------------------------------------
+
+    struct Ring : public Pattern
+    {
+        Ring();                                                             // construtor padrão
+        Ring(const Color &a, const Color &b);                               // construtor com cores
+        Color At(const Point &p) const;                                     // retorna cor no ponto indicado
+    };
+
+    // -------------------------------------------------------------------------------------------------
+    // Quadriculado
+    // -------------------------------------------------------------------------------------------------
+
+    struct Checkers : public Pattern
+    {
+        Checkers();                                                         // construtor padrão
+        Checkers(const Color &a, const Color &b);                           // construtor com cores
+        Color At(const Point &p) const;                                     // retorna cor no ponto indicado
+    };
 }
 
 #endif

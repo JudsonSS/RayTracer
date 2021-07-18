@@ -172,12 +172,46 @@ namespace Chapter10
         EXPECT_TRUE(c == Color(0.75, 0.5, 0.25));
     }
 
-    TEST(Patterns, Gradient)
+    TEST(Patterns, LinearGradient)
     {
         Gradient pattern {Color::White, Color::Black};
         EXPECT_TRUE(pattern.At(Point(0,0,0)) == Color::White);
         EXPECT_TRUE(pattern.At(Point(0.25,0,0)) == Color(0.75, 0.75, 0.75));
         EXPECT_TRUE(pattern.At(Point(0.50,0,0)) == Color(0.50, 0.50, 0.50));
         EXPECT_TRUE(pattern.At(Point(0.75,0,0)) == Color(0.25, 0.25, 0.25));
+    }
+
+    TEST(Patterns, RingExtendsXZ)
+    {
+        Ring pattern {Color::White, Color::Black};
+        EXPECT_TRUE(pattern.At(Point(0,0,0)) == Color::White);
+        EXPECT_TRUE(pattern.At(Point(1,0,0)) == Color::Black);
+        EXPECT_TRUE(pattern.At(Point(0,0,1)) == Color::Black);
+        // 0.708 é um pouco mais que sqrt(2)/2
+        EXPECT_TRUE(pattern.At(Point(0.708, 0, 0.708)) == Color::Black);
+    }
+
+    TEST(Patterns, CheckersRepeatInX)
+    {
+        Checkers pattern {Color::White, Color::Black};
+        EXPECT_TRUE(pattern.At(Point(0, 0, 0)) == Color::White);
+        EXPECT_TRUE(pattern.At(Point(0.99, 0, 0)) == Color::White);
+        EXPECT_TRUE(pattern.At(Point(1.01, 0, 0)) == Color::Black);
+    }
+
+    TEST(Patterns, CheckersRepeatInY)
+    {
+        Checkers pattern {Color::White, Color::Black};
+        EXPECT_TRUE(pattern.At(Point(0, 0, 0)) == Color::White);
+        EXPECT_TRUE(pattern.At(Point(0, 0.99, 0)) == Color::White);
+        EXPECT_TRUE(pattern.At(Point(0, 1.01, 0)) == Color::Black);
+    }
+
+    TEST(Patterns, CheckersRepeatInZ)
+    {
+        Checkers pattern {Color::White, Color::Black};
+        EXPECT_TRUE(pattern.At(Point(0, 0, 0)) == Color::White);
+        EXPECT_TRUE(pattern.At(Point(0, 0, 0.99)) == Color::White);
+        EXPECT_TRUE(pattern.At(Point(0, 0, 1.01)) == Color::Black);
     }
 }
