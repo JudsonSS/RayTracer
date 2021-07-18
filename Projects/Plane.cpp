@@ -45,17 +45,17 @@ int main()
     left.material.specular = 0.9;
 
     // ------------------------------------------
-    // padrão listrado 
+    // usando padrões nas superfícies 
     // ------------------------------------------
     
-    Stripe white_red {Color{1,1,1}, Color{1,0,0}};
-    Stripe white_blue {Color{1,1,1}, Color{0,0,1}};
-    Stripe white_green {Color{1,1,1}, Color{0,1,0}};
-    Stripe white_yellow {Color{1,1,1}, Color{1,1,0}};
+    Stripe white_red {Color{1,1,1}, Color{0.8,0,0}};
+    Ring white_blue {Color{1,1,1}, Color{0,0,1}};
+    Gradient white_green {Color{1,1,1}, Color{0,1,0}};
+    Checkers white_yellow {Color{1,1,1}, Color{1,0.6,0}};
     
-    white_blue.transform = RotationZ(PI/4) * Scaling(0.6, 0.6, 0.6);
-    white_green.transform = Scaling(0.3, 0.3, 0.3);
-    white_yellow.transform =  RotationZ(PI/3) * Scaling(0.4, 0.4, 0.4) * Translation(0.5, 0.5, 0.5);
+    white_blue.transform = RotationZ(PI/3) * RotationX(PI/1.5) * Scaling(0.3, 0.3, 0.3);
+    white_green.transform = Scaling(2, 2, 2) * Translation(0.5,0.5,0.5);
+    white_yellow.transform =  Scaling(0.5, 0.5, 0.5);
 
     floor.material.pattern = &white_red;
     middle.material.pattern = &white_blue;
