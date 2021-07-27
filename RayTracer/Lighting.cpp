@@ -2,17 +2,17 @@
 // Light (Arquivo de Código Fonte)
 //
 // Criação:     17 Jul 2021
-// Atualização:	18 Jul 2021
+// Atualização:	26 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
-// Descrição:	Define a representação de um ponto de luz e os dados necessários 
-//              para calcular o sombreamento de uma superfície com base no 
-//              método de Phong.
+// Descrição:	Define funções, tipos e estruturas de dados necessárias para
+//              iluminação de uma cena. O método de Phong é utilizado para
+//              o sombreamento de superfícies.
 //
 **********************************************************************************/
 
 #include <cmath>
-#include "Light.h"
+#include "Lighting.h"
 #include "Pattern.h"
 #include "Shape.h"
 
@@ -37,7 +37,8 @@ namespace RayTracer
           ambient(0.1), 
           diffuse(0.9), 
           specular(0.9), 
-          shininess(200.0) {}
+          shininess(200.0),
+          reflective(0.0) {}
 
     bool operator==(const Material &a, const Material &b)
     {

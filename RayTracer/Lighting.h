@@ -1,18 +1,18 @@
 /**********************************************************************************
-// Light (Arquivo de Cabeçalho)
+// Lighting (Arquivo de Cabeçalho)
 //
 // Criação:     17 Jul 2021
-// Atualização:	18 Jul 2021
+// Atualização:	26 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
-// Descrição:	Define a representação de um ponto de luz e os dados necessários 
-//              para calcular o sombreamento de uma superfície com base no 
-//              método de Phong.
+// Descrição:	Define funções, tipos e estruturas de dados necessárias para
+//              iluminação de uma cena. O método de Phong é utilizado para
+//              o sombreamento de superfícies.
 //
 **********************************************************************************/
 
-#ifndef RAY_TRACER_LIGHT
-#define RAY_TRACER_LIGHT
+#ifndef RAY_TRACER_LIGHTING
+#define RAY_TRACER_LIGHTING
 
 #include "Types.h"
 #include "Point.h"
@@ -50,6 +50,7 @@ namespace RayTracer
         double diffuse;                             // intensidade da reflexão da luz
         double specular;                            // intensidade do ponto de luz
         double shininess;                           // tamanho do reflexo do ponto de luz
+        double reflective;                          // índice de reflectividade
 
         Material();                                 // construtor padrão
     };

@@ -29,6 +29,7 @@ namespace RayTracer
         hit.point = ray.Position(intersection.time);
         hit.eye = -ray.direction;
         hit.normal = hit.object->Normal(hit.point);
+        hit.reflect = ray.direction.Reflect(hit.normal);
         hit.inside = false;
 
         // se os vetores tem direções opostas

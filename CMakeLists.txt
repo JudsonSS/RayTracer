@@ -40,7 +40,7 @@ set (RAYTRACER_FILES
     "RayTracer/Pattern.cpp"
     "RayTracer/Canvas.cpp"
     "RayTracer/Ray.cpp"
-    "RayTracer/Light.cpp"
+    "RayTracer/Lighting.cpp"
     "RayTracer/Shape.cpp"
     "RayTracer/World.cpp")
 
@@ -55,7 +55,8 @@ set (TEST_FILES
     "UnitTests/Chapter7.cpp"
     "UnitTests/Chapter8.cpp"
     "UnitTests/Chapter9.cpp"
-    "UnitTests/Chapter10.cpp")
+    "UnitTests/Chapter10.cpp"
+    "UnitTests/Chapter11.cpp")
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/RayTracer")
 add_executable(Projectile "Projects/Projectile.cpp" ${PROJECTILE_FILES})

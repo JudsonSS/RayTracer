@@ -32,6 +32,7 @@ namespace RayTracer
         Point over_point;                       // posição para cálculo da sombra
         Vector eye;                             // vetor na direção do observador
         Vector normal;                          // vetor normal no local da interseção 
+        Vector reflect;                         // vetor reflexão do raio
         bool inside;                            // observador está dentro do objeto
     };
 

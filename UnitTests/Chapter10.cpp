@@ -1,5 +1,5 @@
 /**********************************************************************************
-// Chapter9 (Arquivo de Código Fonte)
+// Chapter10 (Arquivo de Código Fonte)
 //
 // Criação:     16 Jul 2021
 // Atualização:	17 Jul 2021
@@ -14,7 +14,7 @@
 #include <gtest/gtest.h>
 #include "Color.h"
 #include "Ray.h"
-#include "Light.h"
+#include "Lighting.h"
 #include "Pattern.h"
 #include "Shape.h"
 using namespace RayTracer;

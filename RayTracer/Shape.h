@@ -2,7 +2,7 @@
 // Shape (Arquivo de Cabeçalho)
 //
 // Criação:     26 Jun 2021
-// Atualização:	17 Jul 2021
+// Atualização:	26 Jul 2021
 // Compilador:	Clang++ 12.0.5 / GNU g++ 9.3.0
 //
 // Descrição:	Define uma classe base para as formas 3D e classes para algumas 
@@ -19,7 +19,7 @@
 #include "Vector.h"
 #include "Matrix.h"
 #include "Ray.h"
-#include "Light.h"
+#include "Lighting.h"
 using std::vector;
 
 namespace RayTracer
