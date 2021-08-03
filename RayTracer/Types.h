@@ -22,7 +22,7 @@ namespace RayTracer
 {
     // ---------------------------------------------------------------------------------------
 
-    const double EPSILON = 0.00001;		    // diferença máxima permitida para a igualdade
+    const double EPSILON = 0.0001;		    // diferença máxima permitida para a igualdade
     const double PI = 3.14159265358979;     // constante PI
     
     bool Equal(double a, double b);	   	    // comparação de pontos-flutuantes

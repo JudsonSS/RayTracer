@@ -99,22 +99,26 @@ namespace RayTracer
 
     // -------------------------------------------------------------------------------
 
-    Color World::ShadeHit(HitData &hit)
+    Color World::ShadeHit(HitData &hit, int remaining)
     {
         bool shadowed = IsShadowed(hit.over_point);
 
-        return Lighting(hit.object->material,
-                        *hit.object,
-                        light,
-                        hit.over_point,
-                        hit.eye,
-                        hit.normal,
-                        shadowed);
+        Color surface = Lighting(hit.object->material,
+                                *hit.object,
+                                light,
+                                hit.over_point,
+                                hit.eye,
+                                hit.normal,
+                                shadowed);
+
+        Color reflected = ReflectedColor(hit, remaining);
+
+        return surface + reflected;
     }
 
     // -------------------------------------------------------------------------------
 
-    Color World::ColorAt(Ray &r)
+    Color World::ColorAt(Ray &r, int remaining)
     {
         // se não há interseções do raio com o mundo
         vector<Intersection> intersections = Intersect(r);
@@ -128,7 +132,7 @@ namespace RayTracer
             return Color{0,0,0};
 
         HitData hit = PrepareComputations(intersection, r);
-        return ShadeHit(hit);
+        return ShadeHit(hit, remaining);
     }
 
     // -------------------------------------------------------------------------------
@@ -146,6 +150,21 @@ namespace RayTracer
             return true;
         else
             return false;
+    }
+
+    // -------------------------------------------------------------------------------
+
+    Color World::ReflectedColor(HitData &hit, int remaining)
+    {
+        if (remaining < 1)
+            return Color::Black;
+
+        if (Equal(hit.object->material.reflective, 0.0))
+            return Color::Black;
+
+        Ray reflect_ray { hit.over_point, hit.reflect };
+        Color color = ColorAt(reflect_ray, remaining - 1);       
+        return color * hit.object->material.reflective;
     }
 
     // -------------------------------------------------------------------------------

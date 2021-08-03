@@ -26,14 +26,14 @@ namespace RayTracer
 
     struct HitData
     {
-        double time;                            // valor de distância ao longo do raio
-        Shape * object;                         // objeto em que ocorreu a interseção
-        Point point;                            // posição em coordenadas do mundo
-        Point over_point;                       // posição para cálculo da sombra
-        Vector eye;                             // vetor na direção do observador
-        Vector normal;                          // vetor normal no local da interseção 
-        Vector reflect;                         // vetor reflexão do raio
-        bool inside;                            // observador está dentro do objeto
+        double time;        // valor de distância ao longo do raio
+        Shape * object;     // objeto em que ocorreu a interseção
+        Point point;        // posição em coordenadas do mundo
+        Point over_point;   // posição para cálculo da sombra
+        Vector eye;         // vetor na direção do observador
+        Vector normal;      // vetor normal no local da interseção 
+        Vector reflect;     // vetor reflexão do raio com a normal
+        bool inside;        // observador está dentro do objeto
     };
 
     // pré-calcula algumas informações para o sombreamento do ponto de interseção
@@ -45,17 +45,18 @@ namespace RayTracer
 
     struct World
     {
-        vector<Shape*> objects;			        // coleção de objetos
-        PointLight light;                       // ponto de luz
+        vector<Shape*> objects;			                        // coleção de objetos
+        PointLight light;                                       // ponto de luz
 
-        enum {Empty, Default};                  // opções do construtor
-        World(int config = Empty);		        // construtor padrão
+        enum {Empty, Default};                                  // opções do construtor
+        World(int config = Empty);		                        // construtor padrão
 
-        bool Contains(Shape &obj);              // mundo contém objeto        
-        vector<Intersection> Intersect(Ray &r); // retorna pontos de interseção
-        Color ShadeHit(HitData &hit);           // retorna cor no ponto de interseção
-        Color ColorAt(Ray &r);                  // retorna cor na interseção com o raio
-        bool IsShadowed(Point &p);              // retorna se o ponto está na sombra
+        bool Contains(Shape &obj);                              // mundo contém objeto        
+        vector<Intersection> Intersect(Ray &r);                 // retorna pontos de interseção
+        Color ShadeHit(HitData &hit, int remaining = 5);        // retorna cor no ponto de interseção
+        Color ColorAt(Ray &r, int remaining = 5);               // retorna cor na interseção com o raio
+        bool IsShadowed(Point &p);                              // retorna se o ponto está na sombra
+        Color ReflectedColor(HitData &hit, int remaining = 5);  // retorna a cor refletida para a interseção
     };    
 
     // retorna matrix de transformação da câmera
@@ -67,13 +68,13 @@ namespace RayTracer
 
     struct Camera
     {
-        uint hsize;                             // tamanho horizontal (em pixels)
-        uint vsize;                             // tamanho vertical (em pixels)
-        double fov;                             // field of view (ângulo em radianos)
-        double pixel_size;                      // tamanho de cada pixel
-        double half_width;                      // metade da largura (do mundo)
-        double half_height;                     // metade da altura (do mundo)
-        Matrix transform;                       // view transform matrix
+        uint hsize;             // tamanho horizontal (em pixels)
+        uint vsize;             // tamanho vertical (em pixels)
+        double fov;             // field of view (ângulo em radianos)
+        double pixel_size;      // tamanho de cada pixel
+        double half_width;      // metade da largura (do mundo)
+        double half_height;     // metade da altura (do mundo)
+        Matrix transform;       // view transform matrix
 
         // construtor com valor padrão para a matrix de transformação
         Camera(uint horizontal, 
